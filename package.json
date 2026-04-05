@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "ByAthletes — automated newspaper builder",
   "scripts": {
-    "build": "node build.js",
-    "deploy": "node build.js && wrangler pages deploy . --project-name=byathletes --commit-dirty=true"
+    "build": "node build.js"
   }
 }
