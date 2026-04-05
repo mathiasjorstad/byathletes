@@ -1,0 +1,283 @@
+// ByAthletes — build.js
+// Reads stories.json and writes a fresh index.html
+// Run with: node build.js
+
+const fs = require("fs");
+const path = require("path");
+
+const data = JSON.parse(fs.readFileSync(path.join(__dirname, "stories.json"), "utf8"));
+
+// ─── HELPERS ───────────────────────────────────────────────
+const tag = (label, style = "") => {
+  const cls = style === "red" ? "tag red" : style === "blue" ? "tag blue" : "tag";
+  return `<span class="${cls}">${label}</span>`;
+};
+
+const sideStoryCards = data.side_stories.map(s => `
+  <div class="side-story">
+    ${tag(s.tag, s.tag_style || "")}
+    <h3>${s.headline}</h3>
+    <p>${s.body}</p>
+  </div>`).join("");
+
+const roundupCards = data.roundup.map((r, i) => `
+  <div class="roundup-card">
+    <span class="roundup-num">0${i + 1}</span>
+    ${tag(r.tag)}
+    <h3>${r.headline}</h3>
+    <p>${r.body}</p>
+  </div>`).join("");
+
+const tipRows = data.tips.map((t, i) => `
+  <div class="tip-row">
+    <span class="tip-num">0${i + 1}</span>
+    <div>
+      <h4>${t.headline}</h4>
+      <p>${t.body}</p>
+    </div>
+  </div>`).join("");
+
+const statItems = data.stats.figures.map(s => `
+  <div class="stat-item">
+    <div class="num">${s.num}</div>
+    <p>${s.label}</p>
+  </div>`).join("");
+
+const sectorList = data.stats.sectors.map((s, i) => `${i + 1}. ${s}`).join("<br/>");
+
+const investCards = data.investments.map(inv => `
+  <div class="invest-card">
+    <div class="investor">${inv.investor}</div>
+    <h3>${inv.headline}</h3>
+    <div class="amount">${inv.amount}</div>
+    <p>${inv.body}</p>
+    <div class="sport">${inv.sport} &nbsp;&middot;&nbsp; ${inv.round}</div>
+  </div>`).join("");
+
+const bodyParagraphs = data.cover_story.body.map(p => `<p>${p}</p>`).join("");
+const chips = data.cover_story.chips.map(c => `<span class="chip">${c}</span>`).join("");
+
+// ─── HTML ───────────────────────────────────────────────────
+const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ByAthletes — Issue No. ${data.issue}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f4f3ef; --white: #ffffff; --ink: #0d0d0d; --ink-2: #3a3a3a;
+      --ink-3: #777; --accent: #ff3b00; --accent-2: #0057ff; --border: #e0ddd6; --tag-bg: #eceae4;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { text-decoration: none; color: inherit; }
+    nav { background: var(--ink); color: var(--white); padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; height: 56px; position: sticky; top: 0; z-index: 100; }
+    .nav-logo { font-family: 'Barlow Condensed', sans-serif; font-size: 1.7rem; font-weight: 900; letter-spacing: 0.02em; text-transform: uppercase; }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 0.2rem; }
+    .nav-links a { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.55); padding: 0.4rem 0.8rem; border-radius: 3px; transition: color 0.15s, background 0.15s; }
+    .nav-links a:hover { color: #fff; background: rgba(255,255,255,0.08); }
+    .nav-meta { font-size: 0.7rem; color: rgba(255,255,255,0.4); letter-spacing: 0.04em; }
+    .hero-banner { background: var(--ink); color: var(--white); padding: 4rem 2rem 0; max-width: 1200px; margin: 0 auto; }
+    .issue-meta { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 1rem; display: flex; gap: 1rem; align-items: center; }
+    .issue-meta .dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.25); display: inline-block; }
+    .hero-banner h1 { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(3.5rem, 9vw, 7.5rem); font-weight: 900; line-height: 0.93; letter-spacing: -0.01em; text-transform: uppercase; max-width: 780px; margin-bottom: 1.5rem; }
+    .hero-banner h1 em { font-style: italic; color: var(--accent); }
+    .hero-dek { font-size: 1.05rem; color: rgba(255,255,255,0.6); max-width: 520px; line-height: 1.6; margin-bottom: 2rem; }
+    .hero-meta-row { display: flex; align-items: center; gap: 1rem; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .author-chip { display: flex; align-items: center; gap: 0.5rem; }
+    .author-avatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), #ff8c00); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 800; color: white; }
+    .author-chip span { font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.7); }
+    .read-time { font-size: 0.72rem; color: rgba(255,255,255,0.35); font-weight: 500; }
+    .page { max-width: 1200px; margin: 0 auto; padding: 2.5rem 2rem 5rem; }
+    .section-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; }
+    .section-label { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+    .section-line { flex: 1; height: 1px; background: var(--border); }
+    .cover-story { background: var(--white); border: 1px solid var(--border); overflow: hidden; margin-bottom: 2rem; display: grid; grid-template-columns: 1fr 420px; }
+    .cover-content { padding: 2.5rem; }
+    .tag { display: inline-block; font-size: 0.65rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 10px; border-radius: 2px; margin-bottom: 1rem; background: var(--tag-bg); color: var(--ink-2); }
+    .tag.red { background: var(--accent); color: white; }
+    .tag.blue { background: var(--accent-2); color: white; }
+    .cover-content h2 { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 900; line-height: 1.05; letter-spacing: -0.01em; text-transform: uppercase; margin-bottom: 0.8rem; }
+    .cover-content .dek { font-size: 0.95rem; color: var(--ink-2); line-height: 1.65; margin-bottom: 1.5rem; max-width: 480px; }
+    .cover-content .body-text p { font-size: 0.92rem; color: var(--ink-2); line-height: 1.7; margin-bottom: 0.85rem; }
+    .pullquote { background: var(--bg); border-left: 4px solid var(--accent); padding: 1rem 1.25rem; margin: 1.25rem 0; }
+    .pullquote p { font-size: 1rem !important; font-weight: 700 !important; color: var(--ink) !important; line-height: 1.5 !important; margin: 0 !important; }
+    .pullquote cite { display: block; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); margin-top: 0.4rem; }
+    .cover-visual { background: linear-gradient(160deg, #0a0a0a 0%, #1a1a1a 50%, #111 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem; position: relative; overflow: hidden; min-height: 420px; }
+    .cover-visual::before { content: ''; position: absolute; top: -40px; right: -40px; width: 320px; height: 320px; border-radius: 50%; background: radial-gradient(circle, rgba(255,59,0,0.18) 0%, transparent 70%); }
+    .big-stat { font-family: 'Barlow Condensed', sans-serif; font-size: 6rem; font-weight: 900; line-height: 1; color: var(--white); letter-spacing: -0.02em; position: relative; z-index: 1; }
+    .big-stat span { color: var(--accent); }
+    .stat-label { font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.5); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 0.25rem; position: relative; z-index: 1; }
+    .cover-visual-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.5rem; position: relative; z-index: 1; }
+    .chip { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.5); padding: 3px 8px; border-radius: 2px; }
+    .side-stories { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 2rem; }
+    .side-story { background: var(--white); padding: 1.5rem; }
+    .side-story h3 { font-size: 0.95rem; font-weight: 800; line-height: 1.35; margin-bottom: 0.4rem; color: var(--ink); }
+    .side-story p { font-size: 0.82rem; color: var(--ink-3); line-height: 1.55; }
+    .roundup-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 2rem; }
+    .roundup-card { background: var(--white); padding: 1.5rem; }
+    .roundup-num { font-family: 'Barlow Condensed', sans-serif; font-size: 3.5rem; font-weight: 900; line-height: 1; color: var(--border); display: block; margin-bottom: 0.75rem; letter-spacing: -0.03em; }
+    .roundup-card h3 { font-size: 0.92rem; font-weight: 800; line-height: 1.35; margin-bottom: 0.5rem; color: var(--ink); }
+    .roundup-card p { font-size: 0.82rem; color: var(--ink-3); line-height: 1.55; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+    .tips-card { background: var(--white); border: 1px solid var(--border); padding: 2rem; }
+    .tips-card h2 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.8rem; font-weight: 900; text-transform: uppercase; line-height: 1.1; margin-bottom: 1.5rem; }
+    .tip-row { display: flex; gap: 1rem; padding: 1rem 0; border-top: 1px solid var(--border); }
+    .tip-row:last-child { border-bottom: 1px solid var(--border); }
+    .tip-num { font-family: 'Barlow Condensed', sans-serif; font-size: 1.4rem; font-weight: 900; color: var(--border); flex-shrink: 0; width: 28px; line-height: 1.3; }
+    .tip-row h4 { font-size: 0.88rem; font-weight: 800; margin-bottom: 0.2rem; line-height: 1.3; color: var(--ink); }
+    .tip-row p { font-size: 0.8rem; color: var(--ink-3); line-height: 1.55; }
+    .stats-card { background: var(--ink); color: var(--white); border: 1px solid var(--ink); padding: 2rem; display: flex; flex-direction: column; gap: 1.5rem; }
+    .stats-card .section-label { color: var(--accent); }
+    .stats-card h2 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.8rem; font-weight: 900; text-transform: uppercase; line-height: 1.1; }
+    .stat-item { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.2rem; }
+    .stat-item .num { font-family: 'Barlow Condensed', sans-serif; font-size: 3.2rem; font-weight: 900; line-height: 1; color: var(--white); letter-spacing: -0.02em; }
+    .stat-item p { font-size: 0.8rem; color: rgba(255,255,255,0.45); line-height: 1.5; margin-top: 0.3rem; }
+    .invest-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+    .invest-card { background: var(--white); padding: 1.75rem; display: flex; flex-direction: column; gap: 0.75rem; }
+    .invest-card .investor { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-2); }
+    .invest-card h3 { font-size: 0.95rem; font-weight: 800; line-height: 1.35; color: var(--ink); }
+    .invest-card .amount { font-family: 'Barlow Condensed', sans-serif; font-size: 2.8rem; font-weight: 900; line-height: 1; color: var(--ink); letter-spacing: -0.02em; }
+    .invest-card p { font-size: 0.8rem; color: var(--ink-3); line-height: 1.55; flex: 1; }
+    .invest-card .sport { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); border-top: 1px solid var(--border); padding-top: 0.75rem; margin-top: auto; }
+    footer { background: var(--ink); color: rgba(255,255,255,0.35); padding: 2rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.04em; }
+    footer .logo { font-family: 'Barlow Condensed', sans-serif; font-size: 1.4rem; font-weight: 900; letter-spacing: 0.02em; text-transform: uppercase; color: var(--white); }
+    footer .logo span { color: var(--accent); }
+    footer a { color: rgba(255,255,255,0.5); text-decoration: underline; }
+    .byline { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 1.2rem; }
+    @media (max-width: 900px) {
+      .cover-story { grid-template-columns: 1fr; }
+      .cover-visual { min-height: 240px; }
+      .roundup-grid { grid-template-columns: repeat(2, 1fr); }
+      .two-col { grid-template-columns: 1fr; }
+      .invest-grid { grid-template-columns: 1fr; }
+      .side-stories { grid-template-columns: 1fr; }
+      .nav-links, .nav-meta { display: none; }
+    }
+    @media (max-width: 600px) {
+      .page { padding: 1.5rem 1rem 4rem; }
+      nav { padding: 0 1rem; }
+      .hero-banner { padding: 2.5rem 1rem 0; }
+      .roundup-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">By<span>Athletes</span></div>
+  <div class="nav-links">
+    <a href="#spotlight">Spotlight</a>
+    <a href="#roundup">News</a>
+    <a href="#tips">Tips</a>
+    <a href="#investments">Investments</a>
+  </div>
+  <div class="nav-meta">Vol. I &nbsp;&middot;&nbsp; Issue ${data.issue} &nbsp;&middot;&nbsp; ${data.date}</div>
+</nav>
+
+<div style="background:var(--ink);">
+  <div class="hero-banner">
+    <div class="issue-meta">
+      <span>Issue No. ${data.issue}</span>
+      <span class="dot"></span>
+      <span>Entrepreneur Edition</span>
+      <span class="dot"></span>
+      <span>${data.date}</span>
+    </div>
+    <h1>Athletes<br/>building<br/><em>empires.</em></h1>
+    <p class="hero-dek">Business news for the athlete who thinks beyond the game — startups, deals, and lessons from founders who wore the jersey first.</p>
+    <div class="hero-meta-row">
+      <div class="author-chip">
+        <div class="author-avatar">BA</div>
+        <span>ByAthletes Editorial</span>
+      </div>
+      <span class="read-time">10 min read</span>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+
+  <section id="spotlight" style="margin-bottom:2rem;">
+    <div class="section-header">
+      <span class="section-label">Cover Story</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="cover-story">
+      <div class="cover-content">
+        ${tag(data.cover_story.tag, "red")}
+        <h2>${data.cover_story.headline}</h2>
+        <p class="dek">${data.cover_story.dek}</p>
+        <p class="byline">By ${data.cover_story.author} &nbsp;&middot;&nbsp; Staff Writer</p>
+        <div class="body-text">
+          ${bodyParagraphs}
+          <div class="pullquote">
+            <p>"${data.cover_story.quote}"</p>
+            <cite>— ${data.cover_story.quote_author}</cite>
+          </div>
+        </div>
+      </div>
+      <div class="cover-visual">
+        <div class="big-stat">${data.cover_story.big_stat}</div>
+        <div class="stat-label">${data.cover_story.stat_label}</div>
+        <div class="cover-visual-chips">${chips}</div>
+      </div>
+    </div>
+    <div class="side-stories">${sideStoryCards}</div>
+  </section>
+
+  <section id="roundup" style="margin-bottom:2rem;">
+    <div class="section-header">
+      <span class="section-label">News Roundup</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="roundup-grid">${roundupCards}</div>
+  </section>
+
+  <section id="tips" style="margin-bottom:2rem;">
+    <div class="section-header">
+      <span class="section-label">Startup Tips</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="two-col">
+      <div class="tips-card">
+        <h2>The athlete's<br/>startup playbook</h2>
+        ${tipRows}
+      </div>
+      <div class="stats-card">
+        <span class="section-label">By The Numbers</span>
+        <h2>The athlete<br/>startup economy</h2>
+        ${statItems}
+        <div class="stat-item">
+          <div style="font-size:0.78rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:0.6rem;">Fastest Growing Sectors</div>
+          <p style="color:rgba(255,255,255,0.6);font-size:0.82rem;line-height:1.8;">${sectorList}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="investments">
+    <div class="section-header">
+      <span class="section-label">Investment Deals — Q1 2026</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="invest-grid">${investCards}</div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="logo">By<span>Athletes</span></div>
+  <span>Entrepreneur Edition &nbsp;&middot;&nbsp; Issue No. ${data.issue} &nbsp;&middot;&nbsp; ${data.date}</span>
+  <span>Stories for athletes, by athletes &nbsp;&middot;&nbsp; <a href="#">Subscribe</a></span>
+</footer>
+
+</body>
+</html>`;
+
+fs.writeFileSync(path.join(__dirname, "index.html"), html, "utf8");
+console.log(`✅ Built index.html — Issue #${data.issue} (${data.date})`);

@@ -1,0 +1,135 @@
+{
+  "issue": 1,
+  "date": "April 5, 2026",
+  "cover_story": {
+    "tag": "Athlete Spotlight",
+    "headline": "From the Penalty Box to the Boardroom",
+    "dek": "After 14 NHL seasons, Marcus Reil didn't slow down — he built a $40M recovery-tech startup that's changing how elite athletes heal.",
+    "author": "Jordan Falk",
+    "body": [
+      "When Marcus Reil took his last shift in the 2021 playoffs, he already had a term sheet in his pocket. While teammates celebrated, Reil was quietly on the phone with a seed investor backing his next play — a recovery-tech platform built by someone who had lived every mile of the pain.",
+      "IceForm Health combines wearable biosensors with AI-driven recovery protocols. Today, 600+ elite athletes across 12 leagues use the platform. In March 2026, it closed a $40M Series B led by a16z's sports-tech fund.",
+      "Next up: European expansion into Bundesliga clubs, and a Series C to bring IceForm to collegiate sports by 2027."
+    ],
+    "quote": "Discipline, pain tolerance, team-building — that's not just sport. That's the startup playbook.",
+    "quote_author": "Marcus Reil, Founder & CEO, IceForm Health",
+    "big_stat": "$40M",
+    "stat_label": "Series B raised — March 2026",
+    "chips": ["Hockey", "Recovery Tech", "AI", "a16z Backed", "600+ Athletes"]
+  },
+  "side_stories": [
+    {
+      "tag": "Soccer",
+      "headline": "Megan Okafor's Fintech App Hits 1M Downloads in 90 Days",
+      "body": "The retired striker's financial literacy platform is becoming the go-to tool for first-contract negotiations in the NWSL."
+    },
+    {
+      "tag": "Basketball",
+      "headline": "Former NBA Guard Opens Third 'Courtside Coffee' in Atlanta",
+      "body": "Darius Penn's specialty coffee chain is generating $2.4M in year-one revenue — no franchise playbook, just hustle."
+    },
+    {
+      "tag": "Opinion",
+      "tag_style": "blue",
+      "headline": "Why Athletes Make Better Founders Than MBAs",
+      "body": "High-stakes performance under pressure is one credential no classroom can replicate. VCs are finally noticing."
+    },
+    {
+      "tag": "Track & Field",
+      "headline": "Sprint Champion Launches Sustainable Apparel — Sells Out in 48 Hours",
+      "body": "Olympic gold medalist Yara Mensah moved 8,000 units in two days. Zero paid ads. All word-of-mouth."
+    }
+  ],
+  "roundup": [
+    {
+      "tag": "Tennis",
+      "headline": "Serena Williams' Venture Fund Backs Three New Startups This Quarter",
+      "body": "Serena Ventures added a health-tech company, an EdTech platform, and a consumer brand — all founded by underrepresented builders."
+    },
+    {
+      "tag": "Football",
+      "headline": "Ex-NFL Linebacker Raises $5M for Mental Health App Targeting Young Athletes",
+      "body": "Three years after retiring with CTE concerns, Tre Williams launched MindField — connecting student-athletes with sport-specialized therapists."
+    },
+    {
+      "tag": "Swimming",
+      "headline": "Olympic Swimmer's Nutrition Brand Hits $1M Revenue — No Paid Ads",
+      "body": "Backed by two Olympic medals, the brand's protein line became a bestseller on Amazon purely through community trust."
+    },
+    {
+      "tag": "Rugby",
+      "headline": "Rugby Star Turns Real Estate Mogul with 12-Property Portfolio in New Zealand",
+      "body": "All Blacks winger Toa Faleolo turned prize money and endorsements into a commercial portfolio now valued at NZD 8.5M."
+    }
+  ],
+  "tips": [
+    {
+      "headline": "Your sport is your unfair advantage",
+      "body": "Build in the industry you know. Your credibility and network in sport is a moat no outsider can replicate."
+    },
+    {
+      "headline": "Treat your cap table like your roster",
+      "body": "Only bring on investors who add value beyond capital. Dead weight costs you the game."
+    },
+    {
+      "headline": "Hire a CFO before you think you need one",
+      "body": "Athletes are trained to push through pain. That instinct is lethal in business finance."
+    },
+    {
+      "headline": "Your platform is your first marketing channel",
+      "body": "Your audience already trusts you. Build for them first — scale second."
+    },
+    {
+      "headline": "Start building during your playing career",
+      "body": "The most successful athlete-founders start before retirement — when you still have income to absorb the losses."
+    },
+    {
+      "headline": "Failure is just film review",
+      "body": "A failed launch is data. Run post-mortems. Improve the next attempt."
+    },
+    {
+      "headline": "Find a co-founder with opposite skills",
+      "body": "You know the sport. Find someone who knows the market, the tech, or the finance side."
+    }
+  ],
+  "stats": {
+    "figures": [
+      { "num": "$4.2B", "label": "Total capital raised by athlete-led startups in 2025 — up 38% year-over-year" },
+      { "num": "1/3",   "label": "Professional athletes now hold an active equity stake in at least one private company" },
+      { "num": "68%",   "label": "Of athlete-founded companies operate in wellness, nutrition, or sports-tech sectors" }
+    ],
+    "sectors": [
+      "Recovery & Wellness Tech",
+      "Consumer Brands",
+      "Financial Literacy",
+      "Real Estate",
+      "Media & Content"
+    ]
+  },
+  "investments": [
+    {
+      "investor": "Kevin Durant — Thirty Five Ventures",
+      "headline": "AI-Powered Sports Scouting Platform",
+      "amount": "$8M",
+      "body": "Machine learning platform identifying undervalued talent in overlooked markets — Africa, Southeast Asia, and South America.",
+      "sport": "Basketball",
+      "round": "Series A"
+    },
+    {
+      "investor": "Naomi Osaka",
+      "headline": "Mental Performance App for Teen Athletes",
+      "amount": "$2.5M",
+      "body": "Osaka co-led this seed round alongside a16z. App targets student-athletes aged 13–22 with sport-specific mental health tools.",
+      "sport": "Tennis",
+      "round": "Seed Round"
+    },
+    {
+      "investor": "Patrick Mahomes — 15 & the Mahomies",
+      "headline": "Youth Sports Infrastructure Network",
+      "amount": "$14M",
+      "body": "Platform connecting cities with private capital to build and maintain youth athletic facilities in 50 underserved US communities.",
+      "sport": "Football",
+      "round": "Series B"
+    }
+  ]
+}
