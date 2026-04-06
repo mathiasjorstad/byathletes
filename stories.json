@@ -1,136 +1,135 @@
 {
-  "issue": 2,
-  "date": "April 5, 2026",
+  "issue": 3,
+  "date": "April 6, 2026",
   "cover_story": {
-    "tag": "Founder Spotlight",
-    "headline": "LeBron James Is Not a Brand. He's a Business.",
-    "dek": "SpringHill Company just crossed a $200M+ valuation — and it's only the beginning of how LeBron is rewriting what athlete ownership really means.",
-    "author": "Jordan Falk",
+    "tag": "Athlete Spotlight",
+    "headline": "Naomi Osaka Built a Skincare Brand Athletes Actually Need",
+    "dek": "Kinlò just closed an $18M Series A — and Osaka's bet on melanin-rich skin is turning into one of the sharpest founder plays in athlete CPG.",
+    "author": "Marcus Webb",
     "body": [
-      "LeBron James has been building SpringHill Company since 2015, and the media and entertainment firm he co-founded with Maverick Carter is now valued at over $200M. It's backed by a who's who of strategic investors — including Nike, Epic Games, and Reddit — and it's producing films, TV shows, and brand campaigns that exist entirely outside the traditional athlete-endorsement model.",
-      "SpringHill's latest move: a multi-year content deal with a streaming platform worth $150M in committed spend. The company employs 150+ people and manages four distinct business lines: film/TV production, brand consulting, merchandise, and athlete management.",
-      "What separates LeBron from most athlete-founders is vertical integration. He doesn't just put his name on things — he owns the creative process, the distribution, and the upside. Every project generates IP that compounds over time.",
-      "The playbook? Start with your audience. Build your platform. Then own the infrastructure that serves that platform."
+      "Naomi Osaka is a four-time Grand Slam champion. She's also a founder. In 2021 she launched Kinlò, a sunscreen and skincare line built specifically for people with melanin-rich skin — a category that major beauty brands had systematically ignored. The product line started with SPF essentials and has since expanded into moisturizers, lip balms, and body care.",
+      "Kinlò just closed an $18M Series A led by Fearless Fund, with participation from CAVU Consumer Partners and a handful of athlete angel investors. The brand has moved 600,000+ units to date and is now stocked in Target, Ulta Beauty, and Amazon — a retail trifecta that most indie beauty brands spend a decade chasing.",
+      "Next up: a hair care line launching in Q3 and an ambassador program specifically targeting college athletes in Olympic sports. Osaka is targeting $30M in revenue by end of 2026."
     ],
-    "quote": "I don't want to be a brand attached to someone else's vision. I want to own the vision.",
-    "quote_author": "LeBron James, Co-Founder, SpringHill Company",
-    "big_stat": "$200M+",
-    "stat_label": "SpringHill Company valuation — 2026",
-    "chips": ["Basketball", "Media", "Entertainment", "Brand Building", "IP Ownership"]
+    "quote": "I didn't want to be the face of someone else's sunscreen. I wanted to solve a real problem for people who look like me — and own the upside.",
+    "quote_author": "Naomi Osaka, Founder, Kinlò",
+    "big_stat": "$18M",
+    "stat_label": "Series A closed — April 2026",
+    "chips": ["Tennis", "Beauty & Skincare", "CPG", "Fearless Fund", "600K+ Units Sold"]
   },
   "side_stories": [
     {
-      "tag": "Golf",
-      "headline": "Tiger Woods' TGR Ventures Closes $30M Round to Scale Golf Tech",
-      "body": "TGR's design and tech division just secured $30M to expand its course analytics platform to 500 clubs worldwide. Tiger's second act is quieter — and more lucrative — than his first."
+      "tag": "Football",
+      "headline": "Patrick Mahomes' Restaurant Group Expands to 12 Locations",
+      "body": "The Chiefs QB's casual dining brand, 1587 Prime, has signed leases in four new cities following record same-store sales in 2025. Mahomes holds equity across all locations — no licensing fee model."
     },
     {
-      "tag": "MMA",
-      "headline": "The McGregor Whiskey Blueprint: How One Fighter Built a Drinks Empire",
-      "body": "Proper No. Twelve's sale to Proximo Spirits earned Conor McGregor an estimated $150M+ exit — and it's now the case study every athlete liquor brand tries to replicate."
+      "tag": "Basketball",
+      "headline": "Jaylen Brown Launches Mental Performance App for High Schoolers",
+      "body": "Brown's app, Clearview, hit 200,000 downloads in its first 90 days — targeting student athletes with guided mindset and recovery protocols. A $6M seed round closed last month."
     },
     {
       "tag": "Opinion",
       "tag_style": "blue",
-      "headline": "Stop Chasing Endorsements. Start Chasing Equity.",
-      "body": "The gap between athletes who rent their name and athletes who own the upside is the defining wealth divide of this generation. The math is simple. The mindset shift isn't."
+      "headline": "Being an Ambassador Is a Job. Being a Founder Is a Career.",
+      "body": "Every year athletes leave billions on the table by choosing spokesperson deals over equity stakes. The athletes who will be wealthy at 60 are the ones building right now — not the ones collecting flat fees."
     },
     {
-      "tag": "Gymnastics",
-      "headline": "Simone Biles' Mental Performance App Hits 80,000 Person Waitlist",
-      "body": "Before launch, Biles' mindfulness platform for young athletes has already drawn an 80K waitlist — proof that her advocacy translates directly into market demand."
+      "tag": "Rugby",
+      "headline": "Richie McCaw's Leadership Consultancy Crosses $10M Revenue",
+      "body": "The All Blacks legend turned corporate performance consultant is running leadership programs for Fortune 500 executives — and the business is scaling faster than any sports deal he ever signed."
     }
   ],
   "roundup": [
     {
-      "tag": "Swimming",
-      "headline": "Caeleb Dressel Signs Landmark Equity Deal with Target's Athletic Line",
-      "body": "Rather than a flat endorsement fee, Dressel negotiated a revenue share — a model more athletes are demanding as awareness of equity-based deals grows."
+      "tag": "Golf",
+      "headline": "Rory McIlroy Takes Stake in Golf Analytics Firm",
+      "body": "McIlroy invested an undisclosed sum in SwingIQ, a machine-learning platform that provides real-time biomechanical feedback to tour players and coaches. The company's B2B product is now deployed at 200 training facilities across North America and Europe, with a consumer app launching in Q4."
+    },
+    {
+      "tag": "Soccer",
+      "headline": "Megan Rapinoe's Re-Inc Brand Expands to 80 New Retail Doors",
+      "body": "Rapinoe's gender-fluid apparel brand Re-Inc has added 80 new retail doors in 2026, including a flagship deal with Nordstrom. The brand's community-first model drives repeat purchase rates nearly double the industry average, according to company disclosures."
+    },
+    {
+      "tag": "Basketball",
+      "headline": "Candace Parker Co-Leads $25M Raise for Women's Sports Media Platform",
+      "body": "Parker co-led a Series B for Togethxr, the media company she co-founded with Alex Morgan, Chloe Kim, and Sue Bird. The platform is expanding into live event ticketing and merchandise — two categories where women's sports demand has consistently outpaced supply."
     },
     {
       "tag": "Track & Field",
-      "headline": "Allyson Felix Expands Saysh into Kids Sizing — Retail Follows",
-      "body": "After launching adult women's footwear, Felix's Saysh brand is moving into kids. Three regional retailers have signed distribution agreements ahead of the Q3 drop."
-    },
-    {
-      "tag": "Tennis",
-      "headline": "Rafael Nadal Backs Spanish Agritech Startup in Seed Round",
-      "body": "The Mallorcan legend invested in a precision irrigation startup that's raised €4.2M. Nadal cited regional water conservation as the driving motivation behind the bet."
-    },
-    {
-      "tag": "Football",
-      "headline": "Marshawn Lynch Earns B Corp Certification for Beast Mode Brand",
-      "body": "Lynch's lifestyle company became one of the first athlete-owned brands to earn B Corp status — a signal to consumers that profit and purpose aren't mutually exclusive."
+      "headline": "Sydney McLaughlin-Levrone Takes Equity in Recovery Startup",
+      "body": "The 400m hurdles world record holder has negotiated a 2% equity stake in RecovR, a wearable-based recovery monitoring platform. The deal includes a standard ambassador component, but McLaughlin-Levrone insisted the equity grant was non-negotiable — and got it."
     }
   ],
   "tips": [
     {
-      "headline": "Equity beats endorsement — every time",
-      "body": "A flat fee pays once. Equity pays forever. Before signing any deal, ask: what's the ownership option?"
+      "headline": "Know the difference between revenue and income",
+      "body": "Revenue is what your business makes. Income is what you keep. Build systems that maximize the gap between the two before you scale."
     },
     {
-      "headline": "Your brand is a distribution channel",
-      "body": "Don't build a brand to sell things. Build a brand to own an audience — then decide what to sell them."
+      "headline": "Your athlete status is a distribution moat",
+      "body": "No startup founder gets the access and attention you do at launch. Use your visibility as a customer acquisition asset — but build the product to retain them."
     },
     {
-      "headline": "Revenue first, valuation second",
-      "body": "Chasing a high valuation before you have real revenue is a vanity exercise. Build cash flow first. Multiples follow."
+      "headline": "Retail is a trap without margin control",
+      "body": "Getting into Target feels like winning. But if your margins aren't protected, volume kills you. Know your cost of goods before you negotiate shelf space."
     },
     {
-      "headline": "Protect your IP from day one",
-      "body": "Names, logos, content — trademark everything before you scale. IP is the asset that appreciates while you sleep."
+      "headline": "Hire operators, not cheerleaders",
+      "body": "Your first hires should have operational track records — not just excitement about working with you. Enthusiasm runs out. Systems scale."
     },
     {
-      "headline": "Negotiate like you're already retired",
-      "body": "During your playing career, you have maximum leverage. Use it to negotiate equity, not just dollars."
+      "headline": "Separate playing income from business capital",
+      "body": "Never fund your company from your playing salary without a formal structure. Set up a holding company and treat every dollar like an investor would."
     },
     {
-      "headline": "Build a board that challenges you",
-      "body": "Surround yourself with people who will tell you no. Yes-men feel good. Challengers make you rich."
+      "headline": "Build the community before you build the product",
+      "body": "If you have an audience, survey them before you spend a dollar on development. The product they'll pay for is rarely the product you'd build in isolation."
     },
     {
-      "headline": "Cash flow is the scoreboard",
-      "body": "Valuations are opinions. Cash in the bank is a fact. Manage cash like your season depends on it — because it does."
+      "headline": "Think in decades, not deal cycles",
+      "body": "A 10-year brand is worth exponentially more than a 10-year contract. Start building the thing that compounds while your peers are still chasing endorsement checks."
     }
   ],
   "stats": {
     "figures": [
-      { "num": "$6.1B", "label": "Projected value of athlete-owned CPG brands by 2028 — growing at 22% annually" },
-      { "num": "1 in 4", "label": "Professional athletes are actively building a business during their playing career" },
-      { "num": "3.2x", "label": "Revenue multiple advantage for athlete-founded brands vs. non-athlete equivalents in consumer categories" }
+      {"num": "$3.4B", "label": "Total capital raised by athlete-founded companies in the last 12 months — a record high"},
+      {"num": "68%", "label": "Of athlete-founded CPG brands that hit retail in 2025 are still operating and growing in 2026"},
+      {"num": "$220K", "label": "Average first-year revenue of athlete-founded startups that complete a formal accelerator program"}
     ],
     "sectors": [
-      "Media & Entertainment",
-      "Consumer Packaged Goods",
-      "Sports Technology",
-      "Equity Investments",
-      "Apparel & Footwear"
+      "Beauty & Personal Care",
+      "Sports Performance Tech",
+      "Mental Health & Wellness",
+      "Food & Beverage",
+      "Media & Content"
     ]
   },
   "investments": [
     {
-      "investor": "Stephen Curry — SC30",
-      "headline": "AR-Powered Basketball Training Platform",
-      "amount": "$11M",
-      "body": "Curry co-led a Series A in an augmented reality training system now used by 40+ NBA G League teams. The platform uses real-time shot mechanics analysis to accelerate player development.",
+      "investor": "Giannis Antetokounmpo — BAGG Inc.",
+      "headline": "Lagos Basketball Academy Gets Seed Funding",
+      "amount": "$4M",
+      "body": "Giannis committed $4M to a Lagos-based basketball development academy that scouts and trains athletes across sub-Saharan Africa. The investment is part of a broader initiative to build talent pipeline infrastructure in regions chronically underserved by traditional scouting networks.",
       "sport": "Basketball",
-      "round": "Series A"
-    },
-    {
-      "investor": "Alex Morgan",
-      "headline": "Women's Sports Media Network",
-      "amount": "$5M",
-      "body": "Morgan anchored a seed round for a digital media company dedicated to women's sports coverage — filling a gap that mainstream outlets have chronically underfunded.",
-      "sport": "Soccer",
       "round": "Seed Round"
     },
     {
-      "investor": "Usain Bolt — Bolt Ventures",
-      "headline": "Last-Mile Delivery Logistics Startup",
-      "amount": "$18M",
-      "body": "Bolt's logistics bet targets emerging markets in the Caribbean and West Africa — regions where e-commerce growth is outpacing delivery infrastructure. Series B expected in Q4.",
-      "sport": "Track & Field",
-      "round": "Series A"
+      "investor": "Serena Williams — Serena Ventures",
+      "headline": "AI Legal Platform Built for Professional Athletes",
+      "amount": "$7M",
+      "body": "Serena Ventures led a seed round for Playbook Legal, a platform helping professional athletes review contracts, negotiate endorsement deals, and understand IP ownership without six-figure legal fees. The platform has already onboarded 400 active professional athletes across six sports.",
+      "sport": "Tennis",
+      "round": "Seed Round"
+    },
+    {
+      "investor": "Shaquille O'Neal",
+      "headline": "Franchise Restaurant Digital Ordering Platform",
+      "amount": "$22M",
+      "body": "O'Neal participated in a Series B for OLIO Tech, a white-label digital ordering and loyalty platform built for franchise restaurant groups. Shaq has operated in the QSR space for over a decade and the investment deepens his vertical integration in food service operations.",
+      "sport": "Basketball",
+      "round": "Series B"
     }
   ]
 }
