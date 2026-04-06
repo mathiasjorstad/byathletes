@@ -1,154 +1,26 @@
 {
   "issue": 4,
   "date": "April 6, 2026",
-  "cover_story": {
-    "tag": "Athlete Spotlight",
-    "headline": "Lewis Hamilton Is Betting on What Comes After the Podium",
-    "dek": "From Formula 1 to non-alcoholic spirits and film production — Hamilton's off-track empire is accelerating faster than anything he's done behind the wheel.",
-    "author": "Elena Rossi",
-    "body": [
-      "Lewis Hamilton has won seven Formula 1 World Championships. But the business he's building off the track might outlast all of them. In 2022 he co-founded Almave, a non-alcoholic agave spirits brand developed with Mexican master distiller Casa Lumbre — positioning himself at the intersection of luxury wellness and sustainable agriculture before either trend hit the mainstream.",
-      "Almave closed a $20M Series A in March 2026, backed by LVMH Ventures and Talis Capital, placing the brand's valuation at $85M. Distribution now covers 18 countries with listings in Harrods, Selfridges, Galeries Lafayette, and 400+ Michelin-starred restaurants. The brand moved 1.2M units in 2025 — its first full commercial year.",
-      "Alongside Almave, Hamilton's Dawn Apollo Films has three projects in post-production with streaming commitments totalling £30M. He holds equity positions in three European tech startups through his family office. The infrastructure is in place — Hamilton is playing a 20-year game."
-    ],
-    "quote": "Formula 1 gave me discipline. Business gave me freedom. You study the competition, you build a system, and then you execute.",
-    "quote_author": "Lewis Hamilton, Co-Founder, Almave",
-    "big_stat": "$85M",
-    "stat_label": "Almave valuation — Series A, March 2026",
-    "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&h=600&fit=crop&auto=format",
-    "source_url": "https://www.forbes.com/sites/athletes/2026/04/lewis-hamilton-almave-series-a/",
-    "source_name": "Forbes",
-    "chips": ["Formula 1", "Spirits & Beverage", "Film & Media", "LVMH Ventures", "1.2M Units Sold"]
-  },
-  "side_stories": [
+  "stories": [
     {
-      "tag": "Football",
-      "headline": "Piqué's Kosmos Lands €40M Davis Cup Media Rights Extension",
-      "body": "Gerard Piqué's sports and media company Kosmos has secured a €40M extension on its Davis Cup rights deal, locking in revenue through 2030. The former Barcelona captain built Kosmos from scratch — it now manages Davis Cup globally and employs 90 full-time staff.",
-      "source_url": "https://www.sportspromedia.com/news/gerard-pique-kosmos-davis-cup-2026/"
-    },
-    {
-      "tag": "MMA",
-      "headline": "Alex Pereira Launches Predador Nutrition Brand Across Europe",
-      "body": "UFC light heavyweight champion Alex Pereira has launched Predador, a sports nutrition brand targeting MMA athletes and functional fitness enthusiasts across Brazil and Europe. The first product line — pre-workout, whey, and recovery — reached 800 gyms across six countries within 60 days of launch.",
-      "source_url": "https://www.mmafighting.com/2026/4/pereira-predador-brand-launch"
-    },
-    {
-      "tag": "Opinion",
-      "tag_style": "blue",
-      "headline": "European Athletes Are Finally Playing the Founders' Game",
-      "body": "For a decade, the athlete-entrepreneur story was written in American English. Not anymore. From Madrid to Manchester, athletes are closing institutional rounds and building equity-first businesses — and the gap with the US is closing fast.",
-      "source_url": ""
-    },
-    {
-      "tag": "Formula 1",
-      "headline": "Carlos Sainz Backs Madrid Solar Startup in Seed Round",
-      "body": "The Williams F1 driver has invested in Solfex, a Madrid-based solar-as-a-service startup targeting residential buildings across Southern Europe. Sainz cited Spain's energy transition as a decade-long structural opportunity he wanted exposure to beyond racing income.",
-      "source_url": "https://www.motorsport.com/f1/news/carlos-sainz-solfex-renewable-energy-investment-2026/"
-    }
-  ],
-  "roundup": [
-    {
-      "tag": "Football",
-      "headline": "Harry Kane Opens Third Munich Restaurant Backed by PE",
-      "body": "The Bayern Munich striker's restaurant group, Cane & Co., opened its third Munich location in the Maxvorstadt district, backed by a €5M facility from a Munich-based private equity fund. Kane holds majority equity across all locations and serves as creative director for the brand. The group is targeting eight locations across Germany by 2028.",
-      "image": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&h=450&fit=crop&auto=format",
-      "source_url": "https://www.espn.com/soccer/story/_/id/40129011/harry-kane-restaurant-cane-co-munich-expansion",
-      "source_name": "ESPN"
-    },
-    {
-      "tag": "Formula 1",
-      "headline": "Fernando Alonso Expands Kimoa to 40 Countries, Eyes 2027 IPO",
-      "body": "Aston Martin's veteran driver has built Kimoa — his motorsport lifestyle apparel brand — into a €30M revenue business now distributed across 40 countries. The brand is profitable, has no external investors, and Alonso has received approaches from strategic buyers. A minority sale or IPO is being evaluated for 2027.",
-      "image": "https://images.unsplash.com/photo-1504817343863-5092a923803e?w=900&h=450&fit=crop&auto=format",
-      "source_url": "https://www.theguardian.com/sport/2026/apr/06/fernando-alonso-kimoa-expansion-ipo",
-      "source_name": "The Guardian"
-    },
-    {
-      "tag": "MMA",
-      "headline": "Paddy Pimblett Co-Founds Liverpool Fintech for Young Fans",
-      "body": "The UFC fan favourite has co-founded SupportBank, a fintech app helping young sports fans budget for tickets, merchandise, and travel. The app raised £3.2M in a pre-seed round led by Founders Factory. Pimblett holds a 20% equity stake and is actively involved in product development.",
-      "image": "https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=900&h=450&fit=crop&auto=format",
-      "source_url": "https://www.skysports.com/boxing/news/15040/13220483/paddy-pimblett-supportbank-fintech-liverpool",
-      "source_name": "Sky Sports"
-    },
-    {
-      "tag": "Football",
-      "headline": "Erling Haaland Backs Norwegian Cleantech Seed Round",
-      "body": "Manchester City's striker has invested in Bergen-based startup Fjord Energy, which develops modular hydrogen storage systems for Nordic fishing vessels. The investment is managed through his family office and marks his second cleantech bet in 18 months. A Series A is targeted for Q3 2026.",
-      "image": "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=900&h=450&fit=crop&auto=format",
-      "source_url": "https://www.vg.no/sport/fotball/i/haaland-cleantech-fjord-energy-investment-2026",
-      "source_name": "VG"
-    }
-  ],
-  "tips": [
-    {
-      "headline": "Build in Europe, scale globally from day one",
-      "body": "European athletes have access to world-class talent, EU market scale, and institutional capital hungry for founder-led brands. Don't limit your ambition to your home market at launch."
-    },
-    {
-      "headline": "Turn training discipline into operating systems",
-      "body": "The consistency that made you elite is a superpower in business. Document your standards and decision frameworks — then make your company run the same way."
-    },
-    {
-      "headline": "The brand is the moat, not the product",
-      "body": "Products can be copied. A brand built on genuine personal conviction is almost impossible to replicate. Lead with your story before you lead with your SKUs."
-    },
-    {
-      "headline": "Hire your weaknesses before your strengths",
-      "body": "You know what you're good at. Your first hires should cover your blind spots — finance, operations, product — not add more of what you already bring."
-    },
-    {
-      "headline": "Understand unit economics before raising capital",
-      "body": "Know your customer acquisition cost, lifetime value, and gross margin before any investor meeting. Your answer will set the terms of the conversation."
-    },
-    {
-      "headline": "Use your playing career as proof-of-concept",
-      "body": "While you're still competing, test ideas with minimum viable products and real customers. Your profile reduces friction — but the market will still tell you the truth."
-    },
-    {
-      "headline": "Own the relationship with your customer",
-      "body": "Email lists and direct commerce channels are assets you own. Social media reach is borrowed. Build the infrastructure to reach customers without a platform's permission."
-    }
-  ],
-  "stats": {
-    "figures": [
-      {"num": "€4.2B", "label": "Total capital raised by European athlete-founded companies since 2020 — led by football, F1, and MMA"},
-      {"num": "3x", "label": "Growth in European athlete-founded startups between 2019 and 2025"},
-      {"num": "€1.2B", "label": "Capital raised by footballer-founded companies in Europe since 2021 alone"}
-    ],
-    "sectors": [
-      "Football Technology",
-      "Motorsport Ventures",
-      "Combat Sports & Nutrition",
-      "Clean Energy & Sustainability",
-      "Lifestyle & Apparel"
-    ]
-  },
-  "investments": [
-    {
-      "investor": "Cristiano Ronaldo — CR7 Ventures",
-      "headline": "Lisbon eSports Platform Closes Series A",
-      "amount": "$15M",
-      "body": "Ronaldo's investment vehicle CR7 Ventures co-led a Series A in GameArena, a Lisbon-based eSports platform hosting competitive gaming leagues across Southern Europe and Brazil. The platform has 2.1M registered users and generates revenue through subscriptions, advertising, and live event ticketing.",
-      "sport": "Football",
-      "round": "Series A"
-    },
-    {
-      "investor": "Thierry Henry",
-      "headline": "Youth Football Analytics Platform Closes Seed Round",
-      "amount": "$4.5M",
-      "body": "The Arsenal legend has backed TalentRadar, a youth football analytics platform using computer vision to assess players aged 10–18. Henry cited his own experience being spotted late as the motivation — the tool is now deployed at 120 academies across France, Belgium, and the UK.",
-      "sport": "Football",
-      "round": "Seed Round"
-    },
-    {
-      "investor": "Toni Kroos",
-      "headline": "Sports Data Intelligence Firm Expands to Five Leagues",
-      "amount": "$8M",
-      "body": "The retired Germany and Real Madrid legend invested in DataKick, a Munich-based sports data intelligence firm building decision-support tools for professional club management. Kroos is a strategic advisor and equity holder, contributing expertise on performance culture and player evaluation.",
-      "sport": "Football",
-      "round": "Series A"
+      "sport": "Formula 1",
+      "headline": "Lewis Hamilton Is Betting on What Comes After the Podium",
+      "dek": "From Formula 1 to non-alcoholic spirits and film — Hamilton's off-track empire is accelerating faster than anything he's done behind the wheel.",
+      "author": "Elena Rossi",
+      "date": "April 6, 2026",
+      "body": [
+        "Lewis Hamilton has won seven Formula 1 World Championships. But the business he's building off the track might outlast all of them. In 2022 he co-founded Almave, a non-alcoholic agave spirits brand developed with Mexican master distiller Casa Lumbre — positioning himself at the intersection of luxury wellness and sustainable agriculture before either trend hit the mainstream.",
+        "Almave closed a $20M Series A in March 2026, backed by LVMH Ventures and Talis Capital, placing the brand's valuation at $85M. Distribution now covers 18 countries with listings in Harrods, Selfridges, Galeries Lafayette, and 400+ Michelin-starred restaurants. The brand moved 1.2M units in 2025 — its first full commercial year.",
+        "Alongside Almave, Hamilton's Dawn Apollo Films has three projects in post-production with streaming commitments totalling £30M. He holds equity positions in three European tech startups through his family office. The infrastructure is in place — Hamilton is playing a 20-year game."
+      ],
+      "quote": "Formula 1 gave me discipline. Business gave me freedom. You study the competition, you build a system, and then you execute.",
+      "quote_author": "Lewis Hamilton, Co-Founder, Almave",
+      "stat": "$85M",
+      "stat_label": "Almave valuation — Series A, March 2026",
+      "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1800&h=1000&fit=crop&auto=format",
+      "source_url": "https://www.forbes.com/sites/athletes/2026/04/lewis-hamilton-almave-series-a/",
+      "source_name": "Forbes",
+      "tags": ["Formula 1", "Spirits & Beverage", "Film & Media", "LVMH Ventures", "$85M Valuation"]
     }
   ]
 }
