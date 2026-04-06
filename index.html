@@ -3,375 +3,712 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ByAthletes — Issue No. 4</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,700&display=swap" rel="stylesheet" />
+  <title>ByAthletes — No. 4 — April 6, 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,600;1,700&family=Barlow+Condensed:wght@700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     :root {
-      --bg: #f4f3ef; --white: #ffffff; --ink: #0d0d0d; --ink-2: #3a3a3a;
-      --ink-3: #777; --accent: #ff3b00; --accent-2: #0057ff; --border: #e0ddd6; --tag-bg: #eceae4;
+      --cream:  #F4F2ED;
+      --white:  #FFFFFF;
+      --ink:    #111010;
+      --ink-2:  #2C2A27;
+      --ink-3:  #7A776F;
+      --red:    #C41230;
+      --border: #E2DED7;
+      --gap:    1px;
+      --serif:  'Playfair Display', Georgia, serif;
+      --cond:   'Barlow Condensed', sans-serif;
+      --sans:   'Inter', system-ui, sans-serif;
+      --page:   1280px;
     }
+
     html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
-    a { text-decoration: none; color: inherit; }
-    nav { background: var(--ink); color: var(--white); padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; height: 56px; position: sticky; top: 0; z-index: 100; }
-    .nav-logo { font-family: 'Barlow Condensed', sans-serif; font-size: 1.7rem; font-weight: 900; letter-spacing: 0.02em; text-transform: uppercase; }
-    .nav-logo span { color: var(--accent); }
-    .nav-links { display: flex; gap: 0.2rem; }
-    .nav-links a { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.55); padding: 0.4rem 0.8rem; border-radius: 3px; transition: color 0.15s, background 0.15s; }
-    .nav-links a:hover { color: #fff; background: rgba(255,255,255,0.08); }
-    .nav-meta { font-size: 0.7rem; color: rgba(255,255,255,0.4); letter-spacing: 0.04em; }
-    .hero-banner { background: var(--ink); color: var(--white); padding: 4rem 2rem 0; max-width: 1200px; margin: 0 auto; }
-    .issue-meta { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 1rem; display: flex; gap: 1rem; align-items: center; }
-    .issue-meta .dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.25); display: inline-block; }
-    .hero-banner h1 { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(3.5rem, 9vw, 7.5rem); font-weight: 900; line-height: 0.93; letter-spacing: -0.01em; text-transform: uppercase; max-width: 780px; margin-bottom: 1.5rem; }
-    .hero-banner h1 em { font-style: italic; color: var(--accent); }
-    .hero-dek { font-size: 1.05rem; color: rgba(255,255,255,0.6); max-width: 520px; line-height: 1.6; margin-bottom: 2rem; }
-    .hero-meta-row { display: flex; align-items: center; gap: 1rem; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
-    .author-chip { display: flex; align-items: center; gap: 0.5rem; }
-    .author-avatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), #ff8c00); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 800; color: white; }
-    .author-chip span { font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.7); }
-    .read-time { font-size: 0.72rem; color: rgba(255,255,255,0.35); font-weight: 500; }
-    .page { max-width: 1200px; margin: 0 auto; padding: 2.5rem 2rem 5rem; }
-    .section-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; }
-    .section-label { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
-    .section-line { flex: 1; height: 1px; background: var(--border); }
-    /* ── Cover story ── */
-    .cover-story { background: var(--white); border: 1px solid var(--border); overflow: hidden; margin-bottom: 2rem; display: grid; grid-template-columns: 1fr 420px; }
-    .cover-content { padding: 2.5rem; }
-    .tag { display: inline-block; font-size: 0.65rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 10px; border-radius: 2px; margin-bottom: 1rem; background: var(--tag-bg); color: var(--ink-2); }
-    .tag.red { background: var(--accent); color: white; }
-    .tag.blue { background: var(--accent-2); color: white; }
-    .cover-content h2 { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 900; line-height: 1.05; letter-spacing: -0.01em; text-transform: uppercase; margin-bottom: 0.8rem; }
-    .cover-content .dek { font-size: 0.95rem; color: var(--ink-2); line-height: 1.65; margin-bottom: 1.5rem; max-width: 480px; }
-    .cover-content .body-text p { font-size: 0.92rem; color: var(--ink-2); line-height: 1.7; margin-bottom: 0.85rem; }
-    .pullquote { background: var(--bg); border-left: 4px solid var(--accent); padding: 1rem 1.25rem; margin: 1.25rem 0; }
-    .pullquote p { font-size: 1rem !important; font-weight: 700 !important; color: var(--ink) !important; line-height: 1.5 !important; margin: 0 !important; }
-    .pullquote cite { display: block; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); margin-top: 0.4rem; }
-    /* Cover visual panel — uses background-image from stories.json */
-    .cover-visual { background-color: #0a0a0a; background-size: cover; background-position: center top; display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem; position: relative; overflow: hidden; min-height: 420px; }
-    .cover-visual::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.15) 100%); z-index: 0; }
-    .big-stat { font-family: 'Barlow Condensed', sans-serif; font-size: 6rem; font-weight: 900; line-height: 1; color: var(--white); letter-spacing: -0.02em; position: relative; z-index: 1; }
-    .big-stat span { color: var(--accent); }
-    .stat-label { font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.5); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 0.25rem; position: relative; z-index: 1; }
-    .cover-visual-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.5rem; position: relative; z-index: 1; }
-    .chip { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.5); padding: 3px 8px; border-radius: 2px; }
-    /* ── Side stories ── */
-    .side-stories { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 2rem; }
-    .side-story { background: var(--white); padding: 1.5rem; display: flex; flex-direction: column; }
-    .side-story h3 { font-size: 0.95rem; font-weight: 800; line-height: 1.35; margin-bottom: 0.4rem; color: var(--ink); }
-    .side-story p { font-size: 0.82rem; color: var(--ink-3); line-height: 1.55; flex: 1; }
-    /* ── Roundup — with images ── */
-    .roundup-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 2rem; }
-    .roundup-card { background: var(--white); padding: 0; overflow: hidden; display: flex; flex-direction: column; }
-    .roundup-img { width: 100%; height: 140px; object-fit: cover; display: block; border-bottom: 2px solid var(--accent); }
-    .roundup-body { padding: 1.25rem 1.5rem 1.5rem; display: flex; flex-direction: column; flex: 1; }
-    .roundup-num { font-family: 'Barlow Condensed', sans-serif; font-size: 3.5rem; font-weight: 900; line-height: 1; color: var(--border); display: block; margin-bottom: 0.6rem; letter-spacing: -0.03em; }
-    .roundup-card h3 { font-size: 0.92rem; font-weight: 800; line-height: 1.35; margin-bottom: 0.5rem; color: var(--ink); }
-    .roundup-card p { font-size: 0.82rem; color: var(--ink-3); line-height: 1.55; flex: 1; }
-    /* ── Read more links ── */
-    .read-more { display: inline-block; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-top: 0.75rem; transition: opacity 0.15s; }
-    .read-more:hover { opacity: 0.65; }
-    /* ── Tips + Stats ── */
-    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
-    .tips-card { background: var(--white); border: 1px solid var(--border); padding: 2rem; }
-    .tips-card h2 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.8rem; font-weight: 900; text-transform: uppercase; line-height: 1.1; margin-bottom: 1.5rem; }
-    .tip-row { display: flex; gap: 1rem; padding: 1rem 0; border-top: 1px solid var(--border); }
-    .tip-row:last-child { border-bottom: 1px solid var(--border); }
-    .tip-num { font-family: 'Barlow Condensed', sans-serif; font-size: 1.4rem; font-weight: 900; color: var(--border); flex-shrink: 0; width: 28px; line-height: 1.3; }
-    .tip-row h4 { font-size: 0.88rem; font-weight: 800; margin-bottom: 0.2rem; line-height: 1.3; color: var(--ink); }
-    .tip-row p { font-size: 0.8rem; color: var(--ink-3); line-height: 1.55; }
-    .stats-card { background: var(--ink); color: var(--white); border: 1px solid var(--ink); padding: 2rem; display: flex; flex-direction: column; gap: 1.5rem; }
-    .stats-card .section-label { color: var(--accent); }
-    .stats-card h2 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.8rem; font-weight: 900; text-transform: uppercase; line-height: 1.1; }
-    .stat-item { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.2rem; }
-    .stat-item .num { font-family: 'Barlow Condensed', sans-serif; font-size: 3.2rem; font-weight: 900; line-height: 1; color: var(--white); letter-spacing: -0.02em; }
-    .stat-item p { font-size: 0.8rem; color: rgba(255,255,255,0.45); line-height: 1.5; margin-top: 0.3rem; }
-    /* ── Investments ── */
-    .invest-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
-    .invest-card { background: var(--white); padding: 1.75rem; display: flex; flex-direction: column; gap: 0.75rem; }
-    .invest-card .investor { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-2); }
-    .invest-card h3 { font-size: 0.95rem; font-weight: 800; line-height: 1.35; color: var(--ink); }
-    .invest-card .amount { font-family: 'Barlow Condensed', sans-serif; font-size: 2.8rem; font-weight: 900; line-height: 1; color: var(--ink); letter-spacing: -0.02em; }
-    .invest-card p { font-size: 0.8rem; color: var(--ink-3); line-height: 1.55; flex: 1; }
-    .invest-card .sport { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); border-top: 1px solid var(--border); padding-top: 0.75rem; margin-top: auto; }
-    footer { background: var(--ink); color: rgba(255,255,255,0.35); padding: 2rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.04em; }
-    footer .logo { font-family: 'Barlow Condensed', sans-serif; font-size: 1.4rem; font-weight: 900; letter-spacing: 0.02em; text-transform: uppercase; color: var(--white); }
-    footer .logo span { color: var(--accent); }
-    footer a { color: rgba(255,255,255,0.5); text-decoration: underline; }
-    .byline { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 1.2rem; }
-    @media (max-width: 900px) {
-      .cover-story { grid-template-columns: 1fr; }
-      .cover-visual { min-height: 240px; }
-      .roundup-grid { grid-template-columns: repeat(2, 1fr); }
-      .two-col { grid-template-columns: 1fr; }
-      .invest-grid { grid-template-columns: 1fr; }
-      .side-stories { grid-template-columns: 1fr; }
-      .nav-links, .nav-meta { display: none; }
+    body {
+      background: var(--cream); color: var(--ink);
+      font-family: var(--sans); font-size: 15px; line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
-    @media (max-width: 600px) {
-      .page { padding: 1.5rem 1rem 4rem; }
-      nav { padding: 0 1rem; }
-      .hero-banner { padding: 2.5rem 1rem 0; }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ── MASTHEAD ───────────────────────────────── */
+    .mast {
+      background: var(--ink); color: var(--white);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .mast-top {
+      max-width: var(--page); margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .mast-logo {
+      font-family: var(--serif); font-style: italic; font-weight: 700;
+      font-size: 1.8rem; letter-spacing: -0.01em; color: var(--white);
+    }
+    .mast-logo em { color: var(--red); font-style: normal; }
+    .mast-center {
+      text-align: center;
+      font-family: var(--sans); font-size: 0.58rem;
+      font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(255,255,255,0.28);
+    }
+    .mast-center strong {
+      display: block; font-family: var(--cond); font-weight: 900;
+      font-size: 1.35rem; letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.65); margin-bottom: 0.1rem;
+    }
+    .mast-tagline {
+      font-size: 0.57rem; font-weight: 600; letter-spacing: 0.16em;
+      text-transform: uppercase; color: rgba(255,255,255,0.25);
+      text-align: right; max-width: 190px; line-height: 1.7;
+    }
+    .mast-nav {
+      max-width: var(--page); margin: 0 auto;
+      display: flex; align-items: center; padding: 0 2.5rem;
+    }
+    .mast-nav a {
+      font-size: 0.58rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(255,255,255,0.35); padding: 0.8rem 0; margin-right: 2rem;
+      position: relative; transition: color 0.2s;
+    }
+    .mast-nav a::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 2px; background: var(--red);
+      transform: scaleX(0); transform-origin: left; transition: transform 0.25s ease;
+    }
+    .mast-nav a:hover { color: rgba(255,255,255,0.85); }
+    .mast-nav a:hover::after { transform: scaleX(1); }
+    .mast-nav-spacer { flex: 1; }
+    .mast-nav-date {
+      font-size: 0.57rem; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: rgba(255,255,255,0.2);
+    }
+
+    /* ── PAGE WRAPPER ───────────────────────────── */
+    .page { max-width: var(--page); margin: 0 auto; padding: 0 2.5rem; }
+
+    /* ── SECTION EYEBROW ────────────────────────── */
+    .eyebrow {
+      display: flex; align-items: center; gap: 1.25rem;
+      padding: 2.75rem 0 1.75rem;
+    }
+    .eyebrow-label {
+      font-size: 0.57rem; font-weight: 800; letter-spacing: 0.24em;
+      text-transform: uppercase; color: var(--red); white-space: nowrap;
+    }
+    .eyebrow-rule { flex: 1; height: 1px; background: var(--border); }
+    .eyebrow-sub {
+      font-family: var(--cond); font-size: 0.85rem; font-weight: 900;
+      color: var(--border); letter-spacing: 0.06em; text-transform: uppercase;
+    }
+
+    /* ── TAG ────────────────────────────────────── */
+    .tag {
+      display: inline-block; font-size: 0.55rem; font-weight: 800;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      padding: 3px 9px; border: 1px solid; border-radius: 1px;
+    }
+
+    /* ── COVER SPREAD ───────────────────────────── */
+    .cover-spread {
+      display: grid; grid-template-columns: 56% 1fr;
+      border: 1px solid var(--border); background: var(--white);
+      margin-bottom: var(--gap); min-height: 72vh; align-items: stretch;
+    }
+    .cover-img-col { position: relative; overflow: hidden; }
+    .cover-img-col img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .cover-img-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0; padding: 2.5rem;
+      background: linear-gradient(to top, rgba(10,8,5,0.92) 0%, rgba(10,8,5,0.45) 55%, transparent 100%);
+      pointer-events: none;
+    }
+    .cover-stat-big {
+      font-family: var(--cond); font-size: clamp(3.5rem, 7vw, 6.5rem);
+      font-weight: 900; line-height: 1; color: var(--white); letter-spacing: -0.02em;
+    }
+    .cover-stat-sub {
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: rgba(255,255,255,0.45); margin-top: 0.35rem;
+    }
+    .cover-text-col {
+      padding: 3rem 3rem 2.5rem; display: flex; flex-direction: column;
+      border-left: 1px solid var(--border);
+    }
+    .cover-tag-row { margin-bottom: 1.5rem; }
+    .cover-h1 {
+      font-family: var(--serif); font-style: italic; font-weight: 700;
+      font-size: clamp(2rem, 3vw, 3rem); line-height: 1.1; letter-spacing: -0.02em;
+      color: var(--ink); margin-bottom: 1.25rem;
+    }
+    .cover-dek {
+      font-size: 0.93rem; color: var(--ink-2); line-height: 1.7;
+      padding-bottom: 1.5rem; margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .cover-byline {
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--ink-3); margin-bottom: 1.5rem;
+    }
+    .body-p { font-size: 0.88rem; color: var(--ink-2); line-height: 1.8; margin-bottom: 0.9rem; }
+    .drop-cap::first-letter {
+      font-family: var(--serif); font-size: 4rem; font-weight: 700;
+      line-height: 0.72; float: left; margin-right: 0.08em; margin-top: 0.08em;
+      color: var(--ink);
+    }
+    .cover-blockquote {
+      margin: 1.5rem 0; padding: 1.25rem 1.5rem;
+      border-left: 3px solid var(--red); background: var(--cream);
+    }
+    .cover-blockquote p {
+      font-family: var(--serif); font-style: italic;
+      font-size: 1.05rem; line-height: 1.6; color: var(--ink);
+    }
+    .cover-blockquote cite {
+      display: block; font-family: var(--sans); font-style: normal;
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--ink-3); margin-top: 0.55rem;
+    }
+    .cover-chips {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      padding-top: 1.5rem; margin-top: auto;
+    }
+    .chip {
+      font-size: 0.57rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      border: 1px solid var(--border); color: var(--ink-3); padding: 4px 10px;
+    }
+    .read-more {
+      display: inline-block; font-size: 0.6rem; font-weight: 800;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--red); margin-top: 0.75rem; transition: letter-spacing 0.2s;
+    }
+    .read-more:hover { letter-spacing: 0.22em; }
+
+    /* ── SIDE STORIES ───────────────────────────── */
+    .side-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      background: var(--border); border: 1px solid var(--border);
+      border-top: none; gap: var(--gap); margin-bottom: 3.5rem;
+    }
+    .side-card {
+      background: var(--white); padding: 2rem 1.75rem;
+      display: flex; flex-direction: column;
+    }
+    .side-card-accent { width: 28px; height: 2px; background: var(--red); margin-bottom: 1.25rem; }
+    .side-card-tag { margin-bottom: 0.85rem; }
+    .side-card-h {
+      font-size: 0.93rem; font-weight: 800; line-height: 1.38;
+      color: var(--ink); margin-bottom: 0.6rem; flex: 1;
+    }
+    .side-card-body { font-size: 0.8rem; color: var(--ink-3); line-height: 1.65; }
+
+    /* ── NEWS ROUNDUP ───────────────────────────── */
+    .roundup-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 2.5rem; margin-bottom: 3.5rem;
+    }
+    .roundup-card { display: flex; flex-direction: column; }
+    .roundup-img-wrap { overflow: hidden; margin-bottom: 1.1rem; border-bottom: 2px solid var(--red); }
+    .roundup-img {
+      width: 100%; aspect-ratio: 3/2; object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .roundup-card:hover .roundup-img { transform: scale(1.04); }
+    .roundup-meta {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 0.65rem;
+    }
+    .roundup-num-label {
+      font-family: var(--cond); font-size: 1.3rem; font-weight: 900;
+      color: var(--border); letter-spacing: -0.02em; line-height: 1;
+    }
+    .roundup-h {
+      font-size: 0.9rem; font-weight: 800; line-height: 1.38;
+      color: var(--ink); margin-bottom: 0.55rem;
+    }
+    .roundup-body { font-size: 0.79rem; color: var(--ink-3); line-height: 1.65; flex: 1; }
+
+    /* ── TIPS + STATS ───────────────────────────── */
+    .two-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3.5rem; }
+    .tips-card { background: var(--white); border: 1px solid var(--border); padding: 2.75rem; }
+    .tips-card-heading {
+      font-family: var(--serif); font-style: italic; font-weight: 700;
+      font-size: 2rem; line-height: 1.15; color: var(--ink); margin-bottom: 2rem;
+    }
+    .tip-row { display: flex; gap: 1.25rem; padding: 1.1rem 0; border-top: 1px solid var(--border); }
+    .tip-row:last-child { border-bottom: 1px solid var(--border); }
+    .tip-num {
+      font-family: var(--cond); font-size: 1.15rem; font-weight: 900;
+      color: var(--border); flex-shrink: 0; width: 32px; line-height: 1.4;
+    }
+    .tip-h { font-size: 0.84rem; font-weight: 800; color: var(--ink); margin-bottom: 0.2rem; line-height: 1.35; }
+    .tip-body { font-size: 0.77rem; color: var(--ink-3); line-height: 1.65; }
+
+    .stats-card {
+      background: var(--ink); color: var(--white);
+      padding: 2.75rem; display: flex; flex-direction: column;
+    }
+    .stats-heading {
+      font-family: var(--cond); font-size: 2rem; font-weight: 900;
+      text-transform: uppercase; letter-spacing: 0.02em;
+      color: var(--white); margin-bottom: 2rem;
+    }
+    .stat-figure { border-top: 1px solid rgba(255,255,255,0.09); padding: 1.25rem 0; }
+    .stat-num {
+      font-family: var(--cond); font-size: 3.5rem; font-weight: 900;
+      line-height: 1; color: var(--white); letter-spacing: -0.02em;
+    }
+    .stat-label { font-size: 0.77rem; color: rgba(255,255,255,0.38); line-height: 1.55; margin-top: 0.3rem; }
+    .sectors-wrap { border-top: 1px solid rgba(255,255,255,0.09); padding-top: 1.25rem; margin-top: auto; }
+    .sectors-title {
+      font-size: 0.57rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: rgba(255,255,255,0.28); margin-bottom: 0.85rem;
+    }
+    .sector-item {
+      display: flex; align-items: baseline; gap: 0.75rem;
+      padding: 0.45rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .sector-num { font-family: var(--cond); font-size: 0.75rem; font-weight: 900; color: var(--red); }
+    .sector-name { font-size: 0.8rem; color: rgba(255,255,255,0.5); }
+
+    /* ── INVESTMENTS ────────────────────────────── */
+    .invest-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: var(--gap); background: var(--border);
+      border: 1px solid var(--border); margin-bottom: 3.5rem;
+    }
+    .invest-card {
+      background: var(--white); padding: 2.25rem;
+      display: flex; flex-direction: column; gap: 0.6rem;
+    }
+    .invest-sport {
+      font-size: 0.57rem; font-weight: 800; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--red);
+    }
+    .invest-amount {
+      font-family: var(--cond); font-size: 3.8rem; font-weight: 900;
+      line-height: 1; color: var(--ink); letter-spacing: -0.02em;
+    }
+    .invest-h { font-size: 0.93rem; font-weight: 800; line-height: 1.38; color: var(--ink); }
+    .invest-body { font-size: 0.79rem; color: var(--ink-3); line-height: 1.65; flex: 1; }
+    .invest-footer {
+      display: flex; justify-content: space-between; align-items: flex-end; gap: 0.75rem;
+      border-top: 1px solid var(--border); padding-top: 0.85rem; margin-top: auto;
+    }
+    .invest-investor { font-size: 0.72rem; font-weight: 700; color: var(--ink); }
+    .invest-round {
+      font-size: 0.57rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--ink-3); white-space: nowrap;
+    }
+
+    /* ── ARCHIVE ────────────────────────────────── */
+    .archive-section { background: var(--ink); padding: 4.5rem 0; }
+    .archive-inner { max-width: var(--page); margin: 0 auto; padding: 0 2.5rem; }
+    .archive-eyebrow {
+      display: flex; align-items: baseline; gap: 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 1.75rem; margin-bottom: 2.5rem;
+    }
+    .archive-eyebrow h2 {
+      font-family: var(--serif); font-style: italic; font-weight: 700;
+      font-size: 1.75rem; color: var(--white);
+    }
+    .archive-eyebrow span {
+      font-size: 0.57rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: rgba(255,255,255,0.22);
+    }
+    .archive-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: var(--gap); background: rgba(255,255,255,0.06);
+    }
+    .archive-card {
+      background: var(--ink); padding: 2rem 2.25rem;
+      transition: background 0.2s;
+    }
+    .archive-card:hover { background: #1C1915; }
+    .archive-issue-label {
+      font-family: var(--cond); font-size: 0.72rem; font-weight: 900;
+      letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.22);
+    }
+    .archive-rule { width: 22px; height: 2px; background: var(--red); margin: 0.85rem 0; }
+    .archive-h {
+      font-family: var(--serif); font-style: italic; font-weight: 400;
+      font-size: 1rem; color: rgba(255,255,255,0.72); line-height: 1.5; margin-bottom: 1.25rem;
+    }
+    .archive-meta {
+      display: flex; gap: 1.25rem; font-size: 0.57rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.22);
+    }
+
+    /* ── FOOTER ─────────────────────────────────── */
+    footer {
+      background: #0A0805; border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 2rem 2.5rem; display: flex; justify-content: space-between;
+      align-items: center; max-width: 100%;
+    }
+    .footer-logo {
+      font-family: var(--serif); font-style: italic; font-weight: 700;
+      font-size: 1.3rem; color: rgba(255,255,255,0.45);
+    }
+    .footer-meta, .footer-sub {
+      font-size: 0.57rem; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: rgba(255,255,255,0.2);
+    }
+    .footer-sub a { color: rgba(255,255,255,0.38); }
+
+    /* ── RESPONSIVE ─────────────────────────────── */
+    @media (max-width: 1040px) {
+      .cover-spread { grid-template-columns: 1fr; min-height: auto; }
+      .cover-img-col { min-height: 52vw; }
+      .cover-img-col img { position: relative; width: 100%; height: 52vw; }
+      .two-panel { grid-template-columns: 1fr; }
+      .roundup-grid { grid-template-columns: repeat(2, 1fr); }
+      .side-grid { grid-template-columns: repeat(2, 1fr); }
+      .invest-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .page { padding: 0 1.25rem; }
+      .mast-top { padding: 0.9rem 1.25rem; }
+      .mast-nav { padding: 0 1.25rem; }
+      .archive-inner { padding: 0 1.25rem; }
+      footer { padding: 1.5rem 1.25rem; flex-direction: column; gap: 0.75rem; text-align: center; }
       .roundup-grid { grid-template-columns: 1fr; }
+      .side-grid { grid-template-columns: 1fr; }
+      .mast-tagline { display: none; }
     }
   </style>
 </head>
 <body>
 
-<nav>
-  <div class="nav-logo">By<span>Athletes</span></div>
-  <div class="nav-links">
-    <a href="#spotlight">Spotlight</a>
+<!-- ═══ MASTHEAD ════════════════════════════════ -->
+<header class="mast">
+  <div class="mast-top">
+    <span class="mast-logo">By<em>Athletes</em></span>
+    <div class="mast-center">
+      <strong>No. IV</strong>
+      <span>Issue 4</span>
+    </div>
+    <span class="mast-tagline">Founder Intelligence<br/>for Professional Athletes</span>
+  </div>
+  <nav class="mast-nav">
+    <a href="#cover">Cover</a>
     <a href="#roundup">News</a>
-    <a href="#tips">Tips</a>
-    <a href="#investments">Investments</a>
+    <a href="#playbook">Playbook</a>
+    <a href="#deals">Deals</a>
+    <a href="#archive">Archive</a>
+    <span class="mast-nav-spacer"></span>
+    <span class="mast-nav-date">April 6, 2026</span>
+  </nav>
+</header>
+
+<!-- ═══ COVER STORY ══════════════════════════════ -->
+<div class="page" id="cover">
+  <div class="eyebrow">
+    <span class="eyebrow-label">Cover Story</span>
+    <div class="eyebrow-rule"></div>
+    <span class="eyebrow-sub">April 6, 2026</span>
   </div>
-  <div class="nav-meta">Vol. I &nbsp;&middot;&nbsp; Issue 4 &nbsp;&middot;&nbsp; April 6, 2026</div>
-</nav>
 
-<div style="background:var(--ink);">
-  <div class="hero-banner">
-    <div class="issue-meta">
-      <span>Issue No. 4</span>
-      <span class="dot"></span>
-      <span>Entrepreneur Edition</span>
-      <span class="dot"></span>
-      <span>April 6, 2026</span>
-    </div>
-    <h1>Athletes<br/>building<br/><em>empires.</em></h1>
-    <p class="hero-dek">Business news for the athlete who thinks beyond the game — startups, deals, and lessons from founders who wore the jersey first.</p>
-    <div class="hero-meta-row">
-      <div class="author-chip">
-        <div class="author-avatar">BA</div>
-        <span>ByAthletes Editorial</span>
+  <div class="cover-spread">
+    <!-- Image col -->
+    <div class="cover-img-col">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&h=600&fit=crop&auto=format" alt="Lewis Hamilton Is Betting on What Comes After the Podium" />
+      <div class="cover-img-overlay">
+        <div class="cover-stat-big">$85M</div>
+        <div class="cover-stat-sub">Almave valuation — Series A, March 2026</div>
       </div>
-      <span class="read-time">10 min read</span>
+    </div>
+
+    <!-- Text col -->
+    <div class="cover-text-col">
+      <div class="cover-tag-row"><span class="tag" style="background:var(--red);color:#fff;border-color:var(--red);">Athlete Spotlight</span></div>
+      <h1 class="cover-h1">Lewis Hamilton Is Betting on What Comes After the Podium</h1>
+      <p class="cover-dek">From Formula 1 to non-alcoholic spirits and film production — Hamilton's off-track empire is accelerating faster than anything he's done behind the wheel.</p>
+      <div class="cover-byline">By Elena Rossi &nbsp;·&nbsp; Staff Writer</div>
+      <p class="body-p drop-cap">Lewis Hamilton has won seven Formula 1 World Championships. But the business he's building off the track might outlast all of them. In 2022 he co-founded Almave, a non-alcoholic agave spirits brand developed with Mexican master distiller Casa Lumbre — positioning himself at the intersection of luxury wellness and sustainable agriculture before either trend hit the mainstream.</p><p class="body-p">Almave closed a $20M Series A in March 2026, backed by LVMH Ventures and Talis Capital, placing the brand's valuation at $85M. Distribution now covers 18 countries with listings in Harrods, Selfridges, Galeries Lafayette, and 400+ Michelin-starred restaurants. The brand moved 1.2M units in 2025 — its first full commercial year.</p><p class="body-p">Alongside Almave, Hamilton's Dawn Apollo Films has three projects in post-production with streaming commitments totalling £30M. He holds equity positions in three European tech startups through his family office. The infrastructure is in place — Hamilton is playing a 20-year game.</p>
+      <div class="cover-blockquote">
+        <p>"Formula 1 gave me discipline. Business gave me freedom. You study the competition, you build a system, and then you execute."</p>
+        <cite>— Lewis Hamilton, Co-Founder, Almave</cite>
+      </div>
+      <div class="cover-chips"><span class="chip">Formula 1</span><span class="chip">Spirits & Beverage</span><span class="chip">Film & Media</span><span class="chip">LVMH Ventures</span><span class="chip">1.2M Units Sold</span></div>
+      <a href="https://www.forbes.com/sites/athletes/2026/04/lewis-hamilton-almave-series-a/" class="read-more" target="_blank" rel="noopener">Read original — Forbes →</a>
     </div>
   </div>
-</div>
 
-<div class="page">
-
-  <section id="spotlight" style="margin-bottom:2rem;">
-    <div class="section-header">
-      <span class="section-label">Cover Story</span>
-      <div class="section-line"></div>
-    </div>
-    <div class="cover-story">
-      <div class="cover-content">
-        <span class="tag red">Athlete Spotlight</span>
-        <h2>Lewis Hamilton Is Betting on What Comes After the Podium</h2>
-        <p class="dek">From Formula 1 to non-alcoholic spirits and film production — Hamilton's off-track empire is accelerating faster than anything he's done behind the wheel.</p>
-        <p class="byline">By Elena Rossi &nbsp;&middot;&nbsp; Staff Writer</p>
-        <div class="body-text">
-          <p>Lewis Hamilton has won seven Formula 1 World Championships. But the business he's building off the track might outlast all of them. In 2022 he co-founded Almave, a non-alcoholic agave spirits brand developed with Mexican master distiller Casa Lumbre — positioning himself at the intersection of luxury wellness and sustainable agriculture before either trend hit the mainstream.</p><p>Almave closed a $20M Series A in March 2026, backed by LVMH Ventures and Talis Capital, placing the brand's valuation at $85M. Distribution now covers 18 countries with listings in Harrods, Selfridges, Galeries Lafayette, and 400+ Michelin-starred restaurants. The brand moved 1.2M units in 2025 — its first full commercial year.</p><p>Alongside Almave, Hamilton's Dawn Apollo Films has three projects in post-production with streaming commitments totalling £30M. He holds equity positions in three European tech startups through his family office. The infrastructure is in place — Hamilton is playing a 20-year game.</p>
-          <div class="pullquote">
-            <p>"Formula 1 gave me discipline. Business gave me freedom. You study the competition, you build a system, and then you execute."</p>
-            <cite>— Lewis Hamilton, Co-Founder, Almave</cite>
-          </div>
-          <a href="https://www.forbes.com/sites/athletes/2026/04/lewis-hamilton-almave-series-a/" class="read-more" target="_blank" rel="noopener">Read original story → <span style="opacity:0.5;font-weight:500">Forbes</span></a>
-        </div>
-      </div>
-      <div class="cover-visual" style="background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&h=600&fit=crop&auto=format')">
-        <div class="big-stat">$85M</div>
-        <div class="stat-label">Almave valuation — Series A, March 2026</div>
-        <div class="cover-visual-chips"><span class="chip">Formula 1</span><span class="chip">Spirits & Beverage</span><span class="chip">Film & Media</span><span class="chip">LVMH Ventures</span><span class="chip">1.2M Units Sold</span></div>
-      </div>
-    </div>
-    <div class="side-stories">
-  <div class="side-story">
-    <span class="tag">Football</span>
-    <h3>Piqué's Kosmos Lands €40M Davis Cup Media Rights Extension</h3>
-    <p>Gerard Piqué's sports and media company Kosmos has secured a €40M extension on its Davis Cup rights deal, locking in revenue through 2030. The former Barcelona captain built Kosmos from scratch — it now manages Davis Cup globally and employs 90 full-time staff.</p>
+  <!-- Side stories strip -->
+  <div class="side-grid">
+  <div class="side-card">
+    <div class="side-card-accent"></div>
+    <div class="side-card-tag"><span class="tag" style="background:transparent;color:var(--ink-3);border-color:var(--border);">Football</span></div>
+    <h3 class="side-card-h">Piqué's Kosmos Lands €40M Davis Cup Media Rights Extension</h3>
+    <p class="side-card-body">Gerard Piqué's sports and media company Kosmos has secured a €40M extension on its Davis Cup rights deal, locking in revenue through 2030. The former Barcelona captain built Kosmos from scratch — it now manages Davis Cup globally and employs 90 full-time staff.</p>
     <a href="https://www.sportspromedia.com/news/gerard-pique-kosmos-davis-cup-2026/" class="read-more" target="_blank" rel="noopener">Read more →</a>
   </div>
-  <div class="side-story">
-    <span class="tag">MMA</span>
-    <h3>Alex Pereira Launches Predador Nutrition Brand Across Europe</h3>
-    <p>UFC light heavyweight champion Alex Pereira has launched Predador, a sports nutrition brand targeting MMA athletes and functional fitness enthusiasts across Brazil and Europe. The first product line — pre-workout, whey, and recovery — reached 800 gyms across six countries within 60 days of launch.</p>
+  <div class="side-card">
+    <div class="side-card-accent"></div>
+    <div class="side-card-tag"><span class="tag" style="background:transparent;color:var(--ink-3);border-color:var(--border);">MMA</span></div>
+    <h3 class="side-card-h">Alex Pereira Launches Predador Nutrition Brand Across Europe</h3>
+    <p class="side-card-body">UFC light heavyweight champion Alex Pereira has launched Predador, a sports nutrition brand targeting MMA athletes and functional fitness enthusiasts across Brazil and Europe. The first product line — pre-workout, whey, and recovery — reached 800 gyms across six countries within 60 days of launch.</p>
     <a href="https://www.mmafighting.com/2026/4/pereira-predador-brand-launch" class="read-more" target="_blank" rel="noopener">Read more →</a>
   </div>
-  <div class="side-story">
-    <span class="tag blue">Opinion</span>
-    <h3>European Athletes Are Finally Playing the Founders' Game</h3>
-    <p>For a decade, the athlete-entrepreneur story was written in American English. Not anymore. From Madrid to Manchester, athletes are closing institutional rounds and building equity-first businesses — and the gap with the US is closing fast.</p>
+  <div class="side-card">
+    <div class="side-card-accent"></div>
+    <div class="side-card-tag"><span class="tag" style="background:#1A3CFF;color:#fff;border-color:#1A3CFF;">Opinion</span></div>
+    <h3 class="side-card-h">European Athletes Are Finally Playing the Founders' Game</h3>
+    <p class="side-card-body">For a decade, the athlete-entrepreneur story was written in American English. Not anymore. From Madrid to Manchester, athletes are closing institutional rounds and building equity-first businesses — and the gap with the US is closing fast.</p>
     
   </div>
-  <div class="side-story">
-    <span class="tag">Formula 1</span>
-    <h3>Carlos Sainz Backs Madrid Solar Startup in Seed Round</h3>
-    <p>The Williams F1 driver has invested in Solfex, a Madrid-based solar-as-a-service startup targeting residential buildings across Southern Europe. Sainz cited Spain's energy transition as a decade-long structural opportunity he wanted exposure to beyond racing income.</p>
+  <div class="side-card">
+    <div class="side-card-accent"></div>
+    <div class="side-card-tag"><span class="tag" style="background:transparent;color:var(--ink-3);border-color:var(--border);">Formula 1</span></div>
+    <h3 class="side-card-h">Carlos Sainz Backs Madrid Solar Startup in Seed Round</h3>
+    <p class="side-card-body">The Williams F1 driver has invested in Solfex, a Madrid-based solar-as-a-service startup targeting residential buildings across Southern Europe. Sainz cited Spain's energy transition as a decade-long structural opportunity he wanted exposure to beyond racing income.</p>
     <a href="https://www.motorsport.com/f1/news/carlos-sainz-solfex-renewable-energy-investment-2026/" class="read-more" target="_blank" rel="noopener">Read more →</a>
   </div></div>
-  </section>
+</div>
 
-  <section id="roundup" style="margin-bottom:2rem;">
-    <div class="section-header">
-      <span class="section-label">News Roundup</span>
-      <div class="section-line"></div>
-    </div>
-    <div class="roundup-grid">
+<!-- ═══ NEWS ROUNDUP ════════════════════════════ -->
+<div class="page" id="roundup">
+  <div class="eyebrow">
+    <span class="eyebrow-label">News Roundup</span>
+    <div class="eyebrow-rule"></div>
+    <span class="eyebrow-sub">Latest</span>
+  </div>
+  <div class="roundup-grid">
   <div class="roundup-card">
-    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&h=450&fit=crop&auto=format" class="roundup-img" alt="Football" loading="lazy" />
-    <div class="roundup-body">
-      <span class="roundup-num">01</span>
-      <span class="tag">Football</span>
-      <h3>Harry Kane Opens Third Munich Restaurant Backed by PE</h3>
-      <p>The Bayern Munich striker's restaurant group, Cane & Co., opened its third Munich location in the Maxvorstadt district, backed by a €5M facility from a Munich-based private equity fund. Kane holds majority equity across all locations and serves as creative director for the brand. The group is targeting eight locations across Germany by 2028.</p>
-      <a href="https://www.espn.com/soccer/story/_/id/40129011/harry-kane-restaurant-cane-co-munich-expansion" class="read-more" target="_blank" rel="noopener">Read full story →</a>
+    <div class="roundup-img-wrap"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&h=450&fit=crop&auto=format" class="roundup-img" alt="" loading="lazy" /></div>
+    <div class="roundup-text">
+      <div class="roundup-meta">
+        <span class="tag" style="background:transparent;color:var(--ink-3);border-color:var(--border);">Football</span>
+        <span class="roundup-num-label">01</span>
+      </div>
+      <h3 class="roundup-h">Harry Kane Opens Third Munich Restaurant Backed by PE</h3>
+      <p class="roundup-body">The Bayern Munich striker's restaurant group, Cane & Co., opened its third Munich location in the Maxvorstadt district, backed by a €5M facility from a Munich-based private equity fund. Kane holds majority equity across all locations and serves as creative director for the brand. The group is targeting eight locations across Germany by 2028.</p>
+      <a href="https://www.espn.com/soccer/story/_/id/40129011/harry-kane-restaurant-cane-co-munich-expansion" class="read-more" target="_blank" rel="noopener">ESPN →</a>
     </div>
   </div>
   <div class="roundup-card">
-    <img src="https://images.unsplash.com/photo-1504817343863-5092a923803e?w=900&h=450&fit=crop&auto=format" class="roundup-img" alt="Formula 1" loading="lazy" />
-    <div class="roundup-body">
-      <span class="roundup-num">02</span>
-      <span class="tag">Formula 1</span>
-      <h3>Fernando Alonso Expands Kimoa to 40 Countries, Eyes 2027 IPO</h3>
-      <p>Aston Martin's veteran driver has built Kimoa — his motorsport lifestyle apparel brand — into a €30M revenue business now distributed across 40 countries. The brand is profitable, has no external investors, and Alonso has received approaches from strategic buyers. A minority sale or IPO is being evaluated for 2027.</p>
-      <a href="https://www.theguardian.com/sport/2026/apr/06/fernando-alonso-kimoa-expansion-ipo" class="read-more" target="_blank" rel="noopener">Read full story →</a>
+    <div class="roundup-img-wrap"><img src="https://images.unsplash.com/photo-1504817343863-5092a923803e?w=900&h=450&fit=crop&auto=format" class="roundup-img" alt="" loading="lazy" /></div>
+    <div class="roundup-text">
+      <div class="roundup-meta">
+        <span class="tag" style="background:transparent;color:var(--ink-3);border-color:var(--border);">Formula 1</span>
+        <span class="roundup-num-label">02</span>
+      </div>
+      <h3 class="roundup-h">Fernando Alonso Expands Kimoa to 40 Countries, Eyes 2027 IPO</h3>
+      <p class="roundup-body">Aston Martin's veteran driver has built Kimoa — his motorsport lifestyle apparel brand — into a €30M revenue business now distributed across 40 countries. The brand is profitable, has no external investors, and Alonso has received approaches from strategic buyers. A minority sale or IPO is being evaluated for 2027.</p>
+      <a href="https://www.theguardian.com/sport/2026/apr/06/fernando-alonso-kimoa-expansion-ipo" class="read-more" target="_blank" rel="noopener">The Guardian →</a>
     </div>
   </div>
   <div class="roundup-card">
-    <img src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=900&h=450&fit=crop&auto=format" class="roundup-img" alt="MMA" loading="lazy" />
-    <div class="roundup-body">
-      <span class="roundup-num">03</span>
-      <span class="tag">MMA</span>
-      <h3>Paddy Pimblett Co-Founds Liverpool Fintech for Young Fans</h3>
-      <p>The UFC fan favourite has co-founded SupportBank, a fintech app helping young sports fans budget for tickets, merchandise, and travel. The app raised £3.2M in a pre-seed round led by Founders Factory. Pimblett holds a 20% equity stake and is actively involved in product development.</p>
-      <a href="https://www.skysports.com/boxing/news/15040/13220483/paddy-pimblett-supportbank-fintech-liverpool" class="read-more" target="_blank" rel="noopener">Read full story →</a>
+    <div class="roundup-img-wrap"><img src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=900&h=450&fit=crop&auto=format" class="roundup-img" alt="" loading="lazy" /></div>
+    <div class="roundup-text">
+      <div class="roundup-meta">
+        <span class="tag" style="background:transparent;color:var(--ink-3);border-color:var(--border);">MMA</span>
+        <span class="roundup-num-label">03</span>
+      </div>
+      <h3 class="roundup-h">Paddy Pimblett Co-Founds Liverpool Fintech for Young Fans</h3>
+      <p class="roundup-body">The UFC fan favourite has co-founded SupportBank, a fintech app helping young sports fans budget for tickets, merchandise, and travel. The app raised £3.2M in a pre-seed round led by Founders Factory. Pimblett holds a 20% equity stake and is actively involved in product development.</p>
+      <a href="https://www.skysports.com/boxing/news/15040/13220483/paddy-pimblett-supportbank-fintech-liverpool" class="read-more" target="_blank" rel="noopener">Sky Sports →</a>
     </div>
   </div>
   <div class="roundup-card">
-    <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=900&h=450&fit=crop&auto=format" class="roundup-img" alt="Football" loading="lazy" />
-    <div class="roundup-body">
-      <span class="roundup-num">04</span>
-      <span class="tag">Football</span>
-      <h3>Erling Haaland Backs Norwegian Cleantech Seed Round</h3>
-      <p>Manchester City's striker has invested in Bergen-based startup Fjord Energy, which develops modular hydrogen storage systems for Nordic fishing vessels. The investment is managed through his family office and marks his second cleantech bet in 18 months. A Series A is targeted for Q3 2026.</p>
-      <a href="https://www.vg.no/sport/fotball/i/haaland-cleantech-fjord-energy-investment-2026" class="read-more" target="_blank" rel="noopener">Read full story →</a>
+    <div class="roundup-img-wrap"><img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=900&h=450&fit=crop&auto=format" class="roundup-img" alt="" loading="lazy" /></div>
+    <div class="roundup-text">
+      <div class="roundup-meta">
+        <span class="tag" style="background:transparent;color:var(--ink-3);border-color:var(--border);">Football</span>
+        <span class="roundup-num-label">04</span>
+      </div>
+      <h3 class="roundup-h">Erling Haaland Backs Norwegian Cleantech Seed Round</h3>
+      <p class="roundup-body">Manchester City's striker has invested in Bergen-based startup Fjord Energy, which develops modular hydrogen storage systems for Nordic fishing vessels. The investment is managed through his family office and marks his second cleantech bet in 18 months. A Series A is targeted for Q3 2026.</p>
+      <a href="https://www.vg.no/sport/fotball/i/haaland-cleantech-fjord-energy-investment-2026" class="read-more" target="_blank" rel="noopener">VG →</a>
     </div>
   </div></div>
-  </section>
+</div>
 
-  <section id="tips" style="margin-bottom:2rem;">
-    <div class="section-header">
-      <span class="section-label">Startup Tips</span>
-      <div class="section-line"></div>
-    </div>
-    <div class="two-col">
-      <div class="tips-card">
-        <h2>The athlete's<br/>startup playbook</h2>
-        
+<!-- ═══ PLAYBOOK + STATS ══════════════════════════ -->
+<div class="page" id="playbook">
+  <div class="eyebrow">
+    <span class="eyebrow-label">The Playbook</span>
+    <div class="eyebrow-rule"></div>
+    <span class="eyebrow-sub">Tips & Data</span>
+  </div>
+  <div class="two-panel">
+    <div class="tips-card">
+      <h2 class="tips-card-heading">The athlete's<br/>startup playbook.</h2>
+      
   <div class="tip-row">
     <span class="tip-num">01</span>
     <div>
-      <h4>Build in Europe, scale globally from day one</h4>
-      <p>European athletes have access to world-class talent, EU market scale, and institutional capital hungry for founder-led brands. Don't limit your ambition to your home market at launch.</p>
+      <h4 class="tip-h">Build in Europe, scale globally from day one</h4>
+      <p class="tip-body">European athletes have access to world-class talent, EU market scale, and institutional capital hungry for founder-led brands. Don't limit your ambition to your home market at launch.</p>
     </div>
   </div>
   <div class="tip-row">
     <span class="tip-num">02</span>
     <div>
-      <h4>Turn training discipline into operating systems</h4>
-      <p>The consistency that made you elite is a superpower in business. Document your standards and decision frameworks — then make your company run the same way.</p>
+      <h4 class="tip-h">Turn training discipline into operating systems</h4>
+      <p class="tip-body">The consistency that made you elite is a superpower in business. Document your standards and decision frameworks — then make your company run the same way.</p>
     </div>
   </div>
   <div class="tip-row">
     <span class="tip-num">03</span>
     <div>
-      <h4>The brand is the moat, not the product</h4>
-      <p>Products can be copied. A brand built on genuine personal conviction is almost impossible to replicate. Lead with your story before you lead with your SKUs.</p>
+      <h4 class="tip-h">The brand is the moat, not the product</h4>
+      <p class="tip-body">Products can be copied. A brand built on genuine personal conviction is almost impossible to replicate. Lead with your story before you lead with your SKUs.</p>
     </div>
   </div>
   <div class="tip-row">
     <span class="tip-num">04</span>
     <div>
-      <h4>Hire your weaknesses before your strengths</h4>
-      <p>You know what you're good at. Your first hires should cover your blind spots — finance, operations, product — not add more of what you already bring.</p>
+      <h4 class="tip-h">Hire your weaknesses before your strengths</h4>
+      <p class="tip-body">You know what you're good at. Your first hires should cover your blind spots — finance, operations, product — not add more of what you already bring.</p>
     </div>
   </div>
   <div class="tip-row">
     <span class="tip-num">05</span>
     <div>
-      <h4>Understand unit economics before raising capital</h4>
-      <p>Know your customer acquisition cost, lifetime value, and gross margin before any investor meeting. Your answer will set the terms of the conversation.</p>
+      <h4 class="tip-h">Understand unit economics before raising capital</h4>
+      <p class="tip-body">Know your customer acquisition cost, lifetime value, and gross margin before any investor meeting. Your answer will set the terms of the conversation.</p>
     </div>
   </div>
   <div class="tip-row">
     <span class="tip-num">06</span>
     <div>
-      <h4>Use your playing career as proof-of-concept</h4>
-      <p>While you're still competing, test ideas with minimum viable products and real customers. Your profile reduces friction — but the market will still tell you the truth.</p>
+      <h4 class="tip-h">Use your playing career as proof-of-concept</h4>
+      <p class="tip-body">While you're still competing, test ideas with minimum viable products and real customers. Your profile reduces friction — but the market will still tell you the truth.</p>
     </div>
   </div>
   <div class="tip-row">
     <span class="tip-num">07</span>
     <div>
-      <h4>Own the relationship with your customer</h4>
-      <p>Email lists and direct commerce channels are assets you own. Social media reach is borrowed. Build the infrastructure to reach customers without a platform's permission.</p>
+      <h4 class="tip-h">Own the relationship with your customer</h4>
+      <p class="tip-body">Email lists and direct commerce channels are assets you own. Social media reach is borrowed. Build the infrastructure to reach customers without a platform's permission.</p>
     </div>
   </div>
-      </div>
-      <div class="stats-card">
-        <span class="section-label">By The Numbers</span>
-        <h2>The athlete<br/>startup economy</h2>
+    </div>
+    <div class="stats-card">
+      <h2 class="stats-heading">By The<br/>Numbers.</h2>
+      
+  <div class="stat-figure">
+    <div class="stat-num">€4.2B</div>
+    <p class="stat-label">Total capital raised by European athlete-founded companies since 2020 — led by football, F1, and MMA</p>
+  </div>
+  <div class="stat-figure">
+    <div class="stat-num">3x</div>
+    <p class="stat-label">Growth in European athlete-founded startups between 2019 and 2025</p>
+  </div>
+  <div class="stat-figure">
+    <div class="stat-num">€1.2B</div>
+    <p class="stat-label">Capital raised by footballer-founded companies in Europe since 2021 alone</p>
+  </div>
+      <div class="sectors-wrap">
+        <div class="sectors-title">Fastest Growing Sectors</div>
         
-  <div class="stat-item">
-    <div class="num">€4.2B</div>
-    <p>Total capital raised by European athlete-founded companies since 2020 — led by football, F1, and MMA</p>
+  <div class="sector-item">
+    <span class="sector-num">01</span>
+    <span class="sector-name">Football Technology</span>
   </div>
-  <div class="stat-item">
-    <div class="num">3x</div>
-    <p>Growth in European athlete-founded startups between 2019 and 2025</p>
+  <div class="sector-item">
+    <span class="sector-num">02</span>
+    <span class="sector-name">Motorsport Ventures</span>
   </div>
-  <div class="stat-item">
-    <div class="num">€1.2B</div>
-    <p>Capital raised by footballer-founded companies in Europe since 2021 alone</p>
+  <div class="sector-item">
+    <span class="sector-num">03</span>
+    <span class="sector-name">Combat Sports & Nutrition</span>
   </div>
-        <div class="stat-item">
-          <div style="font-size:0.78rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:0.6rem;">Fastest Growing Sectors</div>
-          <p style="color:rgba(255,255,255,0.6);font-size:0.82rem;line-height:1.8;">1. Football Technology<br/>2. Motorsport Ventures<br/>3. Combat Sports & Nutrition<br/>4. Clean Energy & Sustainability<br/>5. Lifestyle & Apparel</p>
-        </div>
+  <div class="sector-item">
+    <span class="sector-num">04</span>
+    <span class="sector-name">Clean Energy & Sustainability</span>
+  </div>
+  <div class="sector-item">
+    <span class="sector-num">05</span>
+    <span class="sector-name">Lifestyle & Apparel</span>
+  </div>
       </div>
     </div>
-  </section>
-
-  <section id="investments">
-    <div class="section-header">
-      <span class="section-label">Investment Deals — Q1 2026</span>
-      <div class="section-line"></div>
-    </div>
-    <div class="invest-grid">
-  <div class="invest-card">
-    <div class="investor">Cristiano Ronaldo — CR7 Ventures</div>
-    <h3>Lisbon eSports Platform Closes Series A</h3>
-    <div class="amount">$15M</div>
-    <p>Ronaldo's investment vehicle CR7 Ventures co-led a Series A in GameArena, a Lisbon-based eSports platform hosting competitive gaming leagues across Southern Europe and Brazil. The platform has 2.1M registered users and generates revenue through subscriptions, advertising, and live event ticketing.</p>
-    <div class="sport">Football &nbsp;&middot;&nbsp; Series A</div>
   </div>
-  <div class="invest-card">
-    <div class="investor">Thierry Henry</div>
-    <h3>Youth Football Analytics Platform Closes Seed Round</h3>
-    <div class="amount">$4.5M</div>
-    <p>The Arsenal legend has backed TalentRadar, a youth football analytics platform using computer vision to assess players aged 10–18. Henry cited his own experience being spotted late as the motivation — the tool is now deployed at 120 academies across France, Belgium, and the UK.</p>
-    <div class="sport">Football &nbsp;&middot;&nbsp; Seed Round</div>
-  </div>
-  <div class="invest-card">
-    <div class="investor">Toni Kroos</div>
-    <h3>Sports Data Intelligence Firm Expands to Five Leagues</h3>
-    <div class="amount">$8M</div>
-    <p>The retired Germany and Real Madrid legend invested in DataKick, a Munich-based sports data intelligence firm building decision-support tools for professional club management. Kroos is a strategic advisor and equity holder, contributing expertise on performance culture and player evaluation.</p>
-    <div class="sport">Football &nbsp;&middot;&nbsp; Series A</div>
-  </div></div>
-  </section>
-
 </div>
 
+<!-- ═══ INVESTMENTS ═══════════════════════════════ -->
+<div class="page" id="deals">
+  <div class="eyebrow">
+    <span class="eyebrow-label">Investment Deals</span>
+    <div class="eyebrow-rule"></div>
+    <span class="eyebrow-sub">Q1 2026</span>
+  </div>
+  <div class="invest-grid">
+  <div class="invest-card">
+    <div class="invest-sport">Football</div>
+    <div class="invest-amount">$15M</div>
+    <h3 class="invest-h">Lisbon eSports Platform Closes Series A</h3>
+    <p class="invest-body">Ronaldo's investment vehicle CR7 Ventures co-led a Series A in GameArena, a Lisbon-based eSports platform hosting competitive gaming leagues across Southern Europe and Brazil. The platform has 2.1M registered users and generates revenue through subscriptions, advertising, and live event ticketing.</p>
+    <div class="invest-footer">
+      <span class="invest-investor">Cristiano Ronaldo — CR7 Ventures</span>
+      <span class="invest-round">Series A</span>
+    </div>
+  </div>
+  <div class="invest-card">
+    <div class="invest-sport">Football</div>
+    <div class="invest-amount">$4.5M</div>
+    <h3 class="invest-h">Youth Football Analytics Platform Closes Seed Round</h3>
+    <p class="invest-body">The Arsenal legend has backed TalentRadar, a youth football analytics platform using computer vision to assess players aged 10–18. Henry cited his own experience being spotted late as the motivation — the tool is now deployed at 120 academies across France, Belgium, and the UK.</p>
+    <div class="invest-footer">
+      <span class="invest-investor">Thierry Henry</span>
+      <span class="invest-round">Seed Round</span>
+    </div>
+  </div>
+  <div class="invest-card">
+    <div class="invest-sport">Football</div>
+    <div class="invest-amount">$8M</div>
+    <h3 class="invest-h">Sports Data Intelligence Firm Expands to Five Leagues</h3>
+    <p class="invest-body">The retired Germany and Real Madrid legend invested in DataKick, a Munich-based sports data intelligence firm building decision-support tools for professional club management. Kroos is a strategic advisor and equity holder, contributing expertise on performance culture and player evaluation.</p>
+    <div class="invest-footer">
+      <span class="invest-investor">Toni Kroos</span>
+      <span class="invest-round">Series A</span>
+    </div>
+  </div></div>
+</div>
+
+<!-- ═══ ARCHIVE ════════════════════════════════════ -->
+
+<section class="archive-section" id="archive">
+  <div class="archive-inner">
+    <div class="archive-eyebrow">
+      <h2>Previous Issues</h2>
+      <span>2 issues in the archive</span>
+    </div>
+    <div class="archive-grid">
+  <div class="archive-card">
+    <span class="archive-issue-label">No. 002</span>
+    <div class="archive-rule"></div>
+    <h3 class="archive-h">LeBron James Is Not a Brand. He's a Business.</h3>
+    <div class="archive-meta">
+      <span>April 5, 2026</span>
+      <span>Basketball</span>
+    </div>
+  </div>
+  <div class="archive-card">
+    <span class="archive-issue-label">No. 003</span>
+    <div class="archive-rule"></div>
+    <h3 class="archive-h">Naomi Osaka Built a Skincare Brand Athletes Actually Need</h3>
+    <div class="archive-meta">
+      <span>April 6, 2026</span>
+      <span>Tennis</span>
+    </div>
+  </div></div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ════════════════════════════════════ -->
 <footer>
-  <div class="logo">By<span>Athletes</span></div>
-  <span>Entrepreneur Edition &nbsp;&middot;&nbsp; Issue No. 4 &nbsp;&middot;&nbsp; April 6, 2026</span>
-  <span>Stories for athletes, by athletes &nbsp;&middot;&nbsp; <a href="#">Subscribe</a></span>
+  <span class="footer-logo">ByAthletes</span>
+  <span class="footer-meta">Vol. I &nbsp;·&nbsp; Issue No. 4 &nbsp;·&nbsp; April 6, 2026</span>
+  <span class="footer-sub">For athletes who build &nbsp;·&nbsp; <a href="#">Subscribe</a></span>
 </footer>
 
 </body>

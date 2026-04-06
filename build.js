@@ -1,279 +1,628 @@
 // ByAthletes — build.js
-// Reads stories.json and writes a fresh index.html
-// Run with: node build.js
+// Reads stories.json + archive.json → writes index.html
+// Run: node build.js
 
-const fs = require("fs");
+const fs   = require("fs");
 const path = require("path");
 
 const data = JSON.parse(fs.readFileSync(path.join(__dirname, "stories.json"), "utf8"));
 
+let archive = [];
+try {
+  archive = JSON.parse(fs.readFileSync(path.join(__dirname, "archive.json"), "utf8"));
+} catch(e) { /* no archive yet — that's fine */ }
+
 // ─── HELPERS ───────────────────────────────────────────────
+
+function toRoman(n) {
+  const map = [[1000,"M"],[900,"CM"],[500,"D"],[400,"CD"],[100,"C"],[90,"XC"],
+               [50,"L"],[40,"XL"],[10,"X"],[9,"IX"],[5,"V"],[4,"IV"],[1,"I"]];
+  return map.reduce((acc,[v,s]) => { while(n>=v){acc+=s;n-=v;} return acc; }, "");
+}
+
 const tag = (label, style = "") => {
-  const cls = style === "red" ? "tag red" : style === "blue" ? "tag blue" : "tag";
-  return `<span class="${cls}">${label}</span>`;
+  const s = style === "red"
+    ? "background:var(--red);color:#fff;border-color:var(--red);"
+    : style === "blue"
+    ? "background:#1A3CFF;color:#fff;border-color:#1A3CFF;"
+    : "background:transparent;color:var(--ink-3);border-color:var(--border);";
+  return `<span class="tag" style="${s}">${label}</span>`;
 };
 
+const readMore = (url, label = "Read more") =>
+  url ? `<a href="${url}" class="read-more" target="_blank" rel="noopener">${label} →</a>` : "";
+
+// ─── TEMPLATE FRAGMENTS ────────────────────────────────────
+
 const sideStoryCards = data.side_stories.map(s => `
-  <div class="side-story">
-    ${tag(s.tag, s.tag_style || "")}
-    <h3>${s.headline}</h3>
-    <p>${s.body}</p>
+  <div class="side-card">
+    <div class="side-card-accent"></div>
+    <div class="side-card-tag">${tag(s.tag, s.tag_style || "")}</div>
+    <h3 class="side-card-h">${s.headline}</h3>
+    <p class="side-card-body">${s.body}</p>
+    ${readMore(s.source_url)}
   </div>`).join("");
 
 const roundupCards = data.roundup.map((r, i) => `
   <div class="roundup-card">
-    <span class="roundup-num">0${i + 1}</span>
-    ${tag(r.tag)}
-    <h3>${r.headline}</h3>
-    <p>${r.body}</p>
+    ${r.image ? `<div class="roundup-img-wrap"><img src="${r.image}" class="roundup-img" alt="" loading="lazy" /></div>` : ""}
+    <div class="roundup-text">
+      <div class="roundup-meta">
+        ${tag(r.tag)}
+        <span class="roundup-num-label">${String(i+1).padStart(2,"0")}</span>
+      </div>
+      <h3 class="roundup-h">${r.headline}</h3>
+      <p class="roundup-body">${r.body}</p>
+      ${r.source_url ? `<a href="${r.source_url}" class="read-more" target="_blank" rel="noopener">${r.source_name || "Read more"} →</a>` : ""}
+    </div>
   </div>`).join("");
 
 const tipRows = data.tips.map((t, i) => `
   <div class="tip-row">
-    <span class="tip-num">0${i + 1}</span>
+    <span class="tip-num">${String(i+1).padStart(2,"0")}</span>
     <div>
-      <h4>${t.headline}</h4>
-      <p>${t.body}</p>
+      <h4 class="tip-h">${t.headline}</h4>
+      <p class="tip-body">${t.body}</p>
     </div>
   </div>`).join("");
 
-const statItems = data.stats.figures.map(s => `
-  <div class="stat-item">
-    <div class="num">${s.num}</div>
-    <p>${s.label}</p>
+const statFigures = data.stats.figures.map(s => `
+  <div class="stat-figure">
+    <div class="stat-num">${s.num}</div>
+    <p class="stat-label">${s.label}</p>
   </div>`).join("");
 
-const sectorList = data.stats.sectors.map((s, i) => `${i + 1}. ${s}`).join("<br/>");
+const sectorList = data.stats.sectors.map((s, i) => `
+  <div class="sector-item">
+    <span class="sector-num">${String(i+1).padStart(2,"0")}</span>
+    <span class="sector-name">${s}</span>
+  </div>`).join("");
 
 const investCards = data.investments.map(inv => `
   <div class="invest-card">
-    <div class="investor">${inv.investor}</div>
-    <h3>${inv.headline}</h3>
-    <div class="amount">${inv.amount}</div>
-    <p>${inv.body}</p>
-    <div class="sport">${inv.sport} &nbsp;&middot;&nbsp; ${inv.round}</div>
+    <div class="invest-sport">${inv.sport}</div>
+    <div class="invest-amount">${inv.amount}</div>
+    <h3 class="invest-h">${inv.headline}</h3>
+    <p class="invest-body">${inv.body}</p>
+    <div class="invest-footer">
+      <span class="invest-investor">${inv.investor}</span>
+      <span class="invest-round">${inv.round}</span>
+    </div>
   </div>`).join("");
 
-const bodyParagraphs = data.cover_story.body.map(p => `<p>${p}</p>`).join("");
+const bodyParas = data.cover_story.body.map((p, i) =>
+  i === 0
+    ? `<p class="body-p drop-cap">${p}</p>`
+    : `<p class="body-p">${p}</p>`
+).join("");
+
 const chips = data.cover_story.chips.map(c => `<span class="chip">${c}</span>`).join("");
 
-// ─── HTML ───────────────────────────────────────────────────
+const archiveCards = archive.map(a => `
+  <div class="archive-card">
+    <span class="archive-issue-label">No. ${String(a.issue).padStart(3,"0")}</span>
+    <div class="archive-rule"></div>
+    <h3 class="archive-h">${a.headline}</h3>
+    <div class="archive-meta">
+      <span>${a.date}</span>
+      <span>${a.sport}</span>
+    </div>
+  </div>`).join("");
+
+const issueRoman = toRoman(data.issue);
+
+// ─── HTML ──────────────────────────────────────────────────
+
 const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ByAthletes — Issue No. ${data.issue}</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,700&display=swap" rel="stylesheet" />
+  <title>ByAthletes — No. ${data.issue} — ${data.date}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,600;1,700&family=Barlow+Condensed:wght@700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     :root {
-      --bg: #f4f3ef; --white: #ffffff; --ink: #0d0d0d; --ink-2: #3a3a3a;
-      --ink-3: #777; --accent: #ff3b00; --accent-2: #0057ff; --border: #e0ddd6; --tag-bg: #eceae4;
+      --cream:  #F4F2ED;
+      --white:  #FFFFFF;
+      --ink:    #111010;
+      --ink-2:  #2C2A27;
+      --ink-3:  #7A776F;
+      --red:    #C41230;
+      --border: #E2DED7;
+      --gap:    1px;
+      --serif:  'Playfair Display', Georgia, serif;
+      --cond:   'Barlow Condensed', sans-serif;
+      --sans:   'Inter', system-ui, sans-serif;
+      --page:   1280px;
     }
+
     html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
-    a { text-decoration: none; color: inherit; }
-    nav { background: var(--ink); color: var(--white); padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; height: 56px; position: sticky; top: 0; z-index: 100; }
-    .nav-logo { font-family: 'Barlow Condensed', sans-serif; font-size: 1.7rem; font-weight: 900; letter-spacing: 0.02em; text-transform: uppercase; }
-    .nav-logo span { color: var(--accent); }
-    .nav-links { display: flex; gap: 0.2rem; }
-    .nav-links a { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.55); padding: 0.4rem 0.8rem; border-radius: 3px; transition: color 0.15s, background 0.15s; }
-    .nav-links a:hover { color: #fff; background: rgba(255,255,255,0.08); }
-    .nav-meta { font-size: 0.7rem; color: rgba(255,255,255,0.4); letter-spacing: 0.04em; }
-    .hero-banner { background: var(--ink); color: var(--white); padding: 4rem 2rem 0; max-width: 1200px; margin: 0 auto; }
-    .issue-meta { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 1rem; display: flex; gap: 1rem; align-items: center; }
-    .issue-meta .dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.25); display: inline-block; }
-    .hero-banner h1 { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(3.5rem, 9vw, 7.5rem); font-weight: 900; line-height: 0.93; letter-spacing: -0.01em; text-transform: uppercase; max-width: 780px; margin-bottom: 1.5rem; }
-    .hero-banner h1 em { font-style: italic; color: var(--accent); }
-    .hero-dek { font-size: 1.05rem; color: rgba(255,255,255,0.6); max-width: 520px; line-height: 1.6; margin-bottom: 2rem; }
-    .hero-meta-row { display: flex; align-items: center; gap: 1rem; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
-    .author-chip { display: flex; align-items: center; gap: 0.5rem; }
-    .author-avatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), #ff8c00); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 800; color: white; }
-    .author-chip span { font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.7); }
-    .read-time { font-size: 0.72rem; color: rgba(255,255,255,0.35); font-weight: 500; }
-    .page { max-width: 1200px; margin: 0 auto; padding: 2.5rem 2rem 5rem; }
-    .section-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; }
-    .section-label { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
-    .section-line { flex: 1; height: 1px; background: var(--border); }
-    .cover-story { background: var(--white); border: 1px solid var(--border); overflow: hidden; margin-bottom: 2rem; display: grid; grid-template-columns: 1fr 420px; }
-    .cover-content { padding: 2.5rem; }
-    .tag { display: inline-block; font-size: 0.65rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 10px; border-radius: 2px; margin-bottom: 1rem; background: var(--tag-bg); color: var(--ink-2); }
-    .tag.red { background: var(--accent); color: white; }
-    .tag.blue { background: var(--accent-2); color: white; }
-    .cover-content h2 { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 900; line-height: 1.05; letter-spacing: -0.01em; text-transform: uppercase; margin-bottom: 0.8rem; }
-    .cover-content .dek { font-size: 0.95rem; color: var(--ink-2); line-height: 1.65; margin-bottom: 1.5rem; max-width: 480px; }
-    .cover-content .body-text p { font-size: 0.92rem; color: var(--ink-2); line-height: 1.7; margin-bottom: 0.85rem; }
-    .pullquote { background: var(--bg); border-left: 4px solid var(--accent); padding: 1rem 1.25rem; margin: 1.25rem 0; }
-    .pullquote p { font-size: 1rem !important; font-weight: 700 !important; color: var(--ink) !important; line-height: 1.5 !important; margin: 0 !important; }
-    .pullquote cite { display: block; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); margin-top: 0.4rem; }
-    .cover-visual { background: linear-gradient(160deg, #0a0a0a 0%, #1a1a1a 50%, #111 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem; position: relative; overflow: hidden; min-height: 420px; }
-    .cover-visual::before { content: ''; position: absolute; top: -40px; right: -40px; width: 320px; height: 320px; border-radius: 50%; background: radial-gradient(circle, rgba(255,59,0,0.18) 0%, transparent 70%); }
-    .big-stat { font-family: 'Barlow Condensed', sans-serif; font-size: 6rem; font-weight: 900; line-height: 1; color: var(--white); letter-spacing: -0.02em; position: relative; z-index: 1; }
-    .big-stat span { color: var(--accent); }
-    .stat-label { font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.5); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 0.25rem; position: relative; z-index: 1; }
-    .cover-visual-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.5rem; position: relative; z-index: 1; }
-    .chip { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.5); padding: 3px 8px; border-radius: 2px; }
-    .side-stories { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 2rem; }
-    .side-story { background: var(--white); padding: 1.5rem; }
-    .side-story h3 { font-size: 0.95rem; font-weight: 800; line-height: 1.35; margin-bottom: 0.4rem; color: var(--ink); }
-    .side-story p { font-size: 0.82rem; color: var(--ink-3); line-height: 1.55; }
-    .roundup-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 2rem; }
-    .roundup-card { background: var(--white); padding: 1.5rem; }
-    .roundup-num { font-family: 'Barlow Condensed', sans-serif; font-size: 3.5rem; font-weight: 900; line-height: 1; color: var(--border); display: block; margin-bottom: 0.75rem; letter-spacing: -0.03em; }
-    .roundup-card h3 { font-size: 0.92rem; font-weight: 800; line-height: 1.35; margin-bottom: 0.5rem; color: var(--ink); }
-    .roundup-card p { font-size: 0.82rem; color: var(--ink-3); line-height: 1.55; }
-    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
-    .tips-card { background: var(--white); border: 1px solid var(--border); padding: 2rem; }
-    .tips-card h2 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.8rem; font-weight: 900; text-transform: uppercase; line-height: 1.1; margin-bottom: 1.5rem; }
-    .tip-row { display: flex; gap: 1rem; padding: 1rem 0; border-top: 1px solid var(--border); }
-    .tip-row:last-child { border-bottom: 1px solid var(--border); }
-    .tip-num { font-family: 'Barlow Condensed', sans-serif; font-size: 1.4rem; font-weight: 900; color: var(--border); flex-shrink: 0; width: 28px; line-height: 1.3; }
-    .tip-row h4 { font-size: 0.88rem; font-weight: 800; margin-bottom: 0.2rem; line-height: 1.3; color: var(--ink); }
-    .tip-row p { font-size: 0.8rem; color: var(--ink-3); line-height: 1.55; }
-    .stats-card { background: var(--ink); color: var(--white); border: 1px solid var(--ink); padding: 2rem; display: flex; flex-direction: column; gap: 1.5rem; }
-    .stats-card .section-label { color: var(--accent); }
-    .stats-card h2 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.8rem; font-weight: 900; text-transform: uppercase; line-height: 1.1; }
-    .stat-item { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.2rem; }
-    .stat-item .num { font-family: 'Barlow Condensed', sans-serif; font-size: 3.2rem; font-weight: 900; line-height: 1; color: var(--white); letter-spacing: -0.02em; }
-    .stat-item p { font-size: 0.8rem; color: rgba(255,255,255,0.45); line-height: 1.5; margin-top: 0.3rem; }
-    .invest-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
-    .invest-card { background: var(--white); padding: 1.75rem; display: flex; flex-direction: column; gap: 0.75rem; }
-    .invest-card .investor { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-2); }
-    .invest-card h3 { font-size: 0.95rem; font-weight: 800; line-height: 1.35; color: var(--ink); }
-    .invest-card .amount { font-family: 'Barlow Condensed', sans-serif; font-size: 2.8rem; font-weight: 900; line-height: 1; color: var(--ink); letter-spacing: -0.02em; }
-    .invest-card p { font-size: 0.8rem; color: var(--ink-3); line-height: 1.55; flex: 1; }
-    .invest-card .sport { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); border-top: 1px solid var(--border); padding-top: 0.75rem; margin-top: auto; }
-    footer { background: var(--ink); color: rgba(255,255,255,0.35); padding: 2rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.04em; }
-    footer .logo { font-family: 'Barlow Condensed', sans-serif; font-size: 1.4rem; font-weight: 900; letter-spacing: 0.02em; text-transform: uppercase; color: var(--white); }
-    footer .logo span { color: var(--accent); }
-    footer a { color: rgba(255,255,255,0.5); text-decoration: underline; }
-    .byline { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 1.2rem; }
-    @media (max-width: 900px) {
-      .cover-story { grid-template-columns: 1fr; }
-      .cover-visual { min-height: 240px; }
-      .roundup-grid { grid-template-columns: repeat(2, 1fr); }
-      .two-col { grid-template-columns: 1fr; }
-      .invest-grid { grid-template-columns: 1fr; }
-      .side-stories { grid-template-columns: 1fr; }
-      .nav-links, .nav-meta { display: none; }
+    body {
+      background: var(--cream); color: var(--ink);
+      font-family: var(--sans); font-size: 15px; line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
-    @media (max-width: 600px) {
-      .page { padding: 1.5rem 1rem 4rem; }
-      nav { padding: 0 1rem; }
-      .hero-banner { padding: 2.5rem 1rem 0; }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    /* ── MASTHEAD ───────────────────────────────── */
+    .mast {
+      background: var(--ink); color: var(--white);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .mast-top {
+      max-width: var(--page); margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .mast-logo {
+      font-family: var(--serif); font-style: italic; font-weight: 700;
+      font-size: 1.8rem; letter-spacing: -0.01em; color: var(--white);
+    }
+    .mast-logo em { color: var(--red); font-style: normal; }
+    .mast-center {
+      text-align: center;
+      font-family: var(--sans); font-size: 0.58rem;
+      font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(255,255,255,0.28);
+    }
+    .mast-center strong {
+      display: block; font-family: var(--cond); font-weight: 900;
+      font-size: 1.35rem; letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.65); margin-bottom: 0.1rem;
+    }
+    .mast-tagline {
+      font-size: 0.57rem; font-weight: 600; letter-spacing: 0.16em;
+      text-transform: uppercase; color: rgba(255,255,255,0.25);
+      text-align: right; max-width: 190px; line-height: 1.7;
+    }
+    .mast-nav {
+      max-width: var(--page); margin: 0 auto;
+      display: flex; align-items: center; padding: 0 2.5rem;
+    }
+    .mast-nav a {
+      font-size: 0.58rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(255,255,255,0.35); padding: 0.8rem 0; margin-right: 2rem;
+      position: relative; transition: color 0.2s;
+    }
+    .mast-nav a::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 2px; background: var(--red);
+      transform: scaleX(0); transform-origin: left; transition: transform 0.25s ease;
+    }
+    .mast-nav a:hover { color: rgba(255,255,255,0.85); }
+    .mast-nav a:hover::after { transform: scaleX(1); }
+    .mast-nav-spacer { flex: 1; }
+    .mast-nav-date {
+      font-size: 0.57rem; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: rgba(255,255,255,0.2);
+    }
+
+    /* ── PAGE WRAPPER ───────────────────────────── */
+    .page { max-width: var(--page); margin: 0 auto; padding: 0 2.5rem; }
+
+    /* ── SECTION EYEBROW ────────────────────────── */
+    .eyebrow {
+      display: flex; align-items: center; gap: 1.25rem;
+      padding: 2.75rem 0 1.75rem;
+    }
+    .eyebrow-label {
+      font-size: 0.57rem; font-weight: 800; letter-spacing: 0.24em;
+      text-transform: uppercase; color: var(--red); white-space: nowrap;
+    }
+    .eyebrow-rule { flex: 1; height: 1px; background: var(--border); }
+    .eyebrow-sub {
+      font-family: var(--cond); font-size: 0.85rem; font-weight: 900;
+      color: var(--border); letter-spacing: 0.06em; text-transform: uppercase;
+    }
+
+    /* ── TAG ────────────────────────────────────── */
+    .tag {
+      display: inline-block; font-size: 0.55rem; font-weight: 800;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      padding: 3px 9px; border: 1px solid; border-radius: 1px;
+    }
+
+    /* ── COVER SPREAD ───────────────────────────── */
+    .cover-spread {
+      display: grid; grid-template-columns: 56% 1fr;
+      border: 1px solid var(--border); background: var(--white);
+      margin-bottom: var(--gap); min-height: 72vh; align-items: stretch;
+    }
+    .cover-img-col { position: relative; overflow: hidden; }
+    .cover-img-col img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .cover-img-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0; padding: 2.5rem;
+      background: linear-gradient(to top, rgba(10,8,5,0.92) 0%, rgba(10,8,5,0.45) 55%, transparent 100%);
+      pointer-events: none;
+    }
+    .cover-stat-big {
+      font-family: var(--cond); font-size: clamp(3.5rem, 7vw, 6.5rem);
+      font-weight: 900; line-height: 1; color: var(--white); letter-spacing: -0.02em;
+    }
+    .cover-stat-sub {
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: rgba(255,255,255,0.45); margin-top: 0.35rem;
+    }
+    .cover-text-col {
+      padding: 3rem 3rem 2.5rem; display: flex; flex-direction: column;
+      border-left: 1px solid var(--border);
+    }
+    .cover-tag-row { margin-bottom: 1.5rem; }
+    .cover-h1 {
+      font-family: var(--serif); font-style: italic; font-weight: 700;
+      font-size: clamp(2rem, 3vw, 3rem); line-height: 1.1; letter-spacing: -0.02em;
+      color: var(--ink); margin-bottom: 1.25rem;
+    }
+    .cover-dek {
+      font-size: 0.93rem; color: var(--ink-2); line-height: 1.7;
+      padding-bottom: 1.5rem; margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .cover-byline {
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--ink-3); margin-bottom: 1.5rem;
+    }
+    .body-p { font-size: 0.88rem; color: var(--ink-2); line-height: 1.8; margin-bottom: 0.9rem; }
+    .drop-cap::first-letter {
+      font-family: var(--serif); font-size: 4rem; font-weight: 700;
+      line-height: 0.72; float: left; margin-right: 0.08em; margin-top: 0.08em;
+      color: var(--ink);
+    }
+    .cover-blockquote {
+      margin: 1.5rem 0; padding: 1.25rem 1.5rem;
+      border-left: 3px solid var(--red); background: var(--cream);
+    }
+    .cover-blockquote p {
+      font-family: var(--serif); font-style: italic;
+      font-size: 1.05rem; line-height: 1.6; color: var(--ink);
+    }
+    .cover-blockquote cite {
+      display: block; font-family: var(--sans); font-style: normal;
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--ink-3); margin-top: 0.55rem;
+    }
+    .cover-chips {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      padding-top: 1.5rem; margin-top: auto;
+    }
+    .chip {
+      font-size: 0.57rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      border: 1px solid var(--border); color: var(--ink-3); padding: 4px 10px;
+    }
+    .read-more {
+      display: inline-block; font-size: 0.6rem; font-weight: 800;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--red); margin-top: 0.75rem; transition: letter-spacing 0.2s;
+    }
+    .read-more:hover { letter-spacing: 0.22em; }
+
+    /* ── SIDE STORIES ───────────────────────────── */
+    .side-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      background: var(--border); border: 1px solid var(--border);
+      border-top: none; gap: var(--gap); margin-bottom: 3.5rem;
+    }
+    .side-card {
+      background: var(--white); padding: 2rem 1.75rem;
+      display: flex; flex-direction: column;
+    }
+    .side-card-accent { width: 28px; height: 2px; background: var(--red); margin-bottom: 1.25rem; }
+    .side-card-tag { margin-bottom: 0.85rem; }
+    .side-card-h {
+      font-size: 0.93rem; font-weight: 800; line-height: 1.38;
+      color: var(--ink); margin-bottom: 0.6rem; flex: 1;
+    }
+    .side-card-body { font-size: 0.8rem; color: var(--ink-3); line-height: 1.65; }
+
+    /* ── NEWS ROUNDUP ───────────────────────────── */
+    .roundup-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 2.5rem; margin-bottom: 3.5rem;
+    }
+    .roundup-card { display: flex; flex-direction: column; }
+    .roundup-img-wrap { overflow: hidden; margin-bottom: 1.1rem; border-bottom: 2px solid var(--red); }
+    .roundup-img {
+      width: 100%; aspect-ratio: 3/2; object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .roundup-card:hover .roundup-img { transform: scale(1.04); }
+    .roundup-meta {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 0.65rem;
+    }
+    .roundup-num-label {
+      font-family: var(--cond); font-size: 1.3rem; font-weight: 900;
+      color: var(--border); letter-spacing: -0.02em; line-height: 1;
+    }
+    .roundup-h {
+      font-size: 0.9rem; font-weight: 800; line-height: 1.38;
+      color: var(--ink); margin-bottom: 0.55rem;
+    }
+    .roundup-body { font-size: 0.79rem; color: var(--ink-3); line-height: 1.65; flex: 1; }
+
+    /* ── TIPS + STATS ───────────────────────────── */
+    .two-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3.5rem; }
+    .tips-card { background: var(--white); border: 1px solid var(--border); padding: 2.75rem; }
+    .tips-card-heading {
+      font-family: var(--serif); font-style: italic; font-weight: 700;
+      font-size: 2rem; line-height: 1.15; color: var(--ink); margin-bottom: 2rem;
+    }
+    .tip-row { display: flex; gap: 1.25rem; padding: 1.1rem 0; border-top: 1px solid var(--border); }
+    .tip-row:last-child { border-bottom: 1px solid var(--border); }
+    .tip-num {
+      font-family: var(--cond); font-size: 1.15rem; font-weight: 900;
+      color: var(--border); flex-shrink: 0; width: 32px; line-height: 1.4;
+    }
+    .tip-h { font-size: 0.84rem; font-weight: 800; color: var(--ink); margin-bottom: 0.2rem; line-height: 1.35; }
+    .tip-body { font-size: 0.77rem; color: var(--ink-3); line-height: 1.65; }
+
+    .stats-card {
+      background: var(--ink); color: var(--white);
+      padding: 2.75rem; display: flex; flex-direction: column;
+    }
+    .stats-heading {
+      font-family: var(--cond); font-size: 2rem; font-weight: 900;
+      text-transform: uppercase; letter-spacing: 0.02em;
+      color: var(--white); margin-bottom: 2rem;
+    }
+    .stat-figure { border-top: 1px solid rgba(255,255,255,0.09); padding: 1.25rem 0; }
+    .stat-num {
+      font-family: var(--cond); font-size: 3.5rem; font-weight: 900;
+      line-height: 1; color: var(--white); letter-spacing: -0.02em;
+    }
+    .stat-label { font-size: 0.77rem; color: rgba(255,255,255,0.38); line-height: 1.55; margin-top: 0.3rem; }
+    .sectors-wrap { border-top: 1px solid rgba(255,255,255,0.09); padding-top: 1.25rem; margin-top: auto; }
+    .sectors-title {
+      font-size: 0.57rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: rgba(255,255,255,0.28); margin-bottom: 0.85rem;
+    }
+    .sector-item {
+      display: flex; align-items: baseline; gap: 0.75rem;
+      padding: 0.45rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .sector-num { font-family: var(--cond); font-size: 0.75rem; font-weight: 900; color: var(--red); }
+    .sector-name { font-size: 0.8rem; color: rgba(255,255,255,0.5); }
+
+    /* ── INVESTMENTS ────────────────────────────── */
+    .invest-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: var(--gap); background: var(--border);
+      border: 1px solid var(--border); margin-bottom: 3.5rem;
+    }
+    .invest-card {
+      background: var(--white); padding: 2.25rem;
+      display: flex; flex-direction: column; gap: 0.6rem;
+    }
+    .invest-sport {
+      font-size: 0.57rem; font-weight: 800; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--red);
+    }
+    .invest-amount {
+      font-family: var(--cond); font-size: 3.8rem; font-weight: 900;
+      line-height: 1; color: var(--ink); letter-spacing: -0.02em;
+    }
+    .invest-h { font-size: 0.93rem; font-weight: 800; line-height: 1.38; color: var(--ink); }
+    .invest-body { font-size: 0.79rem; color: var(--ink-3); line-height: 1.65; flex: 1; }
+    .invest-footer {
+      display: flex; justify-content: space-between; align-items: flex-end; gap: 0.75rem;
+      border-top: 1px solid var(--border); padding-top: 0.85rem; margin-top: auto;
+    }
+    .invest-investor { font-size: 0.72rem; font-weight: 700; color: var(--ink); }
+    .invest-round {
+      font-size: 0.57rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--ink-3); white-space: nowrap;
+    }
+
+    /* ── ARCHIVE ────────────────────────────────── */
+    .archive-section { background: var(--ink); padding: 4.5rem 0; }
+    .archive-inner { max-width: var(--page); margin: 0 auto; padding: 0 2.5rem; }
+    .archive-eyebrow {
+      display: flex; align-items: baseline; gap: 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 1.75rem; margin-bottom: 2.5rem;
+    }
+    .archive-eyebrow h2 {
+      font-family: var(--serif); font-style: italic; font-weight: 700;
+      font-size: 1.75rem; color: var(--white);
+    }
+    .archive-eyebrow span {
+      font-size: 0.57rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: rgba(255,255,255,0.22);
+    }
+    .archive-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: var(--gap); background: rgba(255,255,255,0.06);
+    }
+    .archive-card {
+      background: var(--ink); padding: 2rem 2.25rem;
+      transition: background 0.2s;
+    }
+    .archive-card:hover { background: #1C1915; }
+    .archive-issue-label {
+      font-family: var(--cond); font-size: 0.72rem; font-weight: 900;
+      letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.22);
+    }
+    .archive-rule { width: 22px; height: 2px; background: var(--red); margin: 0.85rem 0; }
+    .archive-h {
+      font-family: var(--serif); font-style: italic; font-weight: 400;
+      font-size: 1rem; color: rgba(255,255,255,0.72); line-height: 1.5; margin-bottom: 1.25rem;
+    }
+    .archive-meta {
+      display: flex; gap: 1.25rem; font-size: 0.57rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.22);
+    }
+
+    /* ── FOOTER ─────────────────────────────────── */
+    footer {
+      background: #0A0805; border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 2rem 2.5rem; display: flex; justify-content: space-between;
+      align-items: center; max-width: 100%;
+    }
+    .footer-logo {
+      font-family: var(--serif); font-style: italic; font-weight: 700;
+      font-size: 1.3rem; color: rgba(255,255,255,0.45);
+    }
+    .footer-meta, .footer-sub {
+      font-size: 0.57rem; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: rgba(255,255,255,0.2);
+    }
+    .footer-sub a { color: rgba(255,255,255,0.38); }
+
+    /* ── RESPONSIVE ─────────────────────────────── */
+    @media (max-width: 1040px) {
+      .cover-spread { grid-template-columns: 1fr; min-height: auto; }
+      .cover-img-col { min-height: 52vw; }
+      .cover-img-col img { position: relative; width: 100%; height: 52vw; }
+      .two-panel { grid-template-columns: 1fr; }
+      .roundup-grid { grid-template-columns: repeat(2, 1fr); }
+      .side-grid { grid-template-columns: repeat(2, 1fr); }
+      .invest-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .page { padding: 0 1.25rem; }
+      .mast-top { padding: 0.9rem 1.25rem; }
+      .mast-nav { padding: 0 1.25rem; }
+      .archive-inner { padding: 0 1.25rem; }
+      footer { padding: 1.5rem 1.25rem; flex-direction: column; gap: 0.75rem; text-align: center; }
       .roundup-grid { grid-template-columns: 1fr; }
+      .side-grid { grid-template-columns: 1fr; }
+      .mast-tagline { display: none; }
     }
   </style>
 </head>
 <body>
 
-<nav>
-  <div class="nav-logo">By<span>Athletes</span></div>
-  <div class="nav-links">
-    <a href="#spotlight">Spotlight</a>
+<!-- ═══ MASTHEAD ════════════════════════════════ -->
+<header class="mast">
+  <div class="mast-top">
+    <span class="mast-logo">By<em>Athletes</em></span>
+    <div class="mast-center">
+      <strong>No. ${issueRoman}</strong>
+      <span>Issue ${data.issue}</span>
+    </div>
+    <span class="mast-tagline">Founder Intelligence<br/>for Professional Athletes</span>
+  </div>
+  <nav class="mast-nav">
+    <a href="#cover">Cover</a>
     <a href="#roundup">News</a>
-    <a href="#tips">Tips</a>
-    <a href="#investments">Investments</a>
-  </div>
-  <div class="nav-meta">Vol. I &nbsp;&middot;&nbsp; Issue ${data.issue} &nbsp;&middot;&nbsp; ${data.date}</div>
-</nav>
+    <a href="#playbook">Playbook</a>
+    <a href="#deals">Deals</a>
+    ${archive.length > 0 ? `<a href="#archive">Archive</a>` : ""}
+    <span class="mast-nav-spacer"></span>
+    <span class="mast-nav-date">${data.date}</span>
+  </nav>
+</header>
 
-<div style="background:var(--ink);">
-  <div class="hero-banner">
-    <div class="issue-meta">
-      <span>Issue No. ${data.issue}</span>
-      <span class="dot"></span>
-      <span>Entrepreneur Edition</span>
-      <span class="dot"></span>
-      <span>${data.date}</span>
-    </div>
-    <h1>Athletes<br/>building<br/><em>empires.</em></h1>
-    <p class="hero-dek">Business news for the athlete who thinks beyond the game — startups, deals, and lessons from founders who wore the jersey first.</p>
-    <div class="hero-meta-row">
-      <div class="author-chip">
-        <div class="author-avatar">BA</div>
-        <span>ByAthletes Editorial</span>
+<!-- ═══ COVER STORY ══════════════════════════════ -->
+<div class="page" id="cover">
+  <div class="eyebrow">
+    <span class="eyebrow-label">Cover Story</span>
+    <div class="eyebrow-rule"></div>
+    <span class="eyebrow-sub">${data.date}</span>
+  </div>
+
+  <div class="cover-spread">
+    <!-- Image col -->
+    <div class="cover-img-col">
+      ${data.cover_story.image
+        ? `<img src="${data.cover_story.image}" alt="${data.cover_story.headline}" />`
+        : `<div style="background:#1a1917;width:100%;height:100%;"></div>`}
+      <div class="cover-img-overlay">
+        <div class="cover-stat-big">${data.cover_story.big_stat}</div>
+        <div class="cover-stat-sub">${data.cover_story.stat_label}</div>
       </div>
-      <span class="read-time">10 min read</span>
+    </div>
+
+    <!-- Text col -->
+    <div class="cover-text-col">
+      <div class="cover-tag-row">${tag(data.cover_story.tag, "red")}</div>
+      <h1 class="cover-h1">${data.cover_story.headline}</h1>
+      <p class="cover-dek">${data.cover_story.dek}</p>
+      <div class="cover-byline">By ${data.cover_story.author} &nbsp;·&nbsp; Staff Writer</div>
+      ${bodyParas}
+      <div class="cover-blockquote">
+        <p>"${data.cover_story.quote}"</p>
+        <cite>— ${data.cover_story.quote_author}</cite>
+      </div>
+      <div class="cover-chips">${chips}</div>
+      ${data.cover_story.source_url
+        ? `<a href="${data.cover_story.source_url}" class="read-more" target="_blank" rel="noopener">Read original — ${data.cover_story.source_name || ""} →</a>`
+        : ""}
+    </div>
+  </div>
+
+  <!-- Side stories strip -->
+  <div class="side-grid">${sideStoryCards}</div>
+</div>
+
+<!-- ═══ NEWS ROUNDUP ════════════════════════════ -->
+<div class="page" id="roundup">
+  <div class="eyebrow">
+    <span class="eyebrow-label">News Roundup</span>
+    <div class="eyebrow-rule"></div>
+    <span class="eyebrow-sub">Latest</span>
+  </div>
+  <div class="roundup-grid">${roundupCards}</div>
+</div>
+
+<!-- ═══ PLAYBOOK + STATS ══════════════════════════ -->
+<div class="page" id="playbook">
+  <div class="eyebrow">
+    <span class="eyebrow-label">The Playbook</span>
+    <div class="eyebrow-rule"></div>
+    <span class="eyebrow-sub">Tips & Data</span>
+  </div>
+  <div class="two-panel">
+    <div class="tips-card">
+      <h2 class="tips-card-heading">The athlete's<br/>startup playbook.</h2>
+      ${tipRows}
+    </div>
+    <div class="stats-card">
+      <h2 class="stats-heading">By The<br/>Numbers.</h2>
+      ${statFigures}
+      <div class="sectors-wrap">
+        <div class="sectors-title">Fastest Growing Sectors</div>
+        ${sectorList}
+      </div>
     </div>
   </div>
 </div>
 
-<div class="page">
-
-  <section id="spotlight" style="margin-bottom:2rem;">
-    <div class="section-header">
-      <span class="section-label">Cover Story</span>
-      <div class="section-line"></div>
-    </div>
-    <div class="cover-story">
-      <div class="cover-content">
-        ${tag(data.cover_story.tag, "red")}
-        <h2>${data.cover_story.headline}</h2>
-        <p class="dek">${data.cover_story.dek}</p>
-        <p class="byline">By ${data.cover_story.author} &nbsp;&middot;&nbsp; Staff Writer</p>
-        <div class="body-text">
-          ${bodyParagraphs}
-          <div class="pullquote">
-            <p>"${data.cover_story.quote}"</p>
-            <cite>— ${data.cover_story.quote_author}</cite>
-          </div>
-        </div>
-      </div>
-      <div class="cover-visual">
-        <div class="big-stat">${data.cover_story.big_stat}</div>
-        <div class="stat-label">${data.cover_story.stat_label}</div>
-        <div class="cover-visual-chips">${chips}</div>
-      </div>
-    </div>
-    <div class="side-stories">${sideStoryCards}</div>
-  </section>
-
-  <section id="roundup" style="margin-bottom:2rem;">
-    <div class="section-header">
-      <span class="section-label">News Roundup</span>
-      <div class="section-line"></div>
-    </div>
-    <div class="roundup-grid">${roundupCards}</div>
-  </section>
-
-  <section id="tips" style="margin-bottom:2rem;">
-    <div class="section-header">
-      <span class="section-label">Startup Tips</span>
-      <div class="section-line"></div>
-    </div>
-    <div class="two-col">
-      <div class="tips-card">
-        <h2>The athlete's<br/>startup playbook</h2>
-        ${tipRows}
-      </div>
-      <div class="stats-card">
-        <span class="section-label">By The Numbers</span>
-        <h2>The athlete<br/>startup economy</h2>
-        ${statItems}
-        <div class="stat-item">
-          <div style="font-size:0.78rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:0.6rem;">Fastest Growing Sectors</div>
-          <p style="color:rgba(255,255,255,0.6);font-size:0.82rem;line-height:1.8;">${sectorList}</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="investments">
-    <div class="section-header">
-      <span class="section-label">Investment Deals — Q1 2026</span>
-      <div class="section-line"></div>
-    </div>
-    <div class="invest-grid">${investCards}</div>
-  </section>
-
+<!-- ═══ INVESTMENTS ═══════════════════════════════ -->
+<div class="page" id="deals">
+  <div class="eyebrow">
+    <span class="eyebrow-label">Investment Deals</span>
+    <div class="eyebrow-rule"></div>
+    <span class="eyebrow-sub">Q1 2026</span>
+  </div>
+  <div class="invest-grid">${investCards}</div>
 </div>
 
+<!-- ═══ ARCHIVE ════════════════════════════════════ -->
+${archive.length > 0 ? `
+<section class="archive-section" id="archive">
+  <div class="archive-inner">
+    <div class="archive-eyebrow">
+      <h2>Previous Issues</h2>
+      <span>${archive.length} issue${archive.length !== 1 ? "s" : ""} in the archive</span>
+    </div>
+    <div class="archive-grid">${archiveCards}</div>
+  </div>
+</section>` : ""}
+
+<!-- ═══ FOOTER ════════════════════════════════════ -->
 <footer>
-  <div class="logo">By<span>Athletes</span></div>
-  <span>Entrepreneur Edition &nbsp;&middot;&nbsp; Issue No. ${data.issue} &nbsp;&middot;&nbsp; ${data.date}</span>
-  <span>Stories for athletes, by athletes &nbsp;&middot;&nbsp; <a href="#">Subscribe</a></span>
+  <span class="footer-logo">ByAthletes</span>
+  <span class="footer-meta">Vol. I &nbsp;·&nbsp; Issue No. ${data.issue} &nbsp;·&nbsp; ${data.date}</span>
+  <span class="footer-sub">For athletes who build &nbsp;·&nbsp; <a href="#">Subscribe</a></span>
 </footer>
 
 </body>
