@@ -3,7 +3,8 @@
   "date": "April 6, 2026",
   "stories": [
     {
-      "sport": "Formula 1",
+      "id": "lewis-hamilton-almave",
+    "sport": "Formula 1",
       "headline": "Lewis Hamilton Is Betting on What Comes After the Podium",
       "dek": "From Formula 1 to non-alcoholic spirits and film — Hamilton's off-track empire is accelerating faster than anything he's done behind the wheel.",
       "author": "Elena Rossi",
