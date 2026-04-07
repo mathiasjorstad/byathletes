@@ -207,8 +207,8 @@ function buildFrontPage(stories) {
       </div>
     </a>`;
 
-  // Grid = side stories + roundup from current issue
-  const gridItems = stories.map(s => {
+  // Stories grid = current issue stories + past issue covers, all in one grid
+  const makeGridCard = (s) => {
     const img = s.image
       ? `<img src="${e(s.image)}" alt="${e(s.headline)}" loading="lazy" />`
       : `<div class="img-fallback"></div>`;
@@ -218,36 +218,26 @@ function buildFrontPage(stories) {
       <div class="grid-body">
         <span class="card-tag">${e(s.tag)}</span>
         <h3 class="grid-h">${e(s.headline)}</h3>
-        <p class="grid-dek">${e(snip(s.dek || s.body || ""))}</p>
+        <p class="grid-dek">${e(snip(s.dek || (Array.isArray(s.body) ? s.body[0] : s.body) || ""))}</p>
         <span class="card-meta">${e(s.date)}</span>
       </div>
     </a>`;
-  }).join("");
+  };
 
-  // Archive = past issues only (not the current one)
+  const currentCards = stories.map(makeGridCard).join("");
+
   const pastIssues = archive.filter(a => a.issue !== data.issue);
-  const arcCards = pastIssues.map(a => {
-    const thumb = a.image
-      ? `<div class="arc-thumb"><img src="${e(a.image)}" alt="${e(a.headline)}" loading="lazy" /></div>`
-      : `<div class="arc-thumb"></div>`;
-    return `
-    <a class="arc-card" href="${e(a.page || "#")}">
-      ${thumb}
-      <div class="arc-body">
-        <span class="arc-tag">${e(a.tag)}</span>
-        <h3 class="arc-h">${e(a.headline)}</h3>
-        <span class="arc-meta">No. ${a.issue} &middot; ${e(a.date)}</span>
-      </div>
-    </a>`;
-  }).join("");
+  const pastCards = pastIssues.map(a => makeGridCard({
+    image   : a.image || "",
+    url     : a.page || "#",
+    tag     : a.tag,
+    headline: a.headline,
+    dek     : a.dek || "",
+    date    : a.date
+  })).join("");
 
-  const arcSection = arcCards ? `
-    <section class="arc-section">
-      <div class="arc-inner">
-        <p class="section-label">Previous Issues</p>
-        <div class="arc-grid">${arcCards}</div>
-      </div>
-    </section>` : "";
+  const allGridCards = currentCards + pastCards;
+  const arcSection = "";
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -273,10 +263,9 @@ function buildFrontPage(stories) {
 <div class="wrap">
   <p class="section-label">Latest</p>
   ${featured}
-  ${gridItems ? `<div class="divider"></div><p class="section-label">From This Issue</p><div class="grid">${gridItems}</div>` : ""}
+  ${allGridCards ? `<div class="divider"></div><p class="section-label">Stories</p><div class="grid">${allGridCards}</div>` : ""}
 </div>
 
-${arcSection}
 
 <footer class="site-footer">
   <span class="footer-logo">ByAthletes</span>
