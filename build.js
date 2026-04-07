@@ -1,43 +1,37 @@
 // ByAthletes — build.js
 // Generates:
-//   index.html       — front page (latest issue + past issues)
-//   issue-{N}.html   — individual issue page (full content)
-//   archive.json     — updated with current issue stub
+//   index.html                 — newspaper front page
+//   issue-{N}-cover.html       — cover story page
+//   issue-{N}-side-{i}.html    — each side story page
+//   issue-{N}-news-{i}.html    — each roundup item page
+//   posts.json                 — accumulated post index for front page
 
 const fs   = require("fs");
 const path = require("path");
 
 const data = JSON.parse(fs.readFileSync(path.join(__dirname, "stories.json"), "utf8"));
 
-// ─── ARCHIVE ──────────────────────────────────────────────────────────────
-// Load existing archive, add current issue if new
-
-let archive = [];
-try { archive = JSON.parse(fs.readFileSync(path.join(__dirname, "archive.json"), "utf8")); } catch(e) {}
-
-if (!archive.some(a => a.issue === data.issue)) {
-  archive.unshift({
-    issue : data.issue,
-    date  : data.date,
-    headline : data.cover_story.headline,
-    dek      : data.cover_story.dek,
-    tag      : data.cover_story.tag,
-    image    : data.cover_story.image || ""
-  });
-  fs.writeFileSync(path.join(__dirname, "archive.json"), JSON.stringify(archive, null, 2));
-}
+let posts = [];
+try { posts = JSON.parse(fs.readFileSync(path.join(__dirname, "posts.json"), "utf8")); } catch(e) {}
 
 // ─── HELPERS ──────────────────────────────────────────────────────────────
 
 function esc(s) {
-  return String(s || "")
-    .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;");
+  return String(s || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 }
 
-function issueSlug(n) { return `issue-${n}.html`; }
+function slug(n, type, i) {
+  return `issue-${n}-${type}-${i}.html`;
+}
 
-// ─── FONTS + SHARED CSS ───────────────────────────────────────────────────
+function coverSlug(n) { return `issue-${n}-cover.html`; }
+
+function snippet(text, len = 120) {
+  const s = String(text || "");
+  return s.length > len ? s.slice(0, len).replace(/\s\S*$/, "") + "…" : s;
+}
+
+// ─── FONTS & SHARED CSS ───────────────────────────────────────────────────
 
 const fonts = `
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -45,132 +39,144 @@ const fonts = `
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=Barlow+Condensed:wght@900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 `;
 
-const baseCSS = `
+const sharedCSS = `
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --cream : #F4F2ED;
-    --ink   : #111010;
+    --cream : #F5F3EE;
+    --white : #ffffff;
+    --ink   : #0F0E0D;
     --ink-2 : #2C2A27;
     --ink-3 : #7A776F;
     --red   : #C41230;
-    --brd   : #E2DED7;
+    --brd   : #E0DDD6;
     --serif : 'Playfair Display', Georgia, serif;
     --cond  : 'Barlow Condensed', sans-serif;
     --sans  : 'Inter', system-ui, sans-serif;
   }
-
   html { scroll-behavior: smooth; }
   body { background: var(--cream); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
   a { text-decoration: none; color: inherit; }
   img { display: block; width: 100%; }
 
   /* ── MASTHEAD ─────────────────────────────── */
-
   .mast {
-    background: var(--ink);
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1.1rem 2.5rem;
-    position: sticky; top: 0; z-index: 100;
+    background: var(--ink); padding: 2.5rem 2.5rem 2rem;
+    text-align: center; border-bottom: 3px solid var(--red);
+  }
+  .mast-eyebrow {
+    font-size: 0.55rem; font-weight: 800; letter-spacing: 0.32em;
+    text-transform: uppercase; color: rgba(255,255,255,0.28); margin-bottom: 0.85rem;
   }
   .mast-logo {
     font-family: var(--serif); font-style: italic; font-weight: 700;
-    font-size: 1.8rem; letter-spacing: -0.01em; color: #fff;
+    font-size: clamp(2.8rem, 7vw, 5.5rem); letter-spacing: -0.02em;
+    color: #fff; line-height: 1; margin-bottom: 0.6rem;
+    display: block;
   }
   .mast-logo em { color: var(--red); font-style: normal; }
-  .mast-center {
-    font-family: var(--cond); font-size: 0.75rem; font-weight: 900;
-    letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.28);
+  .mast-tagline {
+    font-size: 0.6rem; font-weight: 600; letter-spacing: 0.22em;
+    text-transform: uppercase; color: rgba(255,255,255,0.22);
   }
-  .mast-right {
-    font-size: 0.58rem; font-weight: 600; letter-spacing: 0.18em;
-    text-transform: uppercase; color: rgba(255,255,255,0.22); text-align: right;
+  .mast-bar {
+    background: var(--cream); border-bottom: 1px solid var(--brd);
+    padding: 0.5rem 2.5rem;
+    display: flex; justify-content: space-between; align-items: center;
   }
+  .mast-bar span {
+    font-size: 0.55rem; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--ink-3);
+  }
+
+  /* ── ISSUE MAST (single pages) ────────────── */
+  .issue-mast {
+    background: var(--ink);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 2.5rem; position: sticky; top: 0; z-index: 100;
+  }
+  .issue-mast-logo {
+    font-family: var(--serif); font-style: italic; font-weight: 700;
+    font-size: 1.6rem; color: #fff;
+  }
+  .issue-mast-logo em { color: var(--red); font-style: normal; }
+  .issue-mast-meta {
+    font-family: var(--cond); font-size: 0.72rem; font-weight: 900;
+    letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.28);
+  }
+  .back-bar {
+    background: var(--cream); border-bottom: 1px solid var(--brd); padding: 0.55rem 2.5rem;
+  }
+  .back-link {
+    font-size: 0.55rem; font-weight: 800; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--ink-3); transition: color 0.15s;
+  }
+  .back-link:hover { color: var(--red); }
 
   /* ── FOOTER ───────────────────────────────── */
-
   .site-footer {
-    background: #0A0805; border-top: 1px solid rgba(255,255,255,0.05);
-    padding: 2rem 2.5rem; display: flex; justify-content: space-between; align-items: center;
+    background: var(--ink); border-top: 1px solid rgba(255,255,255,0.05);
+    padding: 2.25rem 2.5rem; display: flex; justify-content: space-between; align-items: center;
   }
   .footer-logo {
-    font-family: var(--serif); font-style: italic; font-size: 1.3rem;
-    color: rgba(255,255,255,0.38);
+    font-family: var(--serif); font-style: italic; font-size: 1.3rem; color: rgba(255,255,255,0.4);
   }
-  .footer-meta, .footer-sub {
-    font-size: 0.58rem; font-weight: 600; letter-spacing: 0.16em;
+  .footer-meta {
+    font-size: 0.55rem; font-weight: 700; letter-spacing: 0.18em;
     text-transform: uppercase; color: rgba(255,255,255,0.2);
   }
-  .footer-sub a { color: rgba(255,255,255,0.38); }
-
-  /* ── SECTION EYEBROW ──────────────────────── */
-
-  .section-eyebrow {
-    display: flex; align-items: center; gap: 1.25rem; margin-bottom: 2.5rem;
+  .footer-sub {
+    font-size: 0.55rem; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; color: rgba(255,255,255,0.2);
   }
-  .eyebrow-label {
-    font-size: 0.57rem; font-weight: 800; letter-spacing: 0.26em;
-    text-transform: uppercase; color: var(--red); white-space: nowrap;
-  }
-  .eyebrow-rule { flex: 1; height: 1px; background: var(--brd); }
+  .footer-sub a { color: rgba(255,255,255,0.4); }
 
   @media (max-width: 680px) {
-    .mast { padding: 1rem 1.25rem; }
-    .mast-right { display: none; }
-    .site-footer { padding: 1.5rem 1.25rem; flex-direction: column; gap: 0.75rem; text-align: center; }
+    .mast { padding: 1.75rem 1.25rem 1.5rem; }
+    .mast-bar { padding: 0.5rem 1.25rem; }
+    .issue-mast { padding: 1rem 1.25rem; }
+    .back-bar { padding: 0.55rem 1.25rem; }
+    .site-footer { padding: 1.75rem 1.25rem; flex-direction: column; gap: 0.75rem; text-align: center; }
   }
 `;
 
 // ─── FRONT PAGE ───────────────────────────────────────────────────────────
 
-function buildFrontPage() {
-  const latest   = archive[0];
-  const past     = archive.slice(1);
+function buildFrontPage(allPosts) {
+  if (!allPosts || allPosts.length === 0) return;
 
-  const latestCard = `
-    <a class="lead-card" href="${issueSlug(latest.issue)}">
-      <div class="lead-img">
-        ${latest.image
-          ? `<img src="${esc(latest.image)}" alt="${esc(latest.headline)}" />`
-          : `<div class="lead-img-fallback"></div>`}
-        <div class="lead-img-overlay"></div>
-      </div>
-      <div class="lead-body">
-        <span class="lead-tag">${esc(latest.tag)}</span>
-        <h2 class="lead-h">${esc(latest.headline)}</h2>
-        <p class="lead-dek">${esc(latest.dek)}</p>
-        <div class="lead-meta">
-          <span class="lead-issue">Issue No. ${latest.issue}</span>
-          <span class="lead-date">${esc(latest.date)}</span>
+  const featured = allPosts[0];
+  const rest     = allPosts.slice(1);
+
+  const featuredHTML = `
+    <a class="featured-card" href="${esc(featured.url)}">
+      <div class="featured-img">
+        ${featured.image
+          ? `<img src="${esc(featured.image)}" alt="${esc(featured.headline)}" />`
+          : `<div class="img-fallback"></div>`}
+        <div class="featured-gradient"></div>
+        <div class="featured-text">
+          <span class="card-tag">${esc(featured.tag)}</span>
+          <h2 class="featured-h">${esc(featured.headline)}</h2>
+          <p class="featured-dek">${esc(featured.dek)}</p>
+          <span class="card-meta">${esc(featured.date)} &ensp;·&ensp; Issue No. ${featured.issue}</span>
         </div>
-        <span class="lead-cta">Read this issue →</span>
       </div>
     </a>`;
 
-  const pastCards = past.length === 0 ? "" : `
-    <section class="past-section">
-      <div class="past-inner">
-        <div class="section-eyebrow">
-          <span class="eyebrow-label">Previous Issues</span>
-          <div class="eyebrow-rule"></div>
-        </div>
-        <div class="past-grid">
-          ${past.map(a => `
-          <a class="past-card" href="${issueSlug(a.issue)}">
-            <div class="past-img">
-              ${a.image
-                ? `<img src="${esc(a.image)}" alt="${esc(a.headline)}" loading="lazy" />`
-                : `<div class="past-img-fallback"></div>`}
-            </div>
-            <div class="past-body">
-              <span class="past-tag">${esc(a.tag)}</span>
-              <h3 class="past-h">${esc(a.headline)}</h3>
-              <div class="past-meta">No. ${a.issue} &ensp;·&ensp; ${esc(a.date)}</div>
-            </div>
-          </a>`).join("")}
-        </div>
+  const gridCards = rest.map(p => `
+    <a class="grid-card" href="${esc(p.url)}">
+      <div class="grid-img">
+        ${p.image
+          ? `<img src="${esc(p.image)}" alt="${esc(p.headline)}" loading="lazy" />`
+          : `<div class="img-fallback"></div>`}
       </div>
-    </section>`;
+      <div class="grid-body">
+        <span class="card-tag">${esc(p.tag)}</span>
+        <h3 class="grid-h">${esc(p.headline)}</h3>
+        <p class="grid-snippet">${esc(snippet(p.dek || p.body, 110))}</p>
+        <span class="card-meta">${esc(p.date)}</span>
+      </div>
+    </a>`).join("");
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -180,163 +186,103 @@ function buildFrontPage() {
   <title>ByAthletes — Athletes Who Build</title>
   ${fonts}
   <style>
-    ${baseCSS}
+    ${sharedCSS}
 
-    /* ── FRONT PAGE MASTHEAD ──────────────────── */
+    /* ── FRONT PAGE GRID ──────────────────────── */
+    .front-wrap { max-width: 1280px; margin: 0 auto; padding: 3.5rem 2.5rem 5rem; }
 
-    .mast-front {
-      background: var(--ink);
-      padding: 3rem 2.5rem 2.5rem;
-      text-align: center;
-      border-bottom: 3px solid var(--red);
+    .section-label {
+      font-size: 0.55rem; font-weight: 800; letter-spacing: 0.28em;
+      text-transform: uppercase; color: var(--red); margin-bottom: 1.75rem;
     }
-    .mast-front-kicker {
-      font-size: 0.57rem; font-weight: 800; letter-spacing: 0.3em;
-      text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 1rem;
-    }
-    .mast-front-logo {
-      font-family: var(--serif); font-style: italic; font-weight: 700;
-      font-size: clamp(3rem, 8vw, 6.5rem); letter-spacing: -0.02em; color: #fff;
-      line-height: 1; margin-bottom: 0.75rem;
-    }
-    .mast-front-logo em { color: var(--red); font-style: normal; }
-    .mast-front-sub {
-      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.2em;
-      text-transform: uppercase; color: rgba(255,255,255,0.25);
-    }
+    .divider { width: 100%; height: 1px; background: var(--brd); margin: 3.5rem 0; }
 
-    /* ── DATE BAR ─────────────────────────────── */
-
-    .date-bar {
-      background: var(--cream); border-bottom: 1px solid var(--brd);
-      padding: 0.55rem 2.5rem;
-      display: flex; justify-content: space-between; align-items: center;
+    /* Featured */
+    .featured-card { display: block; }
+    .featured-img {
+      position: relative; width: 100%; height: 580px; overflow: hidden;
     }
-    .date-bar-left {
-      font-size: 0.57rem; font-weight: 700; letter-spacing: 0.18em;
-      text-transform: uppercase; color: var(--ink-3);
-    }
-    .date-bar-right {
-      font-size: 0.57rem; font-weight: 700; letter-spacing: 0.18em;
-      text-transform: uppercase; color: var(--ink-3);
-    }
-
-    /* ── LATEST ISSUE (LEAD) ─────────────────── */
-
-    .lead-section { max-width: 1280px; margin: 0 auto; padding: 3.5rem 2.5rem 4rem; }
-
-    .lead-label {
-      font-size: 0.57rem; font-weight: 800; letter-spacing: 0.3em;
-      text-transform: uppercase; color: var(--red); margin-bottom: 1.5rem;
-    }
-
-    .lead-card {
-      display: grid; grid-template-columns: 1fr 420px; gap: 0;
-      background: var(--ink); overflow: hidden;
-      transition: opacity 0.2s;
-    }
-    .lead-card:hover { opacity: 0.92; }
-
-    .lead-img { position: relative; min-height: 480px; }
-    .lead-img img { height: 100%; object-fit: cover; }
-    .lead-img-fallback { width: 100%; height: 100%; background: #1C1916; }
-    .lead-img-overlay {
+    .featured-img img { height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .featured-card:hover .featured-img img { transform: scale(1.02); }
+    .img-fallback { width: 100%; height: 100%; background: #1C1916; }
+    .featured-gradient {
       position: absolute; inset: 0;
-      background: linear-gradient(to right, transparent 50%, rgba(17,16,16,0.7) 100%);
+      background: linear-gradient(to top, rgba(8,7,6,0.92) 0%, rgba(8,7,6,0.5) 40%, transparent 75%);
     }
-
-    .lead-body {
-      padding: 3rem 2.5rem;
-      display: flex; flex-direction: column; justify-content: center; gap: 1rem;
+    .featured-text {
+      position: absolute; bottom: 0; left: 0; right: 0; padding: 2.5rem 2.5rem 2.75rem;
     }
-    .lead-tag {
-      font-size: 0.55rem; font-weight: 800; letter-spacing: 0.26em;
-      text-transform: uppercase; color: var(--red);
+    .card-tag {
+      display: inline-block; font-size: 0.52rem; font-weight: 800;
+      letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--red); margin-bottom: 0.85rem;
     }
-    .lead-h {
+    .featured-h {
       font-family: var(--serif); font-style: italic; font-weight: 700;
-      font-size: clamp(1.6rem, 2.5vw, 2.4rem); line-height: 1.18;
-      letter-spacing: -0.01em; color: #fff;
+      font-size: clamp(1.8rem, 3.5vw, 3rem); line-height: 1.12;
+      letter-spacing: -0.015em; color: #fff;
+      max-width: 720px; margin-bottom: 0.85rem;
     }
-    .lead-dek {
-      font-size: 0.9rem; line-height: 1.7; color: rgba(255,255,255,0.5);
+    .featured-dek {
+      font-size: 0.92rem; line-height: 1.65; color: rgba(255,255,255,0.55);
+      max-width: 580px; margin-bottom: 1rem;
     }
-    .lead-meta {
-      display: flex; gap: 1.5rem;
-      font-size: 0.57rem; font-weight: 700; letter-spacing: 0.16em;
-      text-transform: uppercase; color: rgba(255,255,255,0.28);
-    }
-    .lead-cta {
-      display: inline-block; margin-top: 0.5rem;
-      font-size: 0.6rem; font-weight: 800; letter-spacing: 0.2em;
-      text-transform: uppercase; color: var(--red);
-      border-bottom: 1px solid var(--red); padding-bottom: 2px;
-      width: fit-content;
+    .card-meta {
+      font-size: 0.52rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: rgba(255,255,255,0.3);
     }
 
-    /* ── PAST ISSUES ─────────────────────────── */
-
-    .past-section { border-top: 1px solid var(--brd); }
-    .past-inner { max-width: 1280px; margin: 0 auto; padding: 4rem 2.5rem 5rem; }
-
-    .past-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; }
-
-    .past-card { display: flex; flex-direction: column; transition: opacity 0.2s; }
-    .past-card:hover { opacity: 0.8; }
-
-    .past-img { aspect-ratio: 3/2; overflow: hidden; margin-bottom: 1.1rem; }
-    .past-img img { height: 100%; object-fit: cover; transition: transform 0.4s ease; }
-    .past-card:hover .past-img img { transform: scale(1.04); }
-    .past-img-fallback { width: 100%; height: 100%; background: var(--ink); }
-
-    .past-tag {
-      display: block; font-size: 0.55rem; font-weight: 800;
-      letter-spacing: 0.24em; text-transform: uppercase; color: var(--red); margin-bottom: 0.5rem;
+    /* Grid */
+    .story-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
     }
-    .past-h {
+    .grid-card { display: flex; flex-direction: column; }
+    .grid-img {
+      aspect-ratio: 3/2; overflow: hidden; margin-bottom: 1.1rem; background: var(--ink);
+    }
+    .grid-img img { height: 100%; object-fit: cover; transition: transform 0.45s ease; }
+    .grid-card:hover .grid-img img { transform: scale(1.04); }
+    .grid-body { display: flex; flex-direction: column; gap: 0.45rem; }
+    .grid-card .card-tag { color: var(--red); }
+    .grid-card .card-meta { color: var(--ink-3); }
+    .grid-h {
       font-family: var(--serif); font-style: italic; font-size: 1.1rem;
-      line-height: 1.4; color: var(--ink); margin-bottom: 0.6rem;
+      line-height: 1.38; color: var(--ink);
     }
-    .past-meta {
-      font-size: 0.57rem; font-weight: 700; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--ink-3);
-    }
+    .grid-snippet { font-size: 0.82rem; line-height: 1.65; color: var(--ink-3); }
 
-    @media (max-width: 900px) {
-      .lead-card { grid-template-columns: 1fr; }
-      .lead-img { min-height: 280px; }
-      .lead-img-overlay { background: linear-gradient(to bottom, transparent 50%, rgba(17,16,16,0.7) 100%); }
-    }
-    @media (max-width: 680px) {
-      .mast-front { padding: 2rem 1.25rem; }
-      .date-bar { padding: 0.55rem 1.25rem; }
-      .lead-section { padding: 2.5rem 1.25rem 3rem; }
-      .past-inner { padding: 3rem 1.25rem 4rem; }
-      .lead-body { padding: 2rem 1.5rem; }
+    @media (max-width: 960px) { .story-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px) {
+      .front-wrap { padding: 2.5rem 1.25rem 4rem; }
+      .featured-img { height: 420px; }
+      .featured-text { padding: 1.5rem 1.25rem 2rem; }
+      .story-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-<!-- MASTHEAD -->
-<header class="mast-front">
-  <p class="mast-front-kicker">The athlete entrepreneur publication</p>
-  <h1 class="mast-front-logo">By<em>Athletes</em></h1>
-  <p class="mast-front-sub">For athletes who build</p>
+<header class="mast">
+  <p class="mast-eyebrow">The athlete entrepreneur publication</p>
+  <a href="index.html" class="mast-logo">By<em>Athletes</em></a>
+  <p class="mast-tagline">For athletes who build</p>
 </header>
-
-<div class="date-bar">
-  <span class="date-bar-left">${esc(latest.date)}</span>
-  <span class="date-bar-right">Issue No. ${latest.issue} &ensp;·&ensp; Entrepreneur Edition</span>
+<div class="mast-bar">
+  <span>${esc(allPosts[0].date)}</span>
+  <span>Issue No. ${allPosts[0].issue} &ensp;·&ensp; Entrepreneur Edition</span>
 </div>
 
-<!-- LATEST ISSUE -->
-<div class="lead-section">
-  <p class="lead-label">Latest Issue</p>
-  ${latestCard}
-</div>
+<div class="front-wrap">
+  <p class="section-label">Latest</p>
+  ${featuredHTML}
 
-${pastCards}
+  ${rest.length > 0 ? `
+  <div class="divider"></div>
+  <p class="section-label">From This Issue</p>
+  <div class="story-grid">${gridCards}</div>` : ""}
+</div>
 
 <footer class="site-footer">
   <span class="footer-logo">ByAthletes</span>
@@ -348,438 +294,279 @@ ${pastCards}
 </html>`;
 }
 
-// ─── ISSUE PAGE ───────────────────────────────────────────────────────────
+// ─── STORY PAGE ───────────────────────────────────────────────────────────
 
-function buildIssuePage() {
-  const cs          = data.cover_story;
-  const ss          = data.side_stories  || [];
-  const roundup     = data.roundup       || [];
-  const tips        = data.tips          || [];
-  const stats       = data.stats         || {};
-  const investments = data.investments   || [];
-
-  const chips = (cs.chips || []).map(c => `<span class="chip">${esc(c)}</span>`).join("");
-  const bodyParas = (cs.body || []).map((p, i) =>
-    i === 0 ? `<p class="cover-p drop">${p}</p>` : `<p class="cover-p">${p}</p>`
+function buildStoryPage(post) {
+  const bodyHTML = (post.body || []).map((p, i) =>
+    i === 0 ? `<p class="body-p drop">${esc(p)}</p>` : `<p class="body-p">${esc(p)}</p>`
   ).join("");
 
-  const sideCards = ss.map(s => {
-    const isBlue = s.tag_style === "blue";
-    return `
-    <article class="side-card ${isBlue ? "side-card--opinion" : ""}">
-      <span class="side-tag ${isBlue ? "side-tag--blue" : ""}">${esc(s.tag)}</span>
-      <h3 class="side-h">${esc(s.headline)}</h3>
-      <p class="side-body">${esc(s.body)}</p>
-    </article>`;
-  }).join("");
+  const chips = (post.chips || []).map(c => `<span class="chip">${esc(c)}</span>`).join("");
 
-  const roundupCards = roundup.map(r => `
-    <article class="roundup-card">
-      <div class="roundup-body">
-        <span class="roundup-tag">${esc(r.tag)}</span>
-        <h3 class="roundup-h">${esc(r.headline)}</h3>
-        <p class="roundup-p">${esc(r.body)}</p>
-      </div>
-    </article>`).join("");
+  const quoteBlock = post.quote ? `
+    <blockquote class="pull-quote">
+      <p>&ldquo;${esc(post.quote)}&rdquo;</p>
+      <cite>&mdash; ${esc(post.quote_author)}</cite>
+    </blockquote>` : "";
 
-  const tipCards = tips.map((t, i) => `
-    <div class="tip-card">
-      <span class="tip-num">${String(i + 1).padStart(2,"0")}</span>
-      <div>
-        <h4 class="tip-h">${esc(t.headline)}</h4>
-        <p class="tip-body">${esc(t.body)}</p>
-      </div>
-    </div>`).join("");
+  const sourceBlock = post.source_url ? `
+    <a class="source-link" href="${esc(post.source_url)}" target="_blank" rel="noopener">
+      Read the original essay${post.source_name ? ` — ${esc(post.source_name)}` : ""} &rarr;
+    </a>` : "";
 
-  const figureCards = (stats.figures || []).map(f => `
-    <div class="stat-figure">
-      <span class="stat-num">${esc(f.num)}</span>
-      <span class="stat-lbl">${esc(f.label)}</span>
-    </div>`).join("");
-
-  const sectorPills = (stats.sectors || []).map(s => `<span class="sector-pill">${esc(s)}</span>`).join("");
-
-  const investCards = investments.map(inv => `
-    <article class="invest-card">
-      <div class="invest-top">
-        <span class="invest-sport">${esc(inv.sport)}</span>
-        <span class="invest-round">${esc(inv.round)}</span>
-      </div>
-      <h3 class="invest-h">${esc(inv.headline)}</h3>
-      <p class="invest-investor">${esc(inv.investor)}</p>
-      <p class="invest-amount">${esc(inv.amount)}</p>
-      <p class="invest-body">${esc(inv.body)}</p>
-    </article>`).join("");
+  const statBlock = post.big_stat ? `
+    <div class="stat-callout">
+      <span class="stat-num">${esc(post.big_stat)}</span>
+      <span class="stat-lbl">${esc(post.stat_label)}</span>
+    </div>` : "";
 
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ByAthletes — Issue No. ${data.issue}</title>
+  <title>${esc(post.headline)} — ByAthletes</title>
   ${fonts}
   <style>
-    ${baseCSS}
+    ${sharedCSS}
 
-    /* ── HERO / COVER ─────────────────────────── */
-
-    .hero {
-      position: relative; min-height: 88vh;
-      display: flex; align-items: flex-end; overflow: hidden;
+    /* ── STORY HERO ───────────────────────────── */
+    .story-hero {
+      position: relative; width: 100%; height: 70vh; min-height: 420px;
+      overflow: hidden; display: flex; align-items: flex-end;
     }
-    .hero-img { position: absolute; inset: 0; }
-    .hero-img img { height: 100%; object-fit: cover; }
-    .hero-img-fallback { width: 100%; height: 100%; background: #1C1916; }
-    .hero-gradient {
+    .story-hero img {
+      position: absolute; inset: 0; height: 100%; object-fit: cover;
+    }
+    .hero-fallback {
+      position: absolute; inset: 0; background: #111;
+    }
+    .hero-grad {
       position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(5,4,3,0.95) 0%, rgba(5,4,3,0.5) 40%, rgba(5,4,3,0.1) 70%, transparent 100%);
+      background: linear-gradient(to top, rgba(6,5,4,0.96) 0%, rgba(6,5,4,0.5) 38%, transparent 70%);
     }
-    .hero-content {
-      position: relative; z-index: 2; width: 100%;
-      max-width: 1280px; margin: 0 auto; padding: 0 2.5rem 3.75rem;
+    .hero-text {
+      position: relative; z-index: 2;
+      width: 100%; max-width: 1280px; margin: 0 auto;
+      padding: 0 2.5rem 3.5rem;
     }
     .hero-tag {
-      display: inline-block; font-size: 0.57rem; font-weight: 800;
+      display: inline-block; font-size: 0.52rem; font-weight: 800;
       letter-spacing: 0.3em; text-transform: uppercase;
-      color: var(--red); margin-bottom: 1.5rem;
+      color: var(--red); margin-bottom: 1.25rem;
     }
     .hero-h1 {
       font-family: var(--serif); font-style: italic; font-weight: 700;
-      font-size: clamp(2.4rem, 5.5vw, 5rem); line-height: 1.06;
-      letter-spacing: -0.025em; color: #fff; max-width: 820px; margin-bottom: 1.25rem;
+      font-size: clamp(2rem, 5vw, 4.5rem); line-height: 1.08;
+      letter-spacing: -0.02em; color: #fff;
+      max-width: 800px; margin-bottom: 1rem;
     }
     .hero-dek {
-      font-size: 1rem; line-height: 1.7; color: rgba(255,255,255,0.55);
-      max-width: 560px; margin-bottom: 1.25rem;
+      font-size: 1rem; line-height: 1.7;
+      color: rgba(255,255,255,0.55); max-width: 560px; margin-bottom: 1rem;
     }
-    .hero-meta {
-      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.16em;
-      text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 1.5rem;
+    .hero-byline {
+      font-size: 0.55rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: rgba(255,255,255,0.3);
     }
-    .hero-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .hero-chips {
+      display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.25rem;
+    }
     .chip {
-      font-size: 0.55rem; font-weight: 700; letter-spacing: 0.14em;
-      text-transform: uppercase; border: 1px solid rgba(255,255,255,0.22);
-      color: rgba(255,255,255,0.45); padding: 4px 12px;
+      font-size: 0.52rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.4); padding: 3px 10px;
     }
 
-    /* ── COVER BODY ──────────────────────────── */
-
-    .cover-section {
-      max-width: 1280px; margin: 0 auto; padding: 4rem 2.5rem;
-      display: grid; grid-template-columns: 1fr 320px; gap: 4rem;
-      align-items: start;
+    /* ── STORY BODY ───────────────────────────── */
+    .story-layout {
+      max-width: 1280px; margin: 0 auto; padding: 4rem 2.5rem 5rem;
+      display: grid; grid-template-columns: 1fr 280px; gap: 5rem; align-items: start;
     }
-    .cover-p {
-      font-size: 1.05rem; line-height: 1.9; color: var(--ink-2); margin-bottom: 1.4rem;
+    .story-text {}
+    .body-p {
+      font-size: 1.05rem; line-height: 1.9; color: var(--ink-2); margin-bottom: 1.5rem;
+      max-width: 680px;
     }
     .drop::first-letter {
       font-family: var(--serif); font-size: 5rem; font-weight: 700;
-      line-height: 0.68; float: left;
-      margin-right: 0.07em; margin-top: 0.1em; color: var(--ink);
+      line-height: 0.72; float: left;
+      margin-right: 0.08em; margin-top: 0.08em; color: var(--ink);
     }
-    .cover-quote {
-      margin: 2.5rem 0; padding: 0 0 0 2rem; border-left: 3px solid var(--red);
+    .pull-quote {
+      margin: 2.75rem 0; padding: 0 0 0 1.75rem;
+      border-left: 3px solid var(--red);
     }
-    .cover-quote p {
+    .pull-quote p {
       font-family: var(--serif); font-style: italic;
-      font-size: 1.45rem; line-height: 1.42; color: var(--ink);
+      font-size: 1.5rem; line-height: 1.42; color: var(--ink);
     }
-    .cover-quote cite {
-      display: block; font-style: normal; font-size: 0.58rem; font-weight: 700;
-      letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-3); margin-top: 0.75rem;
+    .pull-quote cite {
+      display: block; font-style: normal;
+      font-size: 0.55rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--ink-3); margin-top: 0.75rem;
     }
-
-    /* ── COVER SIDEBAR ───────────────────────── */
-
-    .big-stat {
-      background: var(--ink); color: #fff;
-      padding: 2.25rem 2rem; margin-bottom: 1.5rem;
-    }
-    .big-stat-num {
-      font-family: var(--cond); font-size: 4rem; font-weight: 900;
-      line-height: 1; letter-spacing: -0.02em; color: #fff; display: block;
-      margin-bottom: 0.75rem;
-    }
-    .big-stat-label {
-      font-size: 0.75rem; color: rgba(255,255,255,0.5); line-height: 1.5;
-    }
-    .cover-chips-sidebar { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-    .cover-chips-sidebar .chip {
-      border-color: var(--brd); color: var(--ink-3);
-    }
-
-    /* ── SIDE STORIES ────────────────────────── */
-
-    .side-section { border-top: 1px solid var(--brd); }
-    .side-inner { max-width: 1280px; margin: 0 auto; padding: 4rem 2.5rem; }
-    .side-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 0; border: 1px solid var(--brd);
-    }
-    .side-card {
-      padding: 2rem 2.25rem; border-right: 1px solid var(--brd);
-      border-bottom: 1px solid var(--brd);
-    }
-    .side-card--opinion { background: #F0EEF8; }
-    .side-tag {
-      display: inline-block; font-size: 0.55rem; font-weight: 800;
-      letter-spacing: 0.24em; text-transform: uppercase; color: var(--red);
-      margin-bottom: 0.85rem;
-    }
-    .side-tag--blue { color: #3B4FAB; }
-    .side-h {
-      font-family: var(--serif); font-style: italic; font-size: 1.1rem;
-      line-height: 1.38; color: var(--ink); margin-bottom: 0.75rem;
-    }
-    .side-body { font-size: 0.82rem; line-height: 1.7; color: var(--ink-3); }
-
-    /* ── ROUNDUP ─────────────────────────────── */
-
-    .roundup-section { border-top: 1px solid var(--brd); background: #F9F7F3; }
-    .roundup-inner { max-width: 1280px; margin: 0 auto; padding: 4rem 2.5rem; }
-    .roundup-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 0; border: 1px solid var(--brd);
-    }
-    .roundup-card { border-right: 1px solid var(--brd); border-bottom: 1px solid var(--brd); }
-    .roundup-body { padding: 1.75rem 2rem; }
-    .roundup-tag {
-      display: block; font-size: 0.55rem; font-weight: 800;
-      letter-spacing: 0.24em; text-transform: uppercase; color: var(--red); margin-bottom: 0.6rem;
-    }
-    .roundup-h {
-      font-family: var(--serif); font-style: italic; font-size: 1.05rem;
-      line-height: 1.38; color: var(--ink); margin-bottom: 0.65rem;
-    }
-    .roundup-p { font-size: 0.82rem; line-height: 1.7; color: var(--ink-3); }
-
-    /* ── STATS ───────────────────────────────── */
-
-    .stats-section { background: var(--ink); padding: 5rem 0; }
-    .stats-inner { max-width: 1280px; margin: 0 auto; padding: 0 2.5rem; }
-    .stats-figures {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 1px; background: rgba(255,255,255,0.07); margin-bottom: 3rem;
-    }
-    .stat-figure { background: var(--ink); padding: 2.5rem 2rem; }
-    .stat-num {
-      font-family: var(--cond); font-size: 4rem; font-weight: 900;
-      line-height: 1; letter-spacing: -0.02em; color: #fff; display: block; margin-bottom: 0.85rem;
-    }
-    .stat-lbl { font-size: 0.78rem; color: rgba(255,255,255,0.42); line-height: 1.55; }
-    .sectors-label {
-      font-size: 0.57rem; font-weight: 800; letter-spacing: 0.24em;
-      text-transform: uppercase; color: rgba(255,255,255,0.25); margin-bottom: 1rem;
-    }
-    .sectors-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-    .sector-pill {
-      font-size: 0.58rem; font-weight: 700; letter-spacing: 0.12em;
-      text-transform: uppercase; border: 1px solid rgba(255,255,255,0.18);
-      color: rgba(255,255,255,0.45); padding: 5px 14px;
-    }
-
-    /* ── TIPS ────────────────────────────────── */
-
-    .tips-section { border-top: 1px solid var(--brd); }
-    .tips-inner { max-width: 1280px; margin: 0 auto; padding: 4rem 2.5rem; }
-    .tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; }
-    .tip-card { display: flex; gap: 1.25rem; align-items: flex-start; }
-    .tip-num {
-      font-family: var(--cond); font-size: 2.25rem; font-weight: 900;
-      line-height: 1; color: var(--brd); flex-shrink: 0; padding-top: 0.1rem;
-    }
-    .tip-h {
-      font-size: 0.78rem; font-weight: 800; letter-spacing: 0.04em;
-      text-transform: uppercase; color: var(--ink); margin-bottom: 0.5rem;
-    }
-    .tip-body { font-size: 0.82rem; line-height: 1.7; color: var(--ink-3); }
-
-    /* ── INVESTMENTS ──────────────────────────── */
-
-    .invest-section { border-top: 1px solid var(--brd); background: #F9F7F3; }
-    .invest-inner { max-width: 1280px; margin: 0 auto; padding: 4rem 2.5rem; }
-    .invest-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2px; background: var(--brd); }
-    .invest-card { background: var(--cream); padding: 2.25rem 2rem; }
-    .invest-top { display: flex; justify-content: space-between; margin-bottom: 0.85rem; }
-    .invest-sport {
-      font-size: 0.55rem; font-weight: 800; letter-spacing: 0.22em;
+    .source-link {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      margin-top: 2rem; padding: 0.75rem 1.25rem;
+      border: 1px solid var(--brd);
+      font-size: 0.6rem; font-weight: 800; letter-spacing: 0.18em;
       text-transform: uppercase; color: var(--red);
+      transition: background 0.15s, border-color 0.15s;
     }
-    .invest-round {
-      font-size: 0.55rem; font-weight: 700; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--ink-3);
-    }
-    .invest-h {
-      font-family: var(--serif); font-style: italic; font-size: 1.1rem;
-      line-height: 1.38; color: var(--ink); margin-bottom: 0.5rem;
-    }
-    .invest-investor {
-      font-size: 0.62rem; font-weight: 800; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--ink); margin-bottom: 0.35rem;
-    }
-    .invest-amount {
-      font-family: var(--cond); font-size: 1.75rem; font-weight: 900;
-      color: var(--red); line-height: 1; margin-bottom: 0.85rem;
-    }
-    .invest-body { font-size: 0.82rem; line-height: 1.7; color: var(--ink-3); }
+    .source-link:hover { background: var(--red); color: #fff; border-color: var(--red); }
 
-    /* ── BACK LINK ───────────────────────────── */
-
-    .back-bar {
-      background: var(--cream); border-bottom: 1px solid var(--brd);
-      padding: 0.6rem 2.5rem;
+    /* ── STORY SIDEBAR ────────────────────────── */
+    .story-sidebar { position: sticky; top: 80px; }
+    .stat-callout {
+      background: var(--ink); padding: 2rem 1.75rem; margin-bottom: 1.5rem;
     }
-    .back-link {
-      font-size: 0.57rem; font-weight: 800; letter-spacing: 0.2em;
-      text-transform: uppercase; color: var(--ink-3);
+    .stat-num {
+      font-family: var(--cond); font-size: 3.5rem; font-weight: 900;
+      line-height: 1; color: #fff; display: block; margin-bottom: 0.6rem;
+      letter-spacing: -0.02em;
     }
-    .back-link:hover { color: var(--red); }
+    .stat-lbl {
+      font-size: 0.72rem; line-height: 1.5; color: rgba(255,255,255,0.45);
+    }
+    .sidebar-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .sidebar-chips .chip { border-color: var(--brd); color: var(--ink-3); }
 
     @media (max-width: 900px) {
-      .cover-section { grid-template-columns: 1fr; gap: 2.5rem; }
-      .cover-sidebar { order: -1; }
-      .stats-figures { grid-template-columns: 1fr; }
+      .story-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+      .story-sidebar { position: static; order: -1; }
+      .stat-callout { display: flex; align-items: center; gap: 1.5rem; }
+      .stat-num { font-size: 2.5rem; margin-bottom: 0; }
     }
-    @media (max-width: 680px) {
-      .hero-content { padding: 0 1.25rem 3rem; }
-      .hero-h1 { font-size: 2.2rem; }
-      .cover-section, .side-inner, .roundup-inner, .tips-inner, .invest-inner { padding: 3rem 1.25rem; }
-      .stats-inner { padding: 0 1.25rem; }
-      .back-bar { padding: 0.6rem 1.25rem; }
+    @media (max-width: 640px) {
+      .hero-text { padding: 0 1.25rem 2.5rem; }
+      .hero-h1 { font-size: 2rem; }
+      .story-layout { padding: 3rem 1.25rem 4rem; }
     }
   </style>
 </head>
 <body>
 
-<header class="mast">
-  <a href="index.html" class="mast-logo">By<em>Athletes</em></a>
-  <span class="mast-center">Issue No. ${data.issue}</span>
-  <span class="mast-right">${esc(data.date)}</span>
+<header class="issue-mast">
+  <a href="index.html" class="issue-mast-logo">By<em>Athletes</em></a>
+  <span class="issue-mast-meta">Issue No. ${post.issue} &ensp;·&ensp; ${esc(post.date)}</span>
 </header>
-
 <div class="back-bar">
-  <a class="back-link" href="index.html">← All Issues</a>
+  <a class="back-link" href="index.html">&larr; All stories</a>
 </div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-img">
-    ${cs.image
-      ? `<img src="${esc(cs.image)}" alt="${esc(cs.headline)}" />`
-      : `<div class="hero-img-fallback"></div>`}
-  </div>
-  <div class="hero-gradient"></div>
-  <div class="hero-content">
-    <span class="hero-tag">${esc(cs.tag)}</span>
-    <h1 class="hero-h1">${esc(cs.headline)}</h1>
-    <p class="hero-dek">${esc(cs.dek)}</p>
-    <div class="hero-meta">By ${esc(cs.author)}&ensp;·&ensp;${esc(data.date)}</div>
-    <div class="hero-chips">${chips}</div>
-  </div>
-</section>
-
-<!-- COVER BODY -->
-<section class="cover-section">
-  <div class="cover-body-wrap">
-    <div class="section-eyebrow">
-      <span class="eyebrow-label">Cover Story</span>
-      <div class="eyebrow-rule"></div>
-    </div>
-    ${bodyParas}
-    <div class="cover-quote">
-      <p>"${esc(cs.quote)}"</p>
-      <cite>— ${esc(cs.quote_author)}</cite>
-    </div>
-  </div>
-  <div class="cover-sidebar">
-    <div class="big-stat">
-      <span class="big-stat-num">${esc(cs.big_stat)}</span>
-      <span class="big-stat-label">${esc(cs.stat_label)}</span>
-    </div>
-    <div class="cover-chips-sidebar">${chips}</div>
+<section class="story-hero">
+  ${post.image
+    ? `<img src="${esc(post.image)}" alt="${esc(post.headline)}" />`
+    : `<div class="hero-fallback"></div>`}
+  <div class="hero-grad"></div>
+  <div class="hero-text">
+    <span class="hero-tag">${esc(post.tag)}</span>
+    <h1 class="hero-h1">${esc(post.headline)}</h1>
+    ${post.dek ? `<p class="hero-dek">${esc(post.dek)}</p>` : ""}
+    <p class="hero-byline">
+      ${post.author ? `By ${esc(post.author)} &ensp;&middot;&ensp; ` : ""}${esc(post.date)}
+    </p>
+    ${chips ? `<div class="hero-chips">${chips}</div>` : ""}
   </div>
 </section>
 
-<!-- SIDE STORIES -->
-${ss.length > 0 ? `
-<section class="side-section">
-  <div class="side-inner">
-    <div class="section-eyebrow">
-      <span class="eyebrow-label">Also in This Issue</span>
-      <div class="eyebrow-rule"></div>
-    </div>
-    <div class="side-grid">${sideCards}</div>
+<div class="story-layout">
+  <div class="story-text">
+    ${bodyHTML}
+    ${quoteBlock}
+    ${sourceBlock}
   </div>
-</section>` : ""}
-
-<!-- ROUNDUP -->
-${roundup.length > 0 ? `
-<section class="roundup-section">
-  <div class="roundup-inner">
-    <div class="section-eyebrow">
-      <span class="eyebrow-label">News Roundup</span>
-      <div class="eyebrow-rule"></div>
-    </div>
-    <div class="roundup-grid">${roundupCards}</div>
-  </div>
-</section>` : ""}
-
-<!-- STATS -->
-${(stats.figures && stats.figures.length > 0) ? `
-<section class="stats-section">
-  <div class="stats-inner">
-    <div class="section-eyebrow" style="margin-bottom:2rem;">
-      <span class="eyebrow-label" style="color:rgba(255,255,255,0.3);">Numbers That Matter</span>
-      <div class="eyebrow-rule" style="background:rgba(255,255,255,0.08);"></div>
-    </div>
-    <div class="stats-figures">${figureCards}</div>
-    ${stats.sectors && stats.sectors.length > 0 ? `
-    <p class="sectors-label">Active Sectors This Issue</p>
-    <div class="sectors-pills">${sectorPills}</div>` : ""}
-  </div>
-</section>` : ""}
-
-<!-- TIPS -->
-${tips.length > 0 ? `
-<section class="tips-section">
-  <div class="tips-inner">
-    <div class="section-eyebrow">
-      <span class="eyebrow-label">Founder Playbook</span>
-      <div class="eyebrow-rule"></div>
-    </div>
-    <div class="tips-grid">${tipCards}</div>
-  </div>
-</section>` : ""}
-
-<!-- INVESTMENTS -->
-${investments.length > 0 ? `
-<section class="invest-section">
-  <div class="invest-inner">
-    <div class="section-eyebrow">
-      <span class="eyebrow-label">Athlete Investments</span>
-      <div class="eyebrow-rule"></div>
-    </div>
-    <div class="invest-grid">${investCards}</div>
-  </div>
-</section>` : ""}
+  ${(post.big_stat || chips) ? `
+  <aside class="story-sidebar">
+    ${statBlock}
+    ${chips ? `<div class="sidebar-chips">${chips}</div>` : ""}
+  </aside>` : ""}
+</div>
 
 <footer class="site-footer">
   <a href="index.html" class="footer-logo">ByAthletes</a>
-  <span class="footer-meta">Issue No. ${data.issue} &ensp;·&ensp; ${esc(data.date)}</span>
-  <span class="footer-sub">For athletes who build &ensp;·&ensp; <a href="#">Subscribe</a></span>
+  <span class="footer-meta">Issue No. ${post.issue} &ensp;·&ensp; ${esc(post.date)}</span>
+  <span class="footer-sub"><a href="#">Subscribe</a></span>
 </footer>
 
 </body>
 </html>`;
 }
 
-// ─── BUILD ─────────────────────────────────────────────────────────────────
+// ─── ASSEMBLE POSTS FROM stories.json ─────────────────────────────────────
 
-const frontPage  = buildFrontPage();
-const issuePage  = buildIssuePage();
+const cs = data.cover_story;
+const allNewPosts = [];
 
-fs.writeFileSync(path.join(__dirname, "index.html"),                  frontPage);
-fs.writeFileSync(path.join(__dirname, issueSlug(data.issue)),         issuePage);
+// Cover story
+allNewPosts.push({
+  issue      : data.issue,
+  date       : data.date,
+  tag        : cs.tag,
+  headline   : cs.headline,
+  dek        : cs.dek,
+  author     : cs.author || "",
+  body       : cs.body || [],
+  quote      : cs.quote || "",
+  quote_author: cs.quote_author || "",
+  big_stat   : cs.big_stat || "",
+  stat_label : cs.stat_label || "",
+  image      : cs.image || "",
+  source_url : cs.source_url || "",
+  source_name: cs.source_name || "",
+  chips      : cs.chips || [],
+  url        : coverSlug(data.issue),
+  type       : "cover"
+});
 
-console.log(`✅ Built index.html + ${issueSlug(data.issue)} — Issue #${data.issue} (${data.date})`);
+// Side stories
+(data.side_stories || []).forEach((s, i) => {
+  allNewPosts.push({
+    issue      : data.issue,
+    date       : data.date,
+    tag        : s.tag,
+    headline   : s.headline,
+    dek        : "",
+    body       : [s.body],
+    image      : s.image || "",
+    source_url : s.source_url || "",
+    source_name: s.source_name || "",
+    url        : slug(data.issue, "side", i + 1),
+    type       : "side"
+  });
+});
+
+// Roundup
+(data.roundup || []).forEach((r, i) => {
+  allNewPosts.push({
+    issue      : data.issue,
+    date       : data.date,
+    tag        : r.tag,
+    headline   : r.headline,
+    dek        : "",
+    body       : [r.body],
+    image      : r.image || "",
+    source_url : r.source_url || "",
+    source_name: r.source_name || "",
+    url        : slug(data.issue, "news", i + 1),
+    type       : "news"
+  });
+});
+
+// Merge into posts.json — prepend new posts (avoid dupes by url)
+const existingUrls = new Set(posts.map(p => p.url));
+const freshPosts   = allNewPosts.filter(p => !existingUrls.has(p.url));
+const allPosts     = [...freshPosts, ...posts];
+fs.writeFileSync(path.join(__dirname, "posts.json"), JSON.stringify(allPosts, null, 2));
+
+// ─── WRITE ALL FILES ──────────────────────────────────────────────────────
+
+allNewPosts.forEach(post => {
+  fs.writeFileSync(path.join(__dirname, post.url), buildStoryPage(post));
+});
+
+fs.writeFileSync(path.join(__dirname, "index.html"), buildFrontPage(allPosts));
+
+console.log(`✅  index.html — ${allPosts.length} posts total`);
+allNewPosts.forEach(p => console.log(`    ${p.url}`));
