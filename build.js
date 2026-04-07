@@ -436,8 +436,8 @@ newsStories.forEach(s => {
   console.log(`  ✓ ${s.url}`);
 });
 
-// Front page — featured = cover, grid = sides + news
-fs.writeFileSync(path.join(DIR, "index.html"), buildFrontPage([...sideStories, ...newsStories]));
+// Front page — featured = cover, grid = past issues only (archive, manually curated)
+fs.writeFileSync(path.join(DIR, "index.html"), buildFrontPage([]));
 console.log(`  ✓ index.html`);
 
 console.log(`\n✅ Built Issue #${data.issue} (${data.date}) — ${allCurrentStories.length} pages`);
