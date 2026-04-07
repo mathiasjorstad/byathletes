@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ByAthletes &mdash; Issue No. 5</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=Barlow+Condensed:wght@900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --cream: #F4F2ED; --ink: #111010; --ink-2: #2C2A27; --ink-3: #7A776F; --red: #C41230; --brd: #E2DED7; --serif: 'Playfair Display', Georgia, serif; --cond: 'Barlow Condensed', sans-serif; --sans: 'Inter', system-ui, sans-serif; }
+html { scroll-behavior: smooth; }
+body { background: var(--cream); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+a { text-decoration: none; color: inherit; }
+img { display: block; width: 100%; }
+.mast { background: var(--ink); display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 2.5rem; position: sticky; top: 0; z-index: 100; }
+.mast-logo { font-family: var(--serif); font-style: italic; font-weight: 700; font-size: 1.8rem; letter-spacing: -0.01em; color: #fff; }
+.mast-logo em { color: var(--red); font-style: normal; }
+.mast-center { font-family: var(--cond); font-size: 0.75rem; font-weight: 900; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.28); }
+.mast-right { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.22); text-align: right; }
+.site-footer { background: #0A0805; border-top: 1px solid rgba(255,255,255,0.05); padding: 2rem 2.5rem; display: flex; justify-content: space-between; align-items: center; }
+.footer-logo { font-family: var(--serif); font-style: italic; font-size: 1.3rem; color: rgba(255,255,255,0.38); }
+.footer-meta, .footer-sub { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.2); }
+.footer-sub a { color: rgba(255,255,255,0.38); }
+.section-eyebrow { display: flex; align-items: center; gap: 1.25rem; margin-bottom: 2.5rem; }
+.eyebrow-label { font-size: 0.57rem; font-weight: 800; letter-spacing: 0.26em; text-transform: uppercase; color: var(--red); white-space: nowrap; }
+.eyebrow-rule { flex: 1; height: 1px; background: var(--brd); }
+@media (max-width: 680px) { .mast { padding: 1rem 1.25rem; } .mast-right { display: none; } .site-footer { padding: 1.5rem 1.25rem; flex-direction: column; gap: 0.75rem; text-align: center; } }.hero { position: relative; min-height: 88vh; display: flex; align-items: flex-end; overflow: hidden; }
+.hero-img { position: absolute; inset: 0; }
+.hero-img img { height: 100%; object-fit: cover; }
+.hero-img-fallback { width: 100%; height: 100%; background: #1C1916; }
+.hero-gradient { position: absolute; inset: 0; background: linear-gradient(to top, rgba(5,4,3,0.95) 0%, rgba(5,4,3,0.5) 40%, rgba(5,4,3,0.1) 70%, transparent 100%); }
+.hero-content { position: relative; z-index: 2; width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 2.5rem 3.75rem; }
+.hero-tag { display: inline-block; font-size: 0.57rem; font-weight: 800; letter-spacing: 0.3em; text-transform: uppercase; color: var(--red); margin-bottom: 1.5rem; }
+.hero-h1 { font-family: var(--serif); font-style: italic; font-weight: 700; font-size: clamp(2.4rem, 5.5vw, 5rem); line-height: 1.06; letter-spacing: -0.025em; color: #fff; max-width: 820px; margin-bottom: 1.25rem; }
+.hero-dek { font-size: 1rem; line-height: 1.7; color: rgba(255,255,255,0.55); max-width: 560px; margin-bottom: 1.25rem; }
+.hero-meta { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 1.5rem; }
+.hero-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.chip { font-size: 0.55rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.22); color: rgba(255,255,255,0.45); padding: 4px 12px; }
+.cover-section { max-width: 1280px; margin: 0 auto; padding: 4rem 2.5rem; display: grid; grid-template-columns: 1fr 320px; gap: 4rem; align-items: start; }
+.cover-p { font-size: 1.05rem; line-height: 1.9; color: var(--ink-2); margin-bottom: 1.4rem; }
+.drop::first-letter { font-family: var(--serif); font-size: 5rem; font-weight: 700; line-height: 0.68; float: left; margin-right: 0.07em; margin-top: 0.1em; color: var(--ink); }
+.cover-quote { margin: 2.5rem 0; padding: 0 0 0 2rem; border-left: 3px solid var(--red); }
+.cover-quote p { font-family: var(--serif); font-style: italic; font-size: 1.45rem; line-height: 1.42; color: var(--ink); }
+.cover-quote cite { display: block; font-style: normal; font-size: 0.58rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-3); margin-top: 0.75rem; }
+.big-stat { background: var(--ink); color: #fff; padding: 2.25rem 2rem; margin-bottom: 1.5rem; }
+.big-stat-num { font-family: var(--cond); font-size: 4rem; font-weight: 900; line-height: 1; letter-spacing: -0.02em; color: #fff; display: block; margin-bottom: 0.75rem; }
+.big-stat-label { font-size: 0.75rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
+.cover-chips-sidebar { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.cover-chips-sidebar .chip { border-color: var(--brd); color: var(--ink-3); }
+.side-section { border-top: 1px solid var(--brd); }
+.side-inner { max-width: 1280px; margin: 0 auto; padding: 4rem 2.5rem; }
+.side-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0; border: 1px solid var(--brd); }
+.side-card { padding: 2rem 2.25rem; border-right: 1px solid var(--brd); border-bottom: 1px solid var(--brd); }
+.side-card--opinion { background: #F0EEF8; }
+.side-tag { display: inline-block; font-size: 0.55rem; font-weight: 800; letter-spacing: 0.24em; text-transform: uppercase; color: var(--red); margin-bottom: 0.85rem; }
+.side-tag--blue { color: #3B4FAB; }
+.side-h { font-family: var(--serif); font-style: italic; font-size: 1.1rem; line-height: 1.38; color: var(--ink); margin-bottom: 0.75rem; }
+.side-body { font-size: 0.82rem; line-height: 1.7; color: var(--ink-3); }
+.roundup-section { border-top: 1px solid var(--brd); background: #F9F7F3; }
+.roundup-inner { max-width: 1280px; margin: 0 auto; padding: 4rem 2.5rem; }
+.roundup-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0; border: 1px solid var(--brd); }
+.roundup-card { border-right: 1px solid var(--brd); border-bottom: 1px solid var(--brd); }
+.roundup-body { padding: 1.75rem 2rem; }
+.roundup-tag { display: block; font-size: 0.55rem; font-weight: 800; letter-spacing: 0.24em; text-transform: uppercase; color: var(--red); margin-bottom: 0.6rem; }
+.roundup-h { font-family: var(--serif); font-style: italic; font-size: 1.05rem; line-height: 1.38; color: var(--ink); margin-bottom: 0.65rem; }
+.roundup-p { font-size: 0.82rem; line-height: 1.7; color: var(--ink-3); }
+.stats-section { background: var(--ink); padding: 5rem 0; }
+.stats-inner { max-width: 1280px; margin: 0 auto; padding: 0 2.5rem; }
+.stats-figures { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.07); margin-bottom: 3rem; }
+.stat-figure { background: var(--ink); padding: 2.5rem 2rem; }
+.stat-num { font-family: var(--cond); font-size: 4rem; font-weight: 900; line-height: 1; letter-spacing: -0.02em; color: #fff; display: block; margin-bottom: 0.85rem; }
+.stat-lbl { font-size: 0.78rem; color: rgba(255,255,255,0.42); line-height: 1.55; }
+.sectors-label { font-size: 0.57rem; font-weight: 800; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(255,255,255,0.25); margin-bottom: 1rem; }
+.sectors-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.sector-pill { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.45); padding: 5px 14px; }
+.tips-section { border-top: 1px solid var(--brd); }
+.tips-inner { max-width: 1280px; margin: 0 auto; padding: 4rem 2.5rem; }
+.tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; }
+.tip-card { display: flex; gap: 1.25rem; align-items: flex-start; }
+.tip-num { font-family: var(--cond); font-size: 2.25rem; font-weight: 900; line-height: 1; color: var(--brd); flex-shrink: 0; padding-top: 0.1rem; }
+.tip-h { font-size: 0.78rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink); margin-bottom: 0.5rem; }
+.tip-body { font-size: 0.82rem; line-height: 1.7; color: var(--ink-3); }
+.invest-section { border-top: 1px solid var(--brd); background: #F9F7F3; }
+.invest-inner { max-width: 1280px; margin: 0 auto; padding: 4rem 2.5rem; }
+.invest-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2px; background: var(--brd); }
+.invest-card { background: var(--cream); padding: 2.25rem 2rem; }
+.invest-top { display: flex; justify-content: space-between; margin-bottom: 0.85rem; }
+.invest-sport { font-size: 0.55rem; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase; color: var(--red); }
+.invest-round { font-size: 0.55rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); }
+.invest-h { font-family: var(--serif); font-style: italic; font-size: 1.1rem; line-height: 1.38; color: var(--ink); margin-bottom: 0.5rem; }
+.invest-investor { font-size: 0.62rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); margin-bottom: 0.35rem; }
+.invest-amount { font-family: var(--cond); font-size: 1.75rem; font-weight: 900; color: var(--red); line-height: 1; margin-bottom: 0.85rem; }
+.invest-body { font-size: 0.82rem; line-height: 1.7; color: var(--ink-3); }
+.back-bar { background: var(--cream); border-bottom: 1px solid var(--brd); padding: 0.6rem 2.5rem; }
+.back-link { font-size: 0.57rem; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-3); }
+.back-link:hover { color: var(--red); }
+@media (max-width: 900px) { .cover-section { grid-template-columns: 1fr; gap: 2.5rem; } .cover-sidebar { order: -1; } .stats-figures { grid-template-columns: 1fr; } }
+@media (max-width: 680px) { .hero-content { padding: 0 1.25rem 3rem; } .hero-h1 { font-size: 2.2rem; } .cover-section, .side-inner, .roundup-inner, .tips-inner, .invest-inner { padding: 3rem 1.25rem; } .stats-inner { padding: 0 1.25rem; } .back-bar { padding: 0.6rem 1.25rem; } }</style>
+</head>
+<body>
+<header class="mast">
+  <a href="index.html" class="mast-logo">By<em>Athletes</em></a>
+  <span class="mast-center">Issue No. 5</span>
+  <span class="mast-right">April 7, 2026</span>
+</header>
+<div class="back-bar"><a class="back-link" href="index.html">&larr; All Issues</a></div>
+<section class="hero">
+  <div class="hero-img"><img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=900&amp;h=600&amp;fit=crop&amp;auto=format" alt="Gerard Piqué Is Rebuilding Football From the Ground Up" /></div>
+  <div class="hero-gradient"></div>
+  <div class="hero-content">
+    <span class="hero-tag">Athlete Spotlight</span>
+    <h1 class="hero-h1">Gerard Piqué Is Rebuilding Football From the Ground Up</h1>
+    <p class="hero-dek">Kings League has gone from a viral experiment to a €200M media and sports property — and Piqué is just getting started.</p>
+    <div class="hero-meta">By Sofía Martínez &middot; April 7, 2026</div>
+    <div class="hero-chips"><span class="chip">Football</span><span class="chip">Media &amp; Streaming</span><span class="chip">€40M Sponsorships</span><span class="chip">Puma / Spotify</span><span class="chip">14 Broadcast Territories</span></div>
+  </div>
+</section>
+<section class="cover-section">
+  <div class="cover-body-wrap">
+    <div class="section-eyebrow"><span class="eyebrow-label">Cover Story</span><div class="eyebrow-rule"></div></div>
+    <p class="cover-p drop">Gerard Piqué won eight La Liga titles, three Champions Leagues, and a World Cup. Then he retired from football at 35 and built something that might matter more. Kings League — the 7-a-side format he co-founded in 2022 with streamer Ibai Llanos — has become one of the fastest-growing sports properties in Europe, blending live sport, streaming culture, and creator audiences in a format that legacy institutions cannot replicate.</p>
+<p class="cover-p">The league closed a €40M sponsorship cycle in Q1 2026, with anchor partners including Puma, Spotify, and Neon. Broadcast rights have been sold in 14 territories. The Kings World Cup in March 2026 drew 92,000 live attendees in Barcelona's Estadi Olímpic and 8.3M concurrent viewers on Twitch — the platform's largest single sports event since Ninja's retirement stream. Kosmos Holding, Piqué's investment vehicle, now manages €200M+ across football IP, Davis Cup media rights, and four European tech bets.</p>
+<p class="cover-p">Piqué is expanding Kings League into Italy, Germany, and Mexico in H2 2026 — each market structured as a joint venture with a local media partner. A women's league, Queens League, is already in its second season. The pitch to investors: sport built natively for streaming, not retrofitted for it.</p>
+    <div class="cover-quote"><p>&ldquo;Traditional football told fans to sit down and watch. We told them to become part of the product. That's not a gimmick — that's the only model that scales for the next generation.&rdquo;</p><cite>&mdash; Gerard Piqué, Founder, Kings League / Kosmos Holding</cite></div>
+  </div>
+  <div class="cover-sidebar">
+    <div class="big-stat"><span class="big-stat-num">€200M+</span><span class="big-stat-label">Kosmos Holding AUM — Q1 2026</span></div>
+    <div class="cover-chips-sidebar"><span class="chip">Football</span><span class="chip">Media &amp; Streaming</span><span class="chip">€40M Sponsorships</span><span class="chip">Puma / Spotify</span><span class="chip">14 Broadcast Territories</span></div>
+  </div>
+</section>
+<section class="side-section"><div class="side-inner"><div class="section-eyebrow"><span class="eyebrow-label">Also in This Issue</span><div class="eyebrow-rule"></div></div><div class="side-grid"><article class="side-card "><span class="side-tag ">Football</span><h3 class="side-h">Mbappé Launches €30M European Sports Tech Fund</h3><p class="side-body">Kylian Mbappé has formally launched MM Ventures, a Paris-based early-stage fund targeting European sports technology, health, and creator economy startups. The fund has already made five seed investments, including French performance analytics platform AthleteIQ and a Berlin-based fan engagement SaaS.</p></article>
+<article class="side-card "><span class="side-tag ">MMA</span><h3 class="side-h">McGregor's Proper No. Twelve Gets €50M Distillery Expansion</h3><p class="side-body">Conor McGregor's Proper No. Twelve Irish whiskey brand — which he sold a majority stake in to Becle for $600M in 2021 — is investing €50M in a new County Kildare distillery set to open in 2027. McGregor retains a minority equity stake and remains active on brand strategy.</p></article>
+<article class="side-card side-card--opinion"><span class="side-tag side-tag--blue">Opinion</span><h3 class="side-h">Your Name Gets You the First Meeting. Your Operator Gets You the Second.</h3><p class="side-body">Too many athlete-founded companies are stuck at Series A because the founder is the entire commercial team. The ones that scale — SpringHill, Proper No. Twelve, Kings League — all hired a professional operator within 18 months of launch. Your equity is the asset. Hire someone to protect it.</p></article>
+<article class="side-card "><span class="side-tag ">Rugby</span><h3 class="side-h">Richie McCaw Backs NZ Sports Analytics Platform Kontrol</h3><p class="side-body">New Zealand Rugby legend Richie McCaw has led a NZ$4M seed round into Kontrol, an Auckland-based platform that provides real-time biomechanical analysis for elite rugby academies. McCaw cited injury prevention as the core thesis — Kontrol's AI flags movement patterns linked to ACL risk before symptoms emerge.</p></article></div></div></section>
+<section class="roundup-section"><div class="roundup-inner"><div class="section-eyebrow"><span class="eyebrow-label">News Roundup</span><div class="eyebrow-rule"></div></div><div class="roundup-grid"><article class="roundup-card"><div class="roundup-body"><span class="roundup-tag">Football</span><h3 class="roundup-h">Antoine Griezmann's Esports Org Holyfrag Hits 1M YouTube Subscribers</h3><p class="roundup-p">Antoine Griezmann's esports and content organisation Holyfrag crossed one million YouTube subscribers this week, less than 18 months after launch. The org now fields competitive rosters in Valorant, EA FC, and Rocket League. Griezmann, a lifelong gamer, holds a 40% equity stake and is actively involved in content direction.</p></div></article>
+<article class="roundup-card"><div class="roundup-body"><span class="roundup-tag">Formula 1</span><h3 class="roundup-h">Fernando Alonso Takes Equity Stake in Spanish Mobility Startup Kairos</h3><p class="roundup-p">Two-time Formula 1 World Champion Fernando Alonso has taken an undisclosed equity stake in Kairos, a Madrid-based EV fleet management platform targeting logistics operators across Southern Europe. Alonso joins as a strategic advisor, leveraging his motorsport engineering network. Kairos has raised €12M to date.</p></div></article>
+<article class="roundup-card"><div class="roundup-body"><span class="roundup-tag">Cycling</span><h3 class="roundup-h">Tadej Pogačar Launches TDF Nutrition — Performance Fueling for Amateurs</h3><p class="roundup-p">Tour de France winner Tadej Pogačar has co-founded TDF Nutrition, a sports fueling brand built on the carbohydrate and electrolyte protocols used by Team UAE during his 2025 and 2024 Grand Tour campaigns. The brand launches direct-to-consumer across Europe in May 2026, with a €5M seed round backed by Unilever Ventures.</p></div></article>
+<article class="roundup-card"><div class="roundup-body"><span class="roundup-tag">Tennis</span><h3 class="roundup-h">Novak Djokovic's ND Nutrition Expands to UK and Germany</h3><p class="roundup-p">Novak Djokovic's plant-based nutrition brand ND Nutrition — built on the gluten-free, dairy-free protocols that drove his late-career dominance — is expanding into the UK and German markets following a successful rollout across the Balkans and Austria. The brand secured shelf space in Holland &amp; Barrett and dm Drogerie Markt ahead of a summer launch.</p></div></article></div></div></section>
+<section class="stats-section"><div class="stats-inner"><div class="section-eyebrow" style="margin-bottom:2rem;"><span class="eyebrow-label" style="color:rgba(255,255,255,0.3);">Numbers That Matter</span><div class="eyebrow-rule" style="background:rgba(255,255,255,0.08);"></div></div><div class="stats-figures"><div class="stat-figure"><span class="stat-num">8.3M</span><span class="stat-lbl">Concurrent Twitch viewers for Kings World Cup 2026 — largest live sports stream in platform history</span></div>
+<div class="stat-figure"><span class="stat-num">$600M</span><span class="stat-lbl">Valuation at which Becle acquired majority of Proper No. Twelve — McGregor's whiskey exit benchmark</span></div>
+<div class="stat-figure"><span class="stat-num">€40M</span><span class="stat-lbl">Kings League sponsorship revenue in Q1 2026 alone — Puma, Spotify, Neon as anchor partners</span></div></div><p class="sectors-label">Active Sectors This Issue</p><div class="sectors-pills"><span class="sector-pill">Sports Media &amp; Streaming</span><span class="sector-pill">Performance Nutrition</span><span class="sector-pill">Sports Technology</span><span class="sector-pill">Spirits &amp; Beverage</span><span class="sector-pill">Esports &amp; Creator Economy</span></div></div></section>
+<section class="tips-section"><div class="tips-inner"><div class="section-eyebrow"><span class="eyebrow-label">Founder Playbook</span><div class="eyebrow-rule"></div></div><div class="tips-grid"><div class="tip-card"><span class="tip-num">01</span><div><h4 class="tip-h">Hire Your Operator Before You Need One</h4><p class="tip-body">The moment your brand has traction, you need a CEO or COO who isn't you. Athlete founders who wait until chaos hits lose 12–18 months of runway finding and onboarding the right person.</p></div></div>
+<div class="tip-card"><span class="tip-num">02</span><div><h4 class="tip-h">Structure Sponsorships as Equity, Not Cash</h4><p class="tip-body">When a brand wants to pay for your name, negotiate for equity instead of a flat fee. Three equity positions in growing brands outlast any single sponsorship cheque.</p></div></div>
+<div class="tip-card"><span class="tip-num">03</span><div><h4 class="tip-h">Your Playing Schedule Is a Capital Advantage</h4><p class="tip-body">You are still in the spotlight. Use competition weeks to schedule investor meetings — your visibility drives deal flow that founders without your profile cannot access.</p></div></div>
+<div class="tip-card"><span class="tip-num">04</span><div><h4 class="tip-h">Build IP You Own, Not Just Access</h4><p class="tip-body">Licensing your name is passive. Building the brand yourself — even at lower initial revenue — compounds. Piqué didn't license Kings League to someone else. He owns the format.</p></div></div>
+<div class="tip-card"><span class="tip-num">05</span><div><h4 class="tip-h">Run Your Business Like a Pre-Season Camp</h4><p class="tip-body">Set a 90-day sprint at the start of each quarter: one clear goal, measurable outputs, weekly check-ins with your operator. Athletes already know how to peak on a schedule — apply it.</p></div></div>
+<div class="tip-card"><span class="tip-num">06</span><div><h4 class="tip-h">Understand Your Cap Table Before You Sign</h4><p class="tip-body">Know your dilution cliff. If your company raises three rounds at standard dilution, your 40% stake can become 18%. Model it before you pitch, not after you close.</p></div></div>
+<div class="tip-card"><span class="tip-num">07</span><div><h4 class="tip-h">Pick One Category and Go Deep First</h4><p class="tip-body">The athlete founders who spread across five sectors in year one rarely dominate any. Pick the space closest to your lived experience — nutrition, recovery, performance tech — and own it before you expand.</p></div></div></div></div></section>
+<section class="invest-section"><div class="invest-inner"><div class="section-eyebrow"><span class="eyebrow-label">Athlete Investments</span><div class="eyebrow-rule"></div></div><div class="invest-grid"><article class="invest-card"><div class="invest-top"><span class="invest-sport">Football</span><span class="invest-round">Seed</span></div><h3 class="invest-h">Leads Seed Round in Dutch Recovery Tech Startup RecovR</h3><p class="invest-investor">Virgil van Dijk</p><p class="invest-amount">€3M</p><p class="invest-body">Virgil van Dijk has led a €3M seed round in RecovR, an Amsterdam-based platform that combines cryotherapy protocol management with sleep tracking for professional sports teams. Van Dijk, who suffered a career-threatening ACL injury in 2020, said recovery science is the single most underinvested area in elite sport. RecovR has signed pilot contracts with three Eredivisie clubs.</p></article>
+<article class="invest-card"><div class="invest-top"><span class="invest-sport">Football</span><span class="invest-round">Series A</span></div><h3 class="invest-h">Backs Croatian Tourism Platform Adriatic.io Series A</h3><p class="invest-investor">Luka Modrić</p><p class="invest-amount">€5M</p><p class="invest-body">Luka Modrić has joined the Series A round for Adriatic.io, a Zagreb-founded platform digitising boutique hotel and villa bookings across Croatia, Slovenia, and Montenegro. The round totals €5M and is led by Flashpoint VC. Modrić, who holds a personal stake in Croatian coastal property, cited the country's under-digitised tourism infrastructure as the core opportunity.</p></article>
+<article class="invest-card"><div class="invest-top"><span class="invest-sport">Track &amp; Field</span><span class="invest-round">Series A</span></div><h3 class="invest-h">Invests in Kenyan AgriTech Platform FarmDrive</h3><p class="invest-investor">Eliud Kipchoge — KIP Foundation</p><p class="invest-amount">$2M</p><p class="invest-body">Marathon world record holder Eliud Kipchoge, through his KIP Foundation, has made a $2M strategic investment in FarmDrive, a Nairobi-based fintech providing smallholder farmers with credit scoring and micro-loans. Kipchoge has long linked elite athletic performance to nutrition access in East Africa. The investment aligns his foundation's public health mission with a scalable financial infrastructure play.</p></article></div></div></section>
+<footer class="site-footer">
+  <a href="index.html" class="footer-logo">ByAthletes</a>
+  <span class="footer-meta">Issue No. 5 &middot; April 7, 2026</span>
+  <span class="footer-sub">For athletes who build &middot; <a href="#">Subscribe</a></span>
+</footer>
+</body></html>

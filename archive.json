@@ -1,11 +1,21 @@
 [
   {
+    "issue": 5,
+    "date": "April 7, 2026",
+    "headline": "Gerard Piqu\u00e9 Is Rebuilding Football From the Ground Up",
+    "dek": "Kings League has gone from a viral experiment to a \u20ac200M media and sports property \u2014 and Piqu\u00e9 is just getting started.",
+    "tag": "Athlete Spotlight",
+    "image": "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=900&h=600&fit=crop&auto=format"
+  },
+  {
     "issue": 2,
     "date": "April 5, 2026",
     "headline": "LeBron James Is Not a Brand. He's a Business.",
     "athlete": "LeBron James",
     "sport": "Basketball",
-    "dek": "SpringHill Company just crossed a $200M+ valuation — and it's only the beginning of how LeBron is rewriting what athlete ownership really means."
+    "dek": "SpringHill Company just crossed a $200M+ valuation \u2014 and it's only the beginning of how LeBron is rewriting what athlete ownership really means.",
+    "tag": "Basketball",
+    "image": ""
   },
   {
     "issue": 3,
@@ -13,7 +23,9 @@
     "headline": "Naomi Osaka Built a Skincare Brand Athletes Actually Need",
     "athlete": "Naomi Osaka",
     "sport": "Tennis",
-    "dek": "Kinlò just closed an $18M Series A — and Osaka's bet on melanin-rich skin is turning into one of the sharpest founder plays in athlete CPG."
+    "dek": "Kinl\u00f2 just closed an $18M Series A \u2014 and Osaka's bet on melanin-rich skin is turning into one of the sharpest founder plays in athlete CPG.",
+    "tag": "Tennis",
+    "image": ""
   },
   {
     "issue": 4,
@@ -21,6 +33,8 @@
     "headline": "Lewis Hamilton Is Betting on What Comes After the Podium",
     "athlete": "Lewis Hamilton",
     "sport": "Formula 1",
-    "dek": "From Formula 1 to non-alcoholic spirits and film — Hamilton's off-track empire is accelerating faster than anything he's done behind the wheel."
+    "dek": "From Formula 1 to non-alcoholic spirits and film \u2014 Hamilton's off-track empire is accelerating faster than anything he's done behind the wheel.",
+    "tag": "Formula 1",
+    "image": ""
   }
 ]
