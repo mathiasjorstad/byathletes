@@ -1,14 +1,12 @@
 // ByAthletes — build.js
 // Generates:
-//   index.html          — landing / front page
-//   stories/{id}.html   — one reading page per story
+//   index.html   — full editorial landing page (new schema)
 
 const fs   = require("fs");
 const path = require("path");
 
-const data = JSON.parse(fs.readFileSync(path.join(__dirname, "stories.json"), "utf8"));
-
-let archive = [];
+const data    = JSON.parse(fs.readFileSync(path.join(__dirname, "stories.json"), "utf8"));
+let archive   = [];
 try { archive = JSON.parse(fs.readFileSync(path.join(__dirname, "archive.json"), "utf8")); } catch(e) {}
 
 // ─── HELPERS ──────────────────────────────────────────────────────────────
@@ -19,11 +17,10 @@ function toRoman(n) {
   return m.reduce((a,[v,s])=>{ while(n>=v){a+=s;n-=v;} return a; },"");
 }
 
-// Resolve image path — story pages live one level deep, so local images need ../
-function img(src, sub = false) {
-  if (!src) return "";
-  if (src.startsWith("http")) return src;
-  return sub ? `../${src}` : src;
+function esc(s) {
+  return String(s || "")
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;");
 }
 
 // ─── SHARED CSS ───────────────────────────────────────────────────────────
@@ -69,21 +66,11 @@ const css = `
     font-size: 0.6rem; font-weight: 600; letter-spacing: 0.18em;
     text-transform: uppercase; color: rgba(255,255,255,0.22); text-align: right;
   }
-  .mast-back {
-    font-size: 0.6rem; font-weight: 700; letter-spacing: 0.18em;
-    text-transform: uppercase; color: rgba(255,255,255,0.38);
-    transition: color 0.2s;
-  }
-  .mast-back:hover { color: rgba(255,255,255,0.8); }
 
-  /* ── ARCHIVE (shared) ─────────────────────── */
+  /* ── ARCHIVE ──────────────────────────────── */
 
-  .archive {
-    background: var(--ink); padding: 5rem 0;
-  }
-  .archive-inner {
-    max-width: 1280px; margin: 0 auto; padding: 0 2.5rem;
-  }
+  .archive { background: var(--ink); padding: 5rem 0; }
+  .archive-inner { max-width: 1280px; margin: 0 auto; padding: 0 2.5rem; }
   .archive-title {
     font-family: var(--serif); font-style: italic; font-weight: 700;
     font-size: 1.75rem; color: #fff;
@@ -94,9 +81,7 @@ const css = `
     display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 1px; background: rgba(255,255,255,0.07);
   }
-  .arc-card {
-    background: var(--ink); padding: 2rem 2.25rem; transition: background 0.18s;
-  }
+  .arc-card { background: var(--ink); padding: 2rem 2.25rem; transition: background 0.18s; }
   .arc-card:hover { background: #1C1916; }
   .arc-no {
     font-family: var(--cond); font-size: 0.72rem; font-weight: 900;
@@ -112,7 +97,7 @@ const css = `
     letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.22);
   }
 
-  /* ── FOOTER (shared) ──────────────────────── */
+  /* ── FOOTER ───────────────────────────────── */
 
   .site-footer {
     background: #0A0805; border-top: 1px solid rgba(255,255,255,0.05);
@@ -128,9 +113,20 @@ const css = `
   }
   .footer-sub a { color: rgba(255,255,255,0.38); }
 
+  /* ── SECTION EYEBROW ──────────────────────── */
+
+  .section-eyebrow {
+    display: flex; align-items: center; gap: 1.25rem; margin-bottom: 2.5rem;
+  }
+  .eyebrow-label {
+    font-size: 0.57rem; font-weight: 800; letter-spacing: 0.26em;
+    text-transform: uppercase; color: var(--red); white-space: nowrap;
+  }
+  .eyebrow-rule { flex: 1; height: 1px; background: var(--brd); }
+
   @media (max-width: 680px) {
     .mast { padding: 1rem 1.25rem; }
-    .mast-right, .mast-back { display: none; }
+    .mast-right { display: none; }
     .archive-inner { padding: 0 1.25rem; }
     .site-footer { padding: 1.5rem 1.25rem; flex-direction: column; gap: 0.75rem; text-align: center; }
   }
@@ -142,16 +138,16 @@ const fonts = `
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=Barlow+Condensed:wght@900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 `;
 
-// ─── ARCHIVE CARDS HTML ────────────────────────────────────────────────────
+// ─── ARCHIVE HTML ─────────────────────────────────────────────────────────
 
 function archiveHTML() {
-  if (archive.length === 0) return "";
+  if (!archive || archive.length === 0) return "";
   const cards = archive.map(a => `
     <div class="arc-card">
       <span class="arc-no">No.&thinsp;${String(a.issue).padStart(3,"0")}</span>
       <div class="arc-rule"></div>
-      <h3 class="arc-h">${a.headline}</h3>
-      <div class="arc-meta"><span>${a.date}</span><span>${a.sport}</span></div>
+      <h3 class="arc-h">${esc(a.headline)}</h3>
+      <div class="arc-meta"><span>${esc(a.date)}</span><span>${esc(a.sport)}</span></div>
     </div>`).join("");
   return `
     <section class="archive">
@@ -166,7 +162,7 @@ function footerHTML() {
   return `
     <footer class="site-footer">
       <span class="footer-logo">ByAthletes</span>
-      <span class="footer-meta">Vol. I &ensp;·&ensp; Issue No. ${data.issue} &ensp;·&ensp; ${data.date}</span>
+      <span class="footer-meta">Vol. I &ensp;·&ensp; Issue No. ${data.issue} &ensp;·&ensp; ${esc(data.date)}</span>
       <span class="footer-sub">For athletes who build &ensp;·&ensp; <a href="#">Subscribe</a></span>
     </footer>`;
 }
@@ -174,19 +170,75 @@ function footerHTML() {
 // ─── LANDING PAGE ──────────────────────────────────────────────────────────
 
 function buildLandingPage() {
-  const hero = data.stories[0];
-  const rest = data.stories.slice(1);
-  const heroImg = img(hero.image, false);
+  const cs = data.cover_story;
+  const ss = data.side_stories || [];
+  const roundup = data.roundup || [];
+  const tips = data.tips || [];
+  const stats = data.stats || {};
+  const investments = data.investments || [];
 
-  const restCards = rest.map(s => `
-    <a class="story-card" href="stories/${s.id}.html">
-      ${s.image ? `<div class="card-img"><img src="${img(s.image, false)}" alt="${s.headline}" loading="lazy" /></div>` : ""}
-      <span class="card-sport">${s.sport}</span>
-      <h2 class="card-h">${s.headline}</h2>
-      <p class="card-dek">${s.dek}</p>
-      <div class="card-meta">By ${s.author}&ensp;·&ensp;${s.date || data.date}</div>
-      <span class="card-link">Read Story →</span>
-    </a>`).join("");
+  // ── HERO (cover story) ──────────────────────────────────────────────────
+  const heroImg = cs.image || "";
+  const chips = (cs.chips || []).map(c => `<span class="chip">${esc(c)}</span>`).join("");
+  const bodyParas = (cs.body || []).map((p, i) =>
+    i === 0 ? `<p class="cover-p drop">${p}</p>` : `<p class="cover-p">${p}</p>`
+  ).join("");
+
+  // ── SIDE STORIES ────────────────────────────────────────────────────────
+  const sideCards = ss.map(s => {
+    const isBlue = s.tag_style === "blue";
+    return `
+    <article class="side-card ${isBlue ? "side-card--opinion" : ""}">
+      <span class="side-tag ${isBlue ? "side-tag--blue" : ""}">${esc(s.tag)}</span>
+      <h3 class="side-h">${esc(s.headline)}</h3>
+      <p class="side-body">${esc(s.body)}</p>
+      ${s.source_url ? `<a class="side-link" href="${esc(s.source_url)}" target="_blank" rel="noopener">Read →</a>` : ""}
+    </article>`;
+  }).join("");
+
+  // ── ROUNDUP ─────────────────────────────────────────────────────────────
+  const roundupCards = roundup.map(r => `
+    <article class="roundup-card">
+      ${r.image ? `<div class="roundup-img"><img src="${esc(r.image)}" alt="${esc(r.headline)}" loading="lazy" /></div>` : ""}
+      <div class="roundup-body">
+        <span class="roundup-tag">${esc(r.tag)}</span>
+        <h3 class="roundup-h">${esc(r.headline)}</h3>
+        <p class="roundup-p">${esc(r.body)}</p>
+        ${r.source_url ? `<a class="roundup-source" href="${esc(r.source_url)}" target="_blank" rel="noopener">${esc(r.source_name || "Source")} →</a>` : ""}
+      </div>
+    </article>`).join("");
+
+  // ── TIPS ────────────────────────────────────────────────────────────────
+  const tipCards = tips.map((t, i) => `
+    <div class="tip-card">
+      <span class="tip-num">${String(i + 1).padStart(2,"0")}</span>
+      <div>
+        <h4 class="tip-h">${esc(t.headline)}</h4>
+        <p class="tip-body">${esc(t.body)}</p>
+      </div>
+    </div>`).join("");
+
+  // ── STATS ───────────────────────────────────────────────────────────────
+  const figureCards = (stats.figures || []).map(f => `
+    <div class="stat-figure">
+      <span class="stat-num">${esc(f.num)}</span>
+      <span class="stat-lbl">${esc(f.label)}</span>
+    </div>`).join("");
+
+  const sectorPills = (stats.sectors || []).map(s => `<span class="sector-pill">${esc(s)}</span>`).join("");
+
+  // ── INVESTMENTS ─────────────────────────────────────────────────────────
+  const investCards = investments.map(inv => `
+    <article class="invest-card">
+      <div class="invest-top">
+        <span class="invest-sport">${esc(inv.sport)}</span>
+        <span class="invest-round">${esc(inv.round)}</span>
+      </div>
+      <h3 class="invest-h">${esc(inv.headline)}</h3>
+      <p class="invest-investor">${esc(inv.investor)}</p>
+      <p class="invest-amount">${esc(inv.amount)}</p>
+      <p class="invest-body">${esc(inv.body)}</p>
+    </article>`).join("");
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -198,125 +250,229 @@ function buildLandingPage() {
   <style>
     ${css}
 
-    /* ── HERO ─────────────────────────────────── */
+    /* ── HERO / COVER ─────────────────────────── */
 
     .hero {
-      position: relative;
-      min-height: 92vh;
-      display: flex;
-      align-items: flex-end;
-      overflow: hidden;
+      position: relative; min-height: 92vh;
+      display: flex; align-items: flex-end; overflow: hidden;
     }
-    .hero-img {
-      position: absolute; inset: 0;
-    }
-    .hero-img img {
-      height: 100%; object-fit: cover;
-    }
+    .hero-img { position: absolute; inset: 0; }
+    .hero-img img { height: 100%; object-fit: cover; }
     .hero-gradient {
       position: absolute; inset: 0;
-      background: linear-gradient(
-        to top,
-        rgba(5,4,3,0.92) 0%,
-        rgba(5,4,3,0.55) 38%,
-        rgba(5,4,3,0.15) 65%,
-        transparent 100%
-      );
+      background: linear-gradient(to top, rgba(5,4,3,0.93) 0%, rgba(5,4,3,0.55) 38%, rgba(5,4,3,0.12) 65%, transparent 100%);
     }
     .hero-content {
-      position: relative; z-index: 2;
-      width: 100%; max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 2.5rem 3.75rem;
+      position: relative; z-index: 2; width: 100%;
+      max-width: 1280px; margin: 0 auto; padding: 0 2.5rem 3.75rem;
     }
-    .hero-sport {
-      display: block; font-size: 0.57rem; font-weight: 800;
+    .hero-tag {
+      display: inline-block; font-size: 0.57rem; font-weight: 800;
       letter-spacing: 0.3em; text-transform: uppercase;
       color: var(--red); margin-bottom: 1.5rem;
     }
     .hero-h1 {
       font-family: var(--serif); font-style: italic; font-weight: 700;
-      font-size: clamp(2.6rem, 5.5vw, 5.5rem);
-      line-height: 1.06; letter-spacing: -0.025em;
-      color: #fff; max-width: 760px; margin-bottom: 1.25rem;
+      font-size: clamp(2.6rem, 5.5vw, 5.5rem); line-height: 1.06;
+      letter-spacing: -0.025em; color: #fff; max-width: 820px; margin-bottom: 1.25rem;
     }
     .hero-dek {
-      font-size: 1rem; line-height: 1.7;
-      color: rgba(255,255,255,0.6);
-      max-width: 520px; margin-bottom: 1.5rem;
+      font-size: 1rem; line-height: 1.7; color: rgba(255,255,255,0.62);
+      max-width: 560px; margin-bottom: 1.25rem;
     }
     .hero-meta {
       font-size: 0.6rem; font-weight: 700; letter-spacing: 0.16em;
-      text-transform: uppercase; color: rgba(255,255,255,0.38);
-      margin-bottom: 2rem;
+      text-transform: uppercase; color: rgba(255,255,255,0.38); margin-bottom: 1.5rem;
     }
-    .hero-cta {
-      display: inline-block; font-size: 0.62rem; font-weight: 800;
-      letter-spacing: 0.2em; text-transform: uppercase; color: #fff;
-      border: 1px solid rgba(255,255,255,0.35); padding: 0.85rem 2rem;
-      transition: background 0.2s, border-color 0.2s;
-    }
-    .hero-cta:hover {
-      background: rgba(255,255,255,0.1);
-      border-color: rgba(255,255,255,0.65);
+    .hero-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
+    .chip {
+      font-size: 0.55rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; border: 1px solid rgba(255,255,255,0.22);
+      color: rgba(255,255,255,0.5); padding: 4px 12px;
     }
 
-    /* ── STORY GRID (for additional stories) ─── */
+    /* ── COVER BODY ──────────────────────────── */
 
-    .stories-section {
+    .cover-section {
       max-width: 1280px; margin: 0 auto; padding: 4rem 2.5rem;
+      display: grid; grid-template-columns: 1fr 340px; gap: 4rem;
+      align-items: start;
     }
-    .stories-eyebrow {
-      display: flex; align-items: center; gap: 1.25rem; margin-bottom: 2.5rem;
+    .cover-body-wrap {}
+    .cover-p {
+      font-size: 1.05rem; line-height: 1.9; color: var(--ink-2); margin-bottom: 1.4rem;
     }
-    .eyebrow-label {
-      font-size: 0.57rem; font-weight: 800; letter-spacing: 0.26em;
-      text-transform: uppercase; color: var(--red); white-space: nowrap;
+    .drop::first-letter {
+      font-family: var(--serif); font-size: 5rem; font-weight: 700;
+      line-height: 0.68; float: left;
+      margin-right: 0.07em; margin-top: 0.1em; color: var(--ink);
     }
-    .eyebrow-rule { flex: 1; height: 1px; background: var(--brd); }
-    .stories-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 2.5rem;
+    .cover-quote {
+      margin: 2.5rem 0; padding: 0 0 0 2rem; border-left: 3px solid var(--red);
     }
-    .story-card {
-      display: flex; flex-direction: column;
-      cursor: pointer;
+    .cover-quote p {
+      font-family: var(--serif); font-style: italic;
+      font-size: 1.5rem; line-height: 1.42; color: var(--ink);
     }
-    .card-img {
-      aspect-ratio: 3/2; overflow: hidden; margin-bottom: 1.25rem;
+    .cover-quote cite {
+      display: block; font-style: normal; font-size: 0.58rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-3); margin-top: 0.75rem;
     }
-    .card-img img {
-      height: 100%; object-fit: cover;
-      transition: transform 0.5s ease;
+    .cover-source {
+      display: inline-block; font-size: 0.6rem; font-weight: 800;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--red);
+      margin-top: 1rem;
     }
-    .story-card:hover .card-img img { transform: scale(1.04); }
-    .card-sport {
-      display: block; font-size: 0.57rem; font-weight: 800;
-      letter-spacing: 0.26em; text-transform: uppercase;
-      color: var(--red); margin-bottom: 0.75rem;
+
+    /* ── COVER SIDEBAR ───────────────────────── */
+
+    .cover-sidebar {}
+    .big-stat {
+      background: var(--ink); color: #fff;
+      padding: 2.25rem 2rem; margin-bottom: 1.5rem;
     }
-    .card-h {
-      font-family: var(--serif); font-style: italic; font-weight: 700;
-      font-size: 1.5rem; line-height: 1.2; color: var(--ink); margin-bottom: 0.65rem;
+    .big-stat-num {
+      font-family: var(--cond); font-size: 4rem; font-weight: 900;
+      line-height: 1; letter-spacing: -0.02em; color: #fff; display: block;
+      margin-bottom: 0.75rem;
     }
-    .card-dek {
-      font-size: 0.85rem; color: var(--ink-3); line-height: 1.65;
-      margin-bottom: 1rem; flex: 1;
+    .big-stat-label {
+      font-size: 0.75rem; color: rgba(255,255,255,0.5); line-height: 1.5;
     }
-    .card-meta {
-      font-size: 0.58rem; font-weight: 700; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--ink-3); margin-bottom: 0.85rem;
+    .cover-chips-sidebar { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .cover-chips-sidebar .chip {
+      border-color: var(--brd); color: var(--ink-3);
     }
-    .card-link {
-      font-size: 0.6rem; font-weight: 800; letter-spacing: 0.16em;
+
+    /* ── SIDE STORIES ────────────────────────── */
+
+    .side-section { border-top: 1px solid var(--brd); }
+    .side-inner { max-width: 1280px; margin: 0 auto; padding: 4rem 2.5rem; }
+    .side-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 0; border: 1px solid var(--brd);
+    }
+    .side-card {
+      padding: 2rem 2.25rem; border-right: 1px solid var(--brd);
+      border-bottom: 1px solid var(--brd);
+    }
+    .side-card--opinion { background: #F0EEF8; }
+    .side-tag {
+      display: inline-block; font-size: 0.55rem; font-weight: 800;
+      letter-spacing: 0.24em; text-transform: uppercase; color: var(--red);
+      margin-bottom: 0.85rem;
+    }
+    .side-tag--blue { color: #3B4FAB; }
+    .side-h {
+      font-family: var(--serif); font-style: italic; font-size: 1.15rem;
+      line-height: 1.38; color: var(--ink); margin-bottom: 0.75rem;
+    }
+    .side-body { font-size: 0.82rem; line-height: 1.7; color: var(--ink-3); margin-bottom: 0.75rem; }
+    .side-link { font-size: 0.58rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--red); }
+
+    /* ── ROUNDUP ─────────────────────────────── */
+
+    .roundup-section { border-top: 1px solid var(--brd); background: #F9F7F3; }
+    .roundup-inner { max-width: 1280px; margin: 0 auto; padding: 4rem 2.5rem; }
+    .roundup-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2.5rem; }
+    .roundup-card { display: flex; flex-direction: column; }
+    .roundup-img { aspect-ratio: 16/9; overflow: hidden; margin-bottom: 1.25rem; }
+    .roundup-img img { height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .roundup-card:hover .roundup-img img { transform: scale(1.04); }
+    .roundup-tag {
+      display: block; font-size: 0.55rem; font-weight: 800;
+      letter-spacing: 0.24em; text-transform: uppercase; color: var(--red); margin-bottom: 0.6rem;
+    }
+    .roundup-h {
+      font-family: var(--serif); font-style: italic; font-size: 1.15rem;
+      line-height: 1.38; color: var(--ink); margin-bottom: 0.65rem;
+    }
+    .roundup-p { font-size: 0.82rem; line-height: 1.7; color: var(--ink-3); flex: 1; margin-bottom: 0.75rem; }
+    .roundup-source {
+      font-size: 0.58rem; font-weight: 800; letter-spacing: 0.16em;
       text-transform: uppercase; color: var(--red);
     }
 
+    /* ── STATS ───────────────────────────────── */
+
+    .stats-section { background: var(--ink); padding: 5rem 0; }
+    .stats-inner { max-width: 1280px; margin: 0 auto; padding: 0 2.5rem; }
+    .stats-figures {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: rgba(255,255,255,0.07); margin-bottom: 3rem;
+    }
+    .stat-figure { background: var(--ink); padding: 2.5rem 2rem; }
+    .stat-num {
+      font-family: var(--cond); font-size: 4rem; font-weight: 900;
+      line-height: 1; letter-spacing: -0.02em; color: #fff; display: block; margin-bottom: 0.85rem;
+    }
+    .stat-lbl { font-size: 0.78rem; color: rgba(255,255,255,0.42); line-height: 1.55; }
+    .sectors-label {
+      font-size: 0.57rem; font-weight: 800; letter-spacing: 0.24em;
+      text-transform: uppercase; color: rgba(255,255,255,0.25); margin-bottom: 1rem;
+    }
+    .sectors-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .sector-pill {
+      font-size: 0.58rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; border: 1px solid rgba(255,255,255,0.18);
+      color: rgba(255,255,255,0.45); padding: 5px 14px;
+    }
+
+    /* ── TIPS ────────────────────────────────── */
+
+    .tips-section { border-top: 1px solid var(--brd); }
+    .tips-inner { max-width: 1280px; margin: 0 auto; padding: 4rem 2.5rem; }
+    .tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; }
+    .tip-card { display: flex; gap: 1.25rem; align-items: flex-start; }
+    .tip-num {
+      font-family: var(--cond); font-size: 2.25rem; font-weight: 900;
+      line-height: 1; color: var(--brd); flex-shrink: 0; padding-top: 0.1rem;
+    }
+    .tip-h {
+      font-size: 0.78rem; font-weight: 800; letter-spacing: 0.04em;
+      text-transform: uppercase; color: var(--ink); margin-bottom: 0.5rem;
+    }
+    .tip-body { font-size: 0.82rem; line-height: 1.7; color: var(--ink-3); }
+
+    /* ── INVESTMENTS ──────────────────────────── */
+
+    .invest-section { border-top: 1px solid var(--brd); background: #F9F7F3; }
+    .invest-inner { max-width: 1280px; margin: 0 auto; padding: 4rem 2.5rem; }
+    .invest-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2px; background: var(--brd); }
+    .invest-card { background: var(--cream); padding: 2.25rem 2rem; }
+    .invest-top { display: flex; justify-content: space-between; margin-bottom: 0.85rem; }
+    .invest-sport {
+      font-size: 0.55rem; font-weight: 800; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--red);
+    }
+    .invest-round {
+      font-size: 0.55rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--ink-3);
+    }
+    .invest-h {
+      font-family: var(--serif); font-style: italic; font-size: 1.1rem;
+      line-height: 1.38; color: var(--ink); margin-bottom: 0.5rem;
+    }
+    .invest-investor {
+      font-size: 0.62rem; font-weight: 800; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--ink); margin-bottom: 0.35rem;
+    }
+    .invest-amount {
+      font-family: var(--cond); font-size: 1.75rem; font-weight: 900;
+      color: var(--red); line-height: 1; margin-bottom: 0.85rem;
+    }
+    .invest-body { font-size: 0.82rem; line-height: 1.7; color: var(--ink-3); }
+
+    @media (max-width: 900px) {
+      .cover-section { grid-template-columns: 1fr; gap: 2.5rem; }
+      .cover-sidebar { order: -1; }
+      .stats-figures { grid-template-columns: 1fr; }
+    }
     @media (max-width: 680px) {
       .hero-content { padding: 0 1.25rem 3rem; }
       .hero-h1 { font-size: 2.4rem; }
-      .stories-section { padding: 3rem 1.25rem; }
+      .cover-section, .side-inner, .roundup-inner, .tips-inner, .invest-inner { padding: 3rem 1.25rem; }
+      .stats-inner { padding: 0 1.25rem; }
     }
   </style>
 </head>
@@ -325,180 +481,109 @@ function buildLandingPage() {
 <header class="mast">
   <span class="mast-logo">By<em>Athletes</em></span>
   <span class="mast-issue">No.&thinsp;${toRoman(data.issue)}</span>
-  <span class="mast-right">Issue ${data.issue}&ensp;·&ensp;${data.date}</span>
+  <span class="mast-right">Issue ${data.issue}&ensp;·&ensp;${esc(data.date)}</span>
 </header>
 
+<!-- HERO -->
 <section class="hero">
   <div class="hero-img">
-    ${heroImg ? `<img src="${heroImg}" alt="${hero.headline}" />` : `<div style="background:#1a1917;width:100%;height:100%;"></div>`}
+    ${heroImg ? `<img src="${esc(heroImg)}" alt="${esc(cs.headline)}" />` : `<div style="background:#1a1917;width:100%;height:100%;"></div>`}
   </div>
   <div class="hero-gradient"></div>
   <div class="hero-content">
-    <span class="hero-sport">${hero.sport}</span>
-    <h1 class="hero-h1">${hero.headline}</h1>
-    <p class="hero-dek">${hero.dek}</p>
-    <div class="hero-meta">By ${hero.author}&ensp;·&ensp;${hero.date || data.date}</div>
-    <a class="hero-cta" href="stories/${hero.id}.html">Read Story →</a>
+    <span class="hero-tag">${esc(cs.tag)}</span>
+    <h1 class="hero-h1">${esc(cs.headline)}</h1>
+    <p class="hero-dek">${esc(cs.dek)}</p>
+    <div class="hero-meta">By ${esc(cs.author)}&ensp;·&ensp;${esc(data.date)}</div>
+    <div class="hero-chips">${chips}</div>
   </div>
 </section>
 
-${rest.length > 0 ? `
-<div class="stories-section">
-  <div class="stories-eyebrow">
-    <span class="eyebrow-label">Also in This Issue</span>
-    <div class="eyebrow-rule"></div>
+<!-- COVER BODY -->
+<section class="cover-section">
+  <div class="cover-body-wrap">
+    <div class="section-eyebrow" style="margin-bottom:2rem;">
+      <span class="eyebrow-label">Cover Story</span>
+      <div class="eyebrow-rule"></div>
+    </div>
+    ${bodyParas}
+    <div class="cover-quote">
+      <p>"${esc(cs.quote)}"</p>
+      <cite>— ${esc(cs.quote_author)}</cite>
+    </div>
+    ${cs.source_url ? `<a class="cover-source" href="${esc(cs.source_url)}" target="_blank" rel="noopener">Read full story — ${esc(cs.source_name || "Source")} →</a>` : ""}
   </div>
-  <div class="stories-grid">${restCards}</div>
-</div>` : ""}
-
-${archiveHTML()}
-${footerHTML()}
-
-</body>
-</html>`;
-}
-
-// ─── STORY PAGE ────────────────────────────────────────────────────────────
-
-function buildStoryPage(story) {
-  const heroImg = img(story.image, true);
-
-  const paras = story.body.map((p, i) =>
-    i === 0 ? `<p class="p drop">${p}</p>` : `<p class="p">${p}</p>`
-  ).join("\n");
-
-  const tags = (story.tags || []).map(t => `<span class="tag">${t}</span>`).join("");
-
-  return `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>${story.headline} — ByAthletes</title>
-  ${fonts}
-  <style>
-    ${css}
-
-    /* ── ARTICLE ──────────────────────────────── */
-
-    .article-header {
-      max-width: 800px; margin: 0 auto;
-      padding: 5.5rem 2rem 3.5rem; text-align: center;
-    }
-    .sport {
-      display: block; font-size: 0.57rem; font-weight: 800;
-      letter-spacing: 0.3em; text-transform: uppercase;
-      color: var(--red); margin-bottom: 2.25rem;
-    }
-    .h1 {
-      font-family: var(--serif); font-style: italic; font-weight: 700;
-      font-size: clamp(2.8rem, 5.5vw, 5.2rem); line-height: 1.06;
-      letter-spacing: -0.025em; color: var(--ink); margin-bottom: 1.75rem;
-    }
-    .dek {
-      font-size: 1.05rem; line-height: 1.72; color: var(--ink-2);
-      max-width: 580px; margin: 0 auto 1.75rem;
-    }
-    .byline {
-      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.18em;
-      text-transform: uppercase; color: var(--ink-3);
-    }
-    .hero {
-      width: 100%; border-top: 1px solid var(--brd); overflow: hidden;
-    }
-    .hero img { height: 72vh; object-fit: cover; }
-    .body {
-      max-width: 680px; margin: 0 auto; padding: 3.75rem 2rem 0;
-    }
-    .p {
-      font-size: 1.05rem; line-height: 1.9; color: var(--ink-2); margin-bottom: 1.4rem;
-    }
-    .drop::first-letter {
-      font-family: var(--serif); font-size: 5rem; font-weight: 700;
-      line-height: 0.68; float: left;
-      margin-right: 0.07em; margin-top: 0.1em; color: var(--ink);
-    }
-    .quote {
-      margin: 3.25rem 0; padding: 0 0 0 2rem; border-left: 3px solid var(--red);
-    }
-    .quote p {
-      font-family: var(--serif); font-style: italic;
-      font-size: 1.6rem; line-height: 1.42; color: var(--ink);
-    }
-    .quote cite {
-      display: block; font-family: var(--sans); font-style: normal;
-      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.18em;
-      text-transform: uppercase; color: var(--ink-3); margin-top: 0.85rem;
-    }
-    .stat {
-      display: flex; align-items: baseline; gap: 1.75rem;
-      border-top: 1px solid var(--brd); border-bottom: 1px solid var(--brd);
-      padding: 2.25rem 0; margin: 2.75rem 0;
-    }
-    .stat-num {
-      font-family: var(--cond); font-size: 5rem; font-weight: 900;
-      line-height: 1; color: var(--ink); letter-spacing: -0.02em; white-space: nowrap;
-    }
-    .stat-label { font-size: 0.85rem; color: var(--ink-3); line-height: 1.6; }
-    .article-footer {
-      max-width: 680px; margin: 0 auto;
-      padding: 1.75rem 2rem 6rem; display: flex; flex-direction: column; gap: 1rem;
-    }
-    .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-    .tag {
-      font-size: 0.57rem; font-weight: 700; letter-spacing: 0.14em;
-      text-transform: uppercase; border: 1px solid var(--brd); color: var(--ink-3); padding: 5px 12px;
-    }
-    .source {
-      display: inline-block; font-size: 0.6rem; font-weight: 800;
-      letter-spacing: 0.18em; text-transform: uppercase; color: var(--red);
-      transition: letter-spacing 0.2s;
-    }
-    .source:hover { letter-spacing: 0.28em; }
-
-    @media (max-width: 680px) {
-      .article-header { padding: 3.5rem 1.25rem 2.5rem; }
-      .body { padding-left: 1.25rem; padding-right: 1.25rem; }
-      .article-footer { padding-left: 1.25rem; padding-right: 1.25rem; }
-      .quote { padding-left: 1.25rem; }
-      .h1 { font-size: 2.6rem; }
-    }
-  </style>
-</head>
-<body>
-
-<header class="mast">
-  <a class="mast-logo" href="../index.html">By<em>Athletes</em></a>
-  <span class="mast-issue">No.&thinsp;${toRoman(data.issue)}</span>
-  <a class="mast-back" href="../index.html">← Front Page</a>
-</header>
-
-<header class="article-header">
-  <span class="sport">${story.sport}</span>
-  <h1 class="h1">${story.headline}</h1>
-  <p class="dek">${story.dek}</p>
-  <p class="byline">By ${story.author}&ensp;·&ensp;${story.date || data.date}</p>
-</header>
-
-${heroImg ? `<div class="hero"><img src="${heroImg}" alt="${story.headline}" /></div>` : `<div style="height:2px;background:var(--brd);"></div>`}
-
-<div class="body">
-  ${paras}
-  <div class="quote">
-    <p>"${story.quote}"</p>
-    <cite>— ${story.quote_author}</cite>
+  <div class="cover-sidebar">
+    <div class="big-stat">
+      <span class="big-stat-num">${esc(cs.big_stat)}</span>
+      <span class="big-stat-label">${esc(cs.stat_label)}</span>
+    </div>
+    <div class="cover-chips-sidebar">${chips}</div>
   </div>
-  ${story.stat ? `
-  <div class="stat">
-    <span class="stat-num">${story.stat}</span>
-    <span class="stat-label">${story.stat_label}</span>
-  </div>` : ""}
-</div>
+</section>
 
-<footer class="article-footer">
-  ${tags ? `<div class="tags">${tags}</div>` : ""}
-  ${story.source_url ? `<a class="source" href="${story.source_url}" target="_blank" rel="noopener">Read original — ${story.source_name || "Source"} →</a>` : ""}
-</footer>
+<!-- SIDE STORIES -->
+${ss.length > 0 ? `
+<section class="side-section">
+  <div class="side-inner">
+    <div class="section-eyebrow">
+      <span class="eyebrow-label">Also in This Issue</span>
+      <div class="eyebrow-rule"></div>
+    </div>
+    <div class="side-grid">${sideCards}</div>
+  </div>
+</section>` : ""}
+
+<!-- ROUNDUP -->
+${roundup.length > 0 ? `
+<section class="roundup-section">
+  <div class="roundup-inner">
+    <div class="section-eyebrow">
+      <span class="eyebrow-label">News Roundup</span>
+      <div class="eyebrow-rule"></div>
+    </div>
+    <div class="roundup-grid">${roundupCards}</div>
+  </div>
+</section>` : ""}
+
+<!-- STATS -->
+${(stats.figures && stats.figures.length > 0) ? `
+<section class="stats-section">
+  <div class="stats-inner">
+    <div class="section-eyebrow" style="margin-bottom:2rem;">
+      <span class="eyebrow-label" style="color:rgba(255,255,255,0.35);">Numbers That Matter</span>
+      <div class="eyebrow-rule" style="background:rgba(255,255,255,0.08);"></div>
+    </div>
+    <div class="stats-figures">${figureCards}</div>
+    ${stats.sectors && stats.sectors.length > 0 ? `
+    <p class="sectors-label">Active Sectors This Issue</p>
+    <div class="sectors-pills">${sectorPills}</div>` : ""}
+  </div>
+</section>` : ""}
+
+<!-- TIPS -->
+${tips.length > 0 ? `
+<section class="tips-section">
+  <div class="tips-inner">
+    <div class="section-eyebrow">
+      <span class="eyebrow-label">Founder Playbook</span>
+      <div class="eyebrow-rule"></div>
+    </div>
+    <div class="tips-grid">${tipCards}</div>
+  </div>
+</section>` : ""}
+
+<!-- INVESTMENTS -->
+${investments.length > 0 ? `
+<section class="invest-section">
+  <div class="invest-inner">
+    <div class="section-eyebrow">
+      <span class="eyebrow-label">Athlete Investments</span>
+      <div class="eyebrow-rule"></div>
+    </div>
+    <div class="invest-grid">${investCards}</div>
+  </div>
+</section>` : ""}
 
 ${archiveHTML()}
 ${footerHTML()}
@@ -509,19 +594,7 @@ ${footerHTML()}
 
 // ─── BUILD ─────────────────────────────────────────────────────────────────
 
-// Ensure stories/ directory exists
-const storiesDir = path.join(__dirname, "stories");
-if (!fs.existsSync(storiesDir)) fs.mkdirSync(storiesDir);
-
-// Generate individual story pages
-data.stories.forEach(story => {
-  const html = buildStoryPage(story);
-  fs.writeFileSync(path.join(storiesDir, `${story.id}.html`), html);
-  console.log(`  📄 stories/${story.id}.html`);
-});
-
-// Generate landing page
 const landing = buildLandingPage();
 fs.writeFileSync(path.join(__dirname, "index.html"), landing);
 
-console.log(`✅ Built index.html + ${data.stories.length} story page(s) — Issue #${data.issue} (${data.date})`);
+console.log(`✅ Built index.html — Issue #${data.issue} (${data.date})`);

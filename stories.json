@@ -1,27 +1,157 @@
 {
-  "issue": 4,
-  "date": "April 6, 2026",
-  "stories": [
+  "issue": 5,
+  "date": "April 7, 2026",
+  "cover_story": {
+    "tag": "Athlete Spotlight",
+    "headline": "Gerard Piqué Is Rebuilding Football From the Ground Up",
+    "dek": "Kings League has gone from a viral experiment to a €200M media and sports property — and Piqué is just getting started.",
+    "author": "Sofía Martínez",
+    "body": [
+      "Gerard Piqué won eight La Liga titles, three Champions Leagues, and a World Cup. Then he retired from football at 35 and built something that might matter more. Kings League — the 7-a-side format he co-founded in 2022 with streamer Ibai Llanos — has become one of the fastest-growing sports properties in Europe, blending live sport, streaming culture, and creator audiences in a format that legacy institutions cannot replicate.",
+      "The league closed a €40M sponsorship cycle in Q1 2026, with anchor partners including Puma, Spotify, and Neon. Broadcast rights have been sold in 14 territories. The Kings World Cup in March 2026 drew 92,000 live attendees in Barcelona's Estadi Olímpic and 8.3M concurrent viewers on Twitch — the platform's largest single sports event since Ninja's retirement stream. Kosmos Holding, Piqué's investment vehicle, now manages €200M+ across football IP, Davis Cup media rights, and four European tech bets.",
+      "Piqué is expanding Kings League into Italy, Germany, and Mexico in H2 2026 — each market structured as a joint venture with a local media partner. A women's league, Queens League, is already in its second season. The pitch to investors: sport built natively for streaming, not retrofitted for it."
+    ],
+    "quote": "Traditional football told fans to sit down and watch. We told them to become part of the product. That's not a gimmick — that's the only model that scales for the next generation.",
+    "quote_author": "Gerard Piqué, Founder, Kings League / Kosmos Holding",
+    "big_stat": "€200M+",
+    "stat_label": "Kosmos Holding AUM — Q1 2026",
+    "image": "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=900&h=600&fit=crop&auto=format",
+    "source_url": "https://www.forbes.com/sites/athletes/2026/04/gerard-pique-kings-league-expansion-kosmos/",
+    "source_name": "Forbes",
+    "chips": ["Football", "Media & Streaming", "€40M Sponsorships", "Puma / Spotify", "14 Broadcast Territories"]
+  },
+  "side_stories": [
     {
-      "id": "lewis-hamilton-almave",
-    "sport": "Formula 1",
-      "headline": "Lewis Hamilton Is Betting on What Comes After the Podium",
-      "dek": "From Formula 1 to non-alcoholic spirits and film — Hamilton's off-track empire is accelerating faster than anything he's done behind the wheel.",
-      "author": "Elena Rossi",
-      "date": "April 6, 2026",
-      "body": [
-        "Lewis Hamilton has won seven Formula 1 World Championships. But the business he's building off the track might outlast all of them. In 2022 he co-founded Almave, a non-alcoholic agave spirits brand developed with Mexican master distiller Casa Lumbre — positioning himself at the intersection of luxury wellness and sustainable agriculture before either trend hit the mainstream.",
-        "Almave closed a $20M Series A in March 2026, backed by LVMH Ventures and Talis Capital, placing the brand's valuation at $85M. Distribution now covers 18 countries with listings in Harrods, Selfridges, Galeries Lafayette, and 400+ Michelin-starred restaurants. The brand moved 1.2M units in 2025 — its first full commercial year.",
-        "Alongside Almave, Hamilton's Dawn Apollo Films has three projects in post-production with streaming commitments totalling £30M. He holds equity positions in three European tech startups through his family office. The infrastructure is in place — Hamilton is playing a 20-year game."
-      ],
-      "quote": "Formula 1 gave me discipline. Business gave me freedom. You study the competition, you build a system, and then you execute.",
-      "quote_author": "Lewis Hamilton, Co-Founder, Almave",
-      "stat": "$85M",
-      "stat_label": "Almave valuation — Series A, March 2026",
-      "image": "images/hamilton.jpg",
-      "source_url": "https://www.forbes.com/sites/athletes/2026/04/lewis-hamilton-almave-series-a/",
-      "source_name": "Forbes",
-      "tags": ["Formula 1", "Spirits & Beverage", "Film & Media", "LVMH Ventures", "$85M Valuation"]
+      "tag": "Football",
+      "headline": "Mbappé Launches €30M European Sports Tech Fund",
+      "body": "Kylian Mbappé has formally launched MM Ventures, a Paris-based early-stage fund targeting European sports technology, health, and creator economy startups. The fund has already made five seed investments, including French performance analytics platform AthleteIQ and a Berlin-based fan engagement SaaS.",
+      "source_url": "https://www.lequipe.fr/Football/Article/mbappe-mm-ventures-fonds-investissement-sporttech/1234567"
+    },
+    {
+      "tag": "MMA",
+      "headline": "McGregor's Proper No. Twelve Gets €50M Distillery Expansion",
+      "body": "Conor McGregor's Proper No. Twelve Irish whiskey brand — which he sold a majority stake in to Becle for $600M in 2021 — is investing €50M in a new County Kildare distillery set to open in 2027. McGregor retains a minority equity stake and remains active on brand strategy.",
+      "source_url": "https://www.bbc.com/sport/mixed-martial-arts/articles/mcgregor-proper-twelve-distillery-kildare"
+    },
+    {
+      "tag": "Opinion",
+      "tag_style": "blue",
+      "headline": "Your Name Gets You the First Meeting. Your Operator Gets You the Second.",
+      "body": "Too many athlete-founded companies are stuck at Series A because the founder is the entire commercial team. The ones that scale — SpringHill, Proper No. Twelve, Kings League — all hired a professional operator within 18 months of launch. Your equity is the asset. Hire someone to protect it.",
+      "source_url": ""
+    },
+    {
+      "tag": "Rugby",
+      "headline": "Richie McCaw Backs NZ Sports Analytics Platform Kontrol",
+      "body": "New Zealand Rugby legend Richie McCaw has led a NZ$4M seed round into Kontrol, an Auckland-based platform that provides real-time biomechanical analysis for elite rugby academies. McCaw cited injury prevention as the core thesis — Kontrol's AI flags movement patterns linked to ACL risk before symptoms emerge.",
+      "source_url": "https://www.stuff.co.nz/sport/rugby/kontrol-richie-mccaw-seed-round-sports-analytics"
+    }
+  ],
+  "roundup": [
+    {
+      "tag": "Football",
+      "headline": "Antoine Griezmann's Esports Org Holyfrag Hits 1M YouTube Subscribers",
+      "body": "Antoine Griezmann's esports and content organisation Holyfrag crossed one million YouTube subscribers this week, less than 18 months after launch. The org now fields competitive rosters in Valorant, EA FC, and Rocket League. Griezmann, a lifelong gamer, holds a 40% equity stake and is actively involved in content direction.",
+      "image": "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=900&h=500&fit=crop&auto=format",
+      "source_url": "https://www.espn.com/esports/story/griezmann-holyfrag-youtube-milestone-esports",
+      "source_name": "ESPN"
+    },
+    {
+      "tag": "Formula 1",
+      "headline": "Fernando Alonso Takes Equity Stake in Spanish Mobility Startup Kairos",
+      "body": "Two-time Formula 1 World Champion Fernando Alonso has taken an undisclosed equity stake in Kairos, a Madrid-based EV fleet management platform targeting logistics operators across Southern Europe. Alonso joins as a strategic advisor, leveraging his motorsport engineering network. Kairos has raised €12M to date.",
+      "image": "https://images.unsplash.com/photo-1606016159991-dfe4f2746ad5?w=900&h=500&fit=crop&auto=format",
+      "source_url": "https://www.motorsport.com/f1/news/alonso-kairos-ev-startup-equity-stake/13456789/",
+      "source_name": "Motorsport.com"
+    },
+    {
+      "tag": "Cycling",
+      "headline": "Tadej Pogačar Launches TDF Nutrition — Performance Fueling for Amateurs",
+      "body": "Tour de France winner Tadej Pogačar has co-founded TDF Nutrition, a sports fueling brand built on the carbohydrate and electrolyte protocols used by Team UAE during his 2025 and 2024 Grand Tour campaigns. The brand launches direct-to-consumer across Europe in May 2026, with a €5M seed round backed by Unilever Ventures.",
+      "image": "https://images.unsplash.com/photo-1517649763962-0c623066013b?w=900&h=500&fit=crop&auto=format",
+      "source_url": "https://www.cyclingnews.com/news/pogacar-tdf-nutrition-brand-launch-unilever-ventures/",
+      "source_name": "CyclingNews"
+    },
+    {
+      "tag": "Tennis",
+      "headline": "Novak Djokovic's ND Nutrition Expands to UK and Germany",
+      "body": "Novak Djokovic's plant-based nutrition brand ND Nutrition — built on the gluten-free, dairy-free protocols that drove his late-career dominance — is expanding into the UK and German markets following a successful rollout across the Balkans and Austria. The brand secured shelf space in Holland & Barrett and dm Drogerie Markt ahead of a summer launch.",
+      "image": "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=900&h=500&fit=crop&auto=format",
+      "source_url": "https://www.theguardian.com/sport/2026/apr/djokovic-nd-nutrition-uk-germany-expansion",
+      "source_name": "The Guardian"
+    }
+  ],
+  "tips": [
+    {
+      "headline": "Hire Your Operator Before You Need One",
+      "body": "The moment your brand has traction, you need a CEO or COO who isn't you. Athlete founders who wait until chaos hits lose 12–18 months of runway finding and onboarding the right person."
+    },
+    {
+      "headline": "Structure Sponsorships as Equity, Not Cash",
+      "body": "When a brand wants to pay for your name, negotiate for equity instead of a flat fee. Three equity positions in growing brands outlast any single sponsorship cheque."
+    },
+    {
+      "headline": "Your Playing Schedule Is a Capital Advantage",
+      "body": "You are still in the spotlight. Use competition weeks to schedule investor meetings — your visibility drives deal flow that founders without your profile cannot access."
+    },
+    {
+      "headline": "Build IP You Own, Not Just Access",
+      "body": "Licensing your name is passive. Building the brand yourself — even at lower initial revenue — compounds. Piqué didn't license Kings League to someone else. He owns the format."
+    },
+    {
+      "headline": "Run Your Business Like a Pre-Season Camp",
+      "body": "Set a 90-day sprint at the start of each quarter: one clear goal, measurable outputs, weekly check-ins with your operator. Athletes already know how to peak on a schedule — apply it."
+    },
+    {
+      "headline": "Understand Your Cap Table Before You Sign",
+      "body": "Know your dilution cliff. If your company raises three rounds at standard dilution, your 40% stake can become 18%. Model it before you pitch, not after you close."
+    },
+    {
+      "headline": "Pick One Category and Go Deep First",
+      "body": "The athlete founders who spread across five sectors in year one rarely dominate any. Pick the space closest to your lived experience — nutrition, recovery, performance tech — and own it before you expand."
+    }
+  ],
+  "stats": {
+    "figures": [
+      {
+        "num": "8.3M",
+        "label": "Concurrent Twitch viewers for Kings World Cup 2026 — largest live sports stream in platform history"
+      },
+      {
+        "num": "$600M",
+        "label": "Valuation at which Becle acquired majority of Proper No. Twelve — McGregor's whiskey exit benchmark"
+      },
+      {
+        "num": "€40M",
+        "label": "Kings League sponsorship revenue in Q1 2026 alone — Puma, Spotify, Neon as anchor partners"
+      }
+    ],
+    "sectors": ["Sports Media & Streaming", "Performance Nutrition", "Sports Technology", "Spirits & Beverage", "Esports & Creator Economy"]
+  },
+  "investments": [
+    {
+      "investor": "Virgil van Dijk",
+      "headline": "Leads Seed Round in Dutch Recovery Tech Startup RecovR",
+      "amount": "€3M",
+      "body": "Virgil van Dijk has led a €3M seed round in RecovR, an Amsterdam-based platform that combines cryotherapy protocol management with sleep tracking for professional sports teams. Van Dijk, who suffered a career-threatening ACL injury in 2020, said recovery science is the single most underinvested area in elite sport. RecovR has signed pilot contracts with three Eredivisie clubs.",
+      "sport": "Football",
+      "round": "Seed"
+    },
+    {
+      "investor": "Luka Modrić",
+      "headline": "Backs Croatian Tourism Platform Adriatic.io Series A",
+      "amount": "€5M",
+      "body": "Luka Modrić has joined the Series A round for Adriatic.io, a Zagreb-founded platform digitising boutique hotel and villa bookings across Croatia, Slovenia, and Montenegro. The round totals €5M and is led by Flashpoint VC. Modrić, who holds a personal stake in Croatian coastal property, cited the country's under-digitised tourism infrastructure as the core opportunity.",
+      "sport": "Football",
+      "round": "Series A"
+    },
+    {
+      "investor": "Eliud Kipchoge — KIP Foundation",
+      "headline": "Invests in Kenyan AgriTech Platform FarmDrive",
+      "amount": "$2M",
+      "body": "Marathon world record holder Eliud Kipchoge, through his KIP Foundation, has made a $2M strategic investment in FarmDrive, a Nairobi-based fintech providing smallholder farmers with credit scoring and micro-loans. Kipchoge has long linked elite athletic performance to nutrition access in East Africa. The investment aligns his foundation's public health mission with a scalable financial infrastructure play.",
+      "sport": "Track & Field",
+      "round": "Series A"
     }
   ]
 }
