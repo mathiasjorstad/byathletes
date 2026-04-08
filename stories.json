@@ -1,157 +1,157 @@
 {
-  "issue": 5,
-  "date": "April 7, 2026",
+  "issue": 6,
+  "date": "April 8, 2026",
   "cover_story": {
     "tag": "Athlete Spotlight",
-    "headline": "Gerard Piqué Is Rebuilding Football From the Ground Up",
-    "dek": "Kings League has gone from a viral experiment to a €200M media and sports property — and Piqué is just getting started.",
-    "author": "Sofía Martínez",
+    "headline": "Erling Haaland Is Building Norway's Boldest Athlete Tech Fund",
+    "dek": "The world's most lethal striker has quietly deployed €50M into Scandinavian health tech and climate infrastructure — and the fund is just getting started.",
+    "author": "Erik Lindström",
     "body": [
-      "Gerard Piqué won eight La Liga titles, three Champions Leagues, and a World Cup. Then he retired from football at 35 and built something that might matter more. Kings League — the 7-a-side format he co-founded in 2022 with streamer Ibai Llanos — has become one of the fastest-growing sports properties in Europe, blending live sport, streaming culture, and creator audiences in a format that legacy institutions cannot replicate.",
-      "The league closed a €40M sponsorship cycle in Q1 2026, with anchor partners including Puma, Spotify, and Neon. Broadcast rights have been sold in 14 territories. The Kings World Cup in March 2026 drew 92,000 live attendees in Barcelona's Estadi Olímpic and 8.3M concurrent viewers on Twitch — the platform's largest single sports event since Ninja's retirement stream. Kosmos Holding, Piqué's investment vehicle, now manages €200M+ across football IP, Davis Cup media rights, and four European tech bets.",
-      "Piqué is expanding Kings League into Italy, Germany, and Mexico in H2 2026 — each market structured as a joint venture with a local media partner. A women's league, Queens League, is already in its second season. The pitch to investors: sport built natively for streaming, not retrofitted for it."
+      "Erling Haaland is 25 years old, has scored 36 Premier League goals in a single season, and remains the most sought-after centre-forward in world football. He is also, quietly, building one of the most focused athlete investment vehicles in European sport. In January 2026, Haaland formalised what had been a series of personal cheques into a structured early-stage fund: Viking Capital, a Bergen-registered vehicle targeting Scandinavian health technology, climate infrastructure, and AI-enabled performance science.",
+      "Viking Capital has deployed €50M across seven investments since its Q4 2025 inception. Anchored positions include BioMark, an Oslo-based continuous glucose monitoring platform for elite athletes (€8M Series A); Vayu, a Stockholm climate fintech that converts athlete endorsement fees into renewable energy certificates (€6M seed); and PulseOS, a Copenhagen AI platform for team load management used by four Bundesliga academies. A two-person investment team manages the fund alongside Haaland's family office. Total portfolio AUM stands at €50M with a €100M hard cap target.",
+      "Viking Capital is targeting first close at €100M by Q3 2026, with active outreach to three Nordic sovereign wealth funds and two Premier League co-investors. Haaland has told LPs he intends to run the fund throughout his playing career — using his own training load, nutrition protocols, and recovery data as real-world test environments for every portfolio company before writing a cheque."
     ],
-    "quote": "Traditional football told fans to sit down and watch. We told them to become part of the product. That's not a gimmick — that's the only model that scales for the next generation.",
-    "quote_author": "Gerard Piqué, Founder, Kings League / Kosmos Holding",
-    "big_stat": "€200M+",
-    "stat_label": "Kosmos Holding AUM — Q1 2026",
-    "image": "images/pique.jpg",
-    "source_url": "https://www.forbes.com/sites/athletes/2026/04/gerard-pique-kings-league-expansion-kosmos/",
-    "source_name": "Forbes",
-    "chips": ["Football", "Media & Streaming", "€40M Sponsorships", "Puma / Spotify", "14 Broadcast Territories"]
+    "quote": "I test every product we invest in during the season. If it doesn't change something measurable in training within 30 days, we don't write the cheque. Full stop.",
+    "quote_author": "Erling Haaland, Founder, Viking Capital",
+    "big_stat": "€50M",
+    "stat_label": "Viking Capital AUM — launched January 2026",
+    "image": "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=900&h=600&fit=crop&auto=format",
+    "source_url": "https://www.theguardian.com/sport/2026/apr/erling-haaland-viking-capital-fund-launch-norway-health-tech",
+    "source_name": "The Guardian",
+    "chips": ["Football", "Health Technology", "Climate Tech", "Viking Capital", "€50M AUM"]
   },
   "side_stories": [
     {
       "tag": "Football",
-      "headline": "Mbappé Launches €30M European Sports Tech Fund",
-      "body": "Kylian Mbappé has formally launched MM Ventures, a Paris-based early-stage fund targeting European sports technology, health, and creator economy startups. The fund has already made five seed investments, including French performance analytics platform AthleteIQ and a Berlin-based fan engagement SaaS.",
-      "source_url": "https://www.lequipe.fr/Football/Article/mbappe-mm-ventures-fonds-investissement-sporttech/1234567"
+      "headline": "Thierry Henry Leads €15M Series A in European Scouting Platform Pitch",
+      "body": "Arsenal and France legend Thierry Henry has co-led a €15M Series A in Pitch, a Paris-based platform connecting academies, agents, and scouts across Europe's top five leagues. Henry, who has spent years in youth development with Monaco and the French national team, joined as a board observer. Pitch processes 40,000 player profiles across 28 countries.",
+      "source_url": "https://www.lequipe.fr/Football/Article/thierry-henry-pitch-sports-platform-series-a/1345678"
     },
     {
-      "tag": "MMA",
-      "headline": "McGregor's Proper No. Twelve Gets €50M Distillery Expansion",
-      "body": "Conor McGregor's Proper No. Twelve Irish whiskey brand — which he sold a majority stake in to Becle for $600M in 2021 — is investing €50M in a new County Kildare distillery set to open in 2027. McGregor retains a minority equity stake and remains active on brand strategy.",
-      "source_url": "https://www.bbc.com/sport/mixed-martial-arts/articles/mcgregor-proper-twelve-distillery-kildare"
+      "tag": "Formula 1",
+      "headline": "Carlos Sainz Takes Stake in F1 Telemetry Startup Apex Analytics",
+      "body": "Carlos Sainz, in his first season with Williams F1, has taken a strategic equity stake in Apex Analytics, a Madrid-founded platform applying Formula 1 telemetry methodology to commercial fleet optimisation. Sainz joins Apex's advisory board alongside ex-Ferrari chief engineer Enrico Cardile. The company has signed contracts with three European logistics groups.",
+      "source_url": "https://www.motorsport.com/f1/news/sainz-apex-analytics-investment-fleet-telemetry/13578901/"
     },
     {
       "tag": "Opinion",
       "tag_style": "blue",
-      "headline": "Your Name Gets You the First Meeting. Your Operator Gets You the Second.",
-      "body": "Too many athlete-founded companies are stuck at Series A because the founder is the entire commercial team. The ones that scale — SpringHill, Proper No. Twelve, Kings League — all hired a professional operator within 18 months of launch. Your equity is the asset. Hire someone to protect it.",
+      "headline": "The Athlete Who Waits Until Retirement to Invest Will Always Be Five Years Behind",
+      "body": "The most valuable window for athlete deal flow is the three years before retirement — not after. Your name, your access, and your network peak while you're still competing. Every athlete who launched a fund the day they stopped playing left compounding time on the table.",
       "source_url": ""
     },
     {
-      "tag": "Rugby",
-      "headline": "Richie McCaw Backs NZ Sports Analytics Platform Kontrol",
-      "body": "New Zealand Rugby legend Richie McCaw has led a NZ$4M seed round into Kontrol, an Auckland-based platform that provides real-time biomechanical analysis for elite rugby academies. McCaw cited injury prevention as the core thesis — Kontrol's AI flags movement patterns linked to ACL risk before symptoms emerge.",
-      "source_url": "https://www.stuff.co.nz/sport/rugby/kontrol-richie-mccaw-seed-round-sports-analytics"
+      "tag": "Cycling",
+      "headline": "Wout van Aert Backs Belgian E-Bike Platform Velio in €4M Seed",
+      "body": "Belgian cycling superstar Wout van Aert has joined a €4M seed round for Velio, a Ghent-based e-bike subscription platform targeting urban commuters across the Benelux. Van Aert, a three-time Tour de France green jersey winner, called urban mobility the natural intersection between elite cycling and everyday transport. Velio has 8,000 active subscribers.",
+      "source_url": "https://www.sporza.be/nl/2026/04/wout-van-aert-velio-ebike-seed-round/"
     }
   ],
   "roundup": [
     {
       "tag": "Football",
-      "headline": "Antoine Griezmann's Esports Org Holyfrag Hits 1M YouTube Subscribers",
-      "body": "Antoine Griezmann's esports and content organisation Holyfrag crossed one million YouTube subscribers this week, less than 18 months after launch. The org now fields competitive rosters in Valorant, EA FC, and Rocket League. Griezmann, a lifelong gamer, holds a 40% equity stake and is actively involved in content direction.",
-      "image": "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=900&h=500&fit=crop&auto=format",
-      "source_url": "https://www.espn.com/esports/story/griezmann-holyfrag-youtube-milestone-esports",
-      "source_name": "ESPN"
+      "headline": "Kevin De Bruyne's KDB Studios Closes €20M Series A at €75M Valuation",
+      "body": "Belgian midfielder Kevin De Bruyne has closed a €20M Series A for KDB Studios, his Antwerp-registered sports documentary and athlete content production company. The round is led by European media group Mediawan and values KDB Studios at €75M. The company has produced four premium sports documentaries distributed on Prime Video and DAZN since 2024, with a fifth — on the Belgium golden generation — set for release in June 2026.",
+      "image": "https://images.unsplash.com/photo-1574926054530-a1e7e42c6db1?w=900&h=500&fit=crop&auto=format",
+      "source_url": "https://www.theguardian.com/sport/2026/apr/kevin-de-bruyne-kdb-studios-series-a-mediawan",
+      "source_name": "The Guardian"
     },
     {
       "tag": "Formula 1",
-      "headline": "Fernando Alonso Takes Equity Stake in Spanish Mobility Startup Kairos",
-      "body": "Two-time Formula 1 World Champion Fernando Alonso has taken an undisclosed equity stake in Kairos, a Madrid-based EV fleet management platform targeting logistics operators across Southern Europe. Alonso joins as a strategic advisor, leveraging his motorsport engineering network. Kairos has raised €12M to date.",
-      "image": "https://images.unsplash.com/photo-1606016159991-dfe4f2746ad5?w=900&h=500&fit=crop&auto=format",
-      "source_url": "https://www.motorsport.com/f1/news/alonso-kairos-ev-startup-equity-stake/13456789/",
+      "headline": "Max Verstappen's Real F1 Sim Platform Crosses 500K Paying Subscribers",
+      "body": "Max Verstappen's Real F1 — a subscription sim-racing platform co-developed with Red Bull's engineering division — has crossed 500,000 paying subscribers at €14.99 per month, annualising at €90M ARR. The platform delivers AI-generated circuit coaching built from Verstappen's actual onboard telemetry data. Red Bull holds a 25% equity stake in the venture. Real F1 launched in November 2024.",
+      "image": "https://images.unsplash.com/photo-1498887960847-2a5e46312788?w=900&h=500&fit=crop&auto=format",
+      "source_url": "https://www.motorsport.com/f1/news/verstappen-real-f1-sim-racing-500k-subscribers-arr/13601234/",
       "source_name": "Motorsport.com"
     },
     {
-      "tag": "Cycling",
-      "headline": "Tadej Pogačar Launches TDF Nutrition — Performance Fueling for Amateurs",
-      "body": "Tour de France winner Tadej Pogačar has co-founded TDF Nutrition, a sports fueling brand built on the carbohydrate and electrolyte protocols used by Team UAE during his 2025 and 2024 Grand Tour campaigns. The brand launches direct-to-consumer across Europe in May 2026, with a €5M seed round backed by Unilever Ventures.",
-      "image": "https://images.unsplash.com/photo-1517649763962-0c623066013b?w=900&h=500&fit=crop&auto=format",
-      "source_url": "https://www.cyclingnews.com/news/pogacar-tdf-nutrition-brand-launch-unilever-ventures/",
-      "source_name": "CyclingNews"
+      "tag": "MMA",
+      "headline": "Israel Adesanya Launches Last Stylebender Streetwear Across Europe",
+      "body": "UFC Middleweight legend Israel Adesanya has launched Last Stylebender, a Lagos-and-Auckland co-designed streetwear label, across European markets in April 2026. The brand blends West African textile traditions with MMA aesthetic culture and has secured stockists in 60 stores across the UK, France, and the Netherlands. Adesanya holds full equity and has turned down acquisition approaches from two major European sportswear groups.",
+      "image": "https://images.unsplash.com/photo-1567515004624-219c11d31f2e?w=900&h=500&fit=crop&auto=format",
+      "source_url": "https://www.bbc.com/sport/mixed-martial-arts/articles/adesanya-last-stylebender-europe-streetwear-launch",
+      "source_name": "BBC Sport"
     },
     {
       "tag": "Tennis",
-      "headline": "Novak Djokovic's ND Nutrition Expands to UK and Germany",
-      "body": "Novak Djokovic's plant-based nutrition brand ND Nutrition — built on the gluten-free, dairy-free protocols that drove his late-career dominance — is expanding into the UK and German markets following a successful rollout across the Balkans and Austria. The brand secured shelf space in Holland & Barrett and dm Drogerie Markt ahead of a summer launch.",
-      "image": "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=900&h=500&fit=crop&auto=format",
-      "source_url": "https://www.theguardian.com/sport/2026/apr/djokovic-nd-nutrition-uk-germany-expansion",
-      "source_name": "The Guardian"
+      "headline": "Carlos Alcaraz Backs Spanish Nutrition Brand Fuerza in Seed Round",
+      "body": "World number one Carlos Alcaraz has invested an undisclosed seed amount in Fuerza, a Valencia-based sports nutrition brand building recovery products around Mediterranean diet science. Alcaraz joins co-founder and former Olympic swimmer Mireia Belmonte on Fuerza's advisory board. The brand ships to 12 European countries and recorded €3.2M in revenue in its first year of trading.",
+      "image": "https://images.unsplash.com/photo-1531315630201-bb15abeb1653?w=900&h=500&fit=crop&auto=format",
+      "source_url": "https://www.espn.com/tennis/story/alcaraz-fuerza-nutrition-seed-investment-spain-2026",
+      "source_name": "ESPN"
     }
   ],
   "tips": [
     {
-      "headline": "Hire Your Operator Before You Need One",
-      "body": "The moment your brand has traction, you need a CEO or COO who isn't you. Athlete founders who wait until chaos hits lose 12–18 months of runway finding and onboarding the right person."
+      "headline": "Validate in Your Home Market First",
+      "body": "Before you expand a product internationally, prove it in the one market where your name has the most pull. Your home country is your cheapest and highest-converting distribution channel."
     },
     {
-      "headline": "Structure Sponsorships as Equity, Not Cash",
-      "body": "When a brand wants to pay for your name, negotiate for equity instead of a flat fee. Three equity positions in growing brands outlast any single sponsorship cheque."
+      "headline": "Test Products Before You Back Them",
+      "body": "If you can use the product yourself — in training, recovery, travel — do it before you write a cheque. Haaland deploys portfolio products in his own training load. That due diligence is irreplaceable."
     },
     {
-      "headline": "Your Playing Schedule Is a Capital Advantage",
-      "body": "You are still in the spotlight. Use competition weeks to schedule investor meetings — your visibility drives deal flow that founders without your profile cannot access."
+      "headline": "Set a Hard Floor for Your Equity Stake",
+      "body": "Model dilution before you sign. Three standard funding rounds can take your 40% founding stake to 18%. Know your floor — the minimum ownership that makes the exit worthwhile — before you start fundraising."
     },
     {
-      "headline": "Build IP You Own, Not Just Access",
-      "body": "Licensing your name is passive. Building the brand yourself — even at lower initial revenue — compounds. Piqué didn't license Kings League to someone else. He owns the format."
+      "headline": "Deploy Capital During Season Breaks",
+      "body": "Pre-season windows and international breaks are when you should be doing due diligence, not just resting. Build your investment pipeline when your competitive schedule is lightest."
     },
     {
-      "headline": "Run Your Business Like a Pre-Season Camp",
-      "body": "Set a 90-day sprint at the start of each quarter: one clear goal, measurable outputs, weekly check-ins with your operator. Athletes already know how to peak on a schedule — apply it."
+      "headline": "Ask for Cohorts, CAC, and Churn First",
+      "body": "Founders pitch vision. You need data. Before any meeting, request a one-page with 6-month retention, customer acquisition cost, and churn rate. If they can't produce it, that's your answer."
     },
     {
-      "headline": "Understand Your Cap Table Before You Sign",
-      "body": "Know your dilution cliff. If your company raises three rounds at standard dilution, your 40% stake can become 18%. Model it before you pitch, not after you close."
+      "headline": "Build Your Board Before You Need to Defend One",
+      "body": "Every athlete founder needs at least one board member who has run a company at scale. Your Series B investor will ask who's in the room — and 'my agent' is not the right answer."
     },
     {
-      "headline": "Pick One Category and Go Deep First",
-      "body": "The athlete founders who spread across five sectors in year one rarely dominate any. Pick the space closest to your lived experience — nutrition, recovery, performance tech — and own it before you expand."
+      "headline": "Your Media Footprint Is a Balance Sheet Item",
+      "body": "Every major interview, documentary, and branded post compounds your brand equity. Track your media value the way you track revenue — athletes who ignore it negotiate consistently worse commercial deals."
     }
   ],
   "stats": {
     "figures": [
       {
-        "num": "8.3M",
-        "label": "Concurrent Twitch viewers for Kings World Cup 2026 — largest live sports stream in platform history"
+        "num": "€90M",
+        "label": "Annualised ARR of Verstappen's Real F1 sim platform at 500K paying subscribers — most valuable single athlete-owned digital product in motorsport"
       },
       {
-        "num": "$600M",
-        "label": "Valuation at which Becle acquired majority of Proper No. Twelve — McGregor's whiskey exit benchmark"
+        "num": "€75M",
+        "label": "Post-money valuation of KDB Studios (Kevin De Bruyne) after €20M Series A led by Mediawan"
       },
       {
-        "num": "€40M",
-        "label": "Kings League sponsorship revenue in Q1 2026 alone — Puma, Spotify, Neon as anchor partners"
+        "num": "€50M",
+        "label": "Viking Capital AUM — Erling Haaland's Scandinavian health and climate tech fund, launched January 2026"
       }
     ],
-    "sectors": ["Sports Media & Streaming", "Performance Nutrition", "Sports Technology", "Spirits & Beverage", "Esports & Creator Economy"]
+    "sectors": ["Health & Performance Tech", "Sports Media & Content", "Mobility & Climate", "Streetwear & Consumer", "Sim-Racing & Digital Sport"]
   },
   "investments": [
     {
-      "investor": "Virgil van Dijk",
-      "headline": "Leads Seed Round in Dutch Recovery Tech Startup RecovR",
-      "amount": "€3M",
-      "body": "Virgil van Dijk has led a €3M seed round in RecovR, an Amsterdam-based platform that combines cryotherapy protocol management with sleep tracking for professional sports teams. Van Dijk, who suffered a career-threatening ACL injury in 2020, said recovery science is the single most underinvested area in elite sport. RecovR has signed pilot contracts with three Eredivisie clubs.",
+      "investor": "Cristiano Ronaldo — CR7 Holdings",
+      "headline": "Backs Portuguese AI Football Education Platform EduKick",
+      "amount": "€8M",
+      "body": "Cristiano Ronaldo, through his CR7 Holdings vehicle, has co-invested €8M in EduKick, a Lisbon-founded platform delivering AI-powered coaching curricula to football academies across Portugal, Spain, and Brazil. EduKick uses video analysis and LLM-generated session plans to give amateur coaches access to professional training methodology. The platform has onboarded 2,200 academies since its 2024 launch.",
       "sport": "Football",
+      "round": "Series A"
+    },
+    {
+      "investor": "Alistair Brownlee",
+      "headline": "Leads Seed Round in UK Endurance Recovery Platform Seren",
+      "amount": "£2.5M",
+      "body": "British triathlete and double Olympic champion Alistair Brownlee has led a £2.5M seed round in Seren, a Cardiff-based platform combining sleep tracking, HRV monitoring, and personalised recovery programming for endurance athletes. Brownlee, who has spoken openly about over-training during his competitive career, said Seren's protocol prevents the burnout cycle that ends amateur athletes' careers prematurely. Seren has 12,000 active users.",
+      "sport": "Triathlon",
       "round": "Seed"
     },
     {
-      "investor": "Luka Modrić",
-      "headline": "Backs Croatian Tourism Platform Adriatic.io Series A",
-      "amount": "€5M",
-      "body": "Luka Modrić has joined the Series A round for Adriatic.io, a Zagreb-founded platform digitising boutique hotel and villa bookings across Croatia, Slovenia, and Montenegro. The round totals €5M and is led by Flashpoint VC. Modrić, who holds a personal stake in Croatian coastal property, cited the country's under-digitised tourism infrastructure as the core opportunity.",
+      "investor": "Vivianne Miedema",
+      "headline": "Invests in Dutch Sports Mental Health Platform Mindset",
+      "amount": "€3M",
+      "body": "Dutch international and Arsenal striker Vivianne Miedema has backed Mindset, an Amsterdam-based platform delivering sports psychology and cognitive performance tools to professional football clubs. Miedema, among the first elite athletes to speak publicly about burnout, joined as a brand ambassador and strategic investor. Mindset has signed contracts with 14 clubs across the Eredivisie and the Women's Super League.",
       "sport": "Football",
-      "round": "Series A"
-    },
-    {
-      "investor": "Eliud Kipchoge — KIP Foundation",
-      "headline": "Invests in Kenyan AgriTech Platform FarmDrive",
-      "amount": "$2M",
-      "body": "Marathon world record holder Eliud Kipchoge, through his KIP Foundation, has made a $2M strategic investment in FarmDrive, a Nairobi-based fintech providing smallholder farmers with credit scoring and micro-loans. Kipchoge has long linked elite athletic performance to nutrition access in East Africa. The investment aligns his foundation's public health mission with a scalable financial infrastructure play.",
-      "sport": "Track & Field",
-      "round": "Series A"
+      "round": "Seed"
     }
   ]
 }
