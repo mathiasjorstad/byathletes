@@ -20,67 +20,6 @@
     "source_name": "The Guardian",
     "chips": ["Football", "Health Technology", "Climate Tech", "Viking Capital", "€50M AUM"]
   },
-  "side_stories": [
-    {
-      "tag": "Football",
-      "headline": "Thierry Henry Leads €15M Series A in European Scouting Platform Pitch",
-      "body": "Arsenal and France legend Thierry Henry has co-led a €15M Series A in Pitch, a Paris-based platform connecting academies, agents, and scouts across Europe's top five leagues. Henry, who has spent years in youth development with Monaco and the French national team, joined as a board observer. Pitch processes 40,000 player profiles across 28 countries.",
-      "source_url": "https://www.lequipe.fr/Football/Article/thierry-henry-pitch-sports-platform-series-a/1345678"
-    },
-    {
-      "tag": "Formula 1",
-      "headline": "Carlos Sainz Takes Stake in F1 Telemetry Startup Apex Analytics",
-      "body": "Carlos Sainz, in his first season with Williams F1, has taken a strategic equity stake in Apex Analytics, a Madrid-founded platform applying Formula 1 telemetry methodology to commercial fleet optimisation. Sainz joins Apex's advisory board alongside ex-Ferrari chief engineer Enrico Cardile. The company has signed contracts with three European logistics groups.",
-      "source_url": "https://www.motorsport.com/f1/news/sainz-apex-analytics-investment-fleet-telemetry/13578901/"
-    },
-    {
-      "tag": "Opinion",
-      "tag_style": "blue",
-      "headline": "The Athlete Who Waits Until Retirement to Invest Will Always Be Five Years Behind",
-      "body": "The most valuable window for athlete deal flow is the three years before retirement — not after. Your name, your access, and your network peak while you're still competing. Every athlete who launched a fund the day they stopped playing left compounding time on the table.",
-      "source_url": ""
-    },
-    {
-      "tag": "Cycling",
-      "headline": "Wout van Aert Backs Belgian E-Bike Platform Velio in €4M Seed",
-      "body": "Belgian cycling superstar Wout van Aert has joined a €4M seed round for Velio, a Ghent-based e-bike subscription platform targeting urban commuters across the Benelux. Van Aert, a three-time Tour de France green jersey winner, called urban mobility the natural intersection between elite cycling and everyday transport. Velio has 8,000 active subscribers.",
-      "source_url": "https://www.sporza.be/nl/2026/04/wout-van-aert-velio-ebike-seed-round/"
-    }
-  ],
-  "roundup": [
-    {
-      "tag": "Football",
-      "headline": "Kevin De Bruyne's KDB Studios Closes €20M Series A at €75M Valuation",
-      "body": "Belgian midfielder Kevin De Bruyne has closed a €20M Series A for KDB Studios, his Antwerp-registered sports documentary and athlete content production company. The round is led by European media group Mediawan and values KDB Studios at €75M. The company has produced four premium sports documentaries distributed on Prime Video and DAZN since 2024, with a fifth — on the Belgium golden generation — set for release in June 2026.",
-      "image": "https://images.unsplash.com/photo-1574926054530-a1e7e42c6db1?w=900&h=500&fit=crop&auto=format",
-      "source_url": "https://www.theguardian.com/sport/2026/apr/kevin-de-bruyne-kdb-studios-series-a-mediawan",
-      "source_name": "The Guardian"
-    },
-    {
-      "tag": "Formula 1",
-      "headline": "Max Verstappen's Real F1 Sim Platform Crosses 500K Paying Subscribers",
-      "body": "Max Verstappen's Real F1 — a subscription sim-racing platform co-developed with Red Bull's engineering division — has crossed 500,000 paying subscribers at €14.99 per month, annualising at €90M ARR. The platform delivers AI-generated circuit coaching built from Verstappen's actual onboard telemetry data. Red Bull holds a 25% equity stake in the venture. Real F1 launched in November 2024.",
-      "image": "https://images.unsplash.com/photo-1498887960847-2a5e46312788?w=900&h=500&fit=crop&auto=format",
-      "source_url": "https://www.motorsport.com/f1/news/verstappen-real-f1-sim-racing-500k-subscribers-arr/13601234/",
-      "source_name": "Motorsport.com"
-    },
-    {
-      "tag": "MMA",
-      "headline": "Israel Adesanya Launches Last Stylebender Streetwear Across Europe",
-      "body": "UFC Middleweight legend Israel Adesanya has launched Last Stylebender, a Lagos-and-Auckland co-designed streetwear label, across European markets in April 2026. The brand blends West African textile traditions with MMA aesthetic culture and has secured stockists in 60 stores across the UK, France, and the Netherlands. Adesanya holds full equity and has turned down acquisition approaches from two major European sportswear groups.",
-      "image": "https://images.unsplash.com/photo-1567515004624-219c11d31f2e?w=900&h=500&fit=crop&auto=format",
-      "source_url": "https://www.bbc.com/sport/mixed-martial-arts/articles/adesanya-last-stylebender-europe-streetwear-launch",
-      "source_name": "BBC Sport"
-    },
-    {
-      "tag": "Tennis",
-      "headline": "Carlos Alcaraz Backs Spanish Nutrition Brand Fuerza in Seed Round",
-      "body": "World number one Carlos Alcaraz has invested an undisclosed seed amount in Fuerza, a Valencia-based sports nutrition brand building recovery products around Mediterranean diet science. Alcaraz joins co-founder and former Olympic swimmer Mireia Belmonte on Fuerza's advisory board. The brand ships to 12 European countries and recorded €3.2M in revenue in its first year of trading.",
-      "image": "https://images.unsplash.com/photo-1531315630201-bb15abeb1653?w=900&h=500&fit=crop&auto=format",
-      "source_url": "https://www.espn.com/tennis/story/alcaraz-fuerza-nutrition-seed-investment-spain-2026",
-      "source_name": "ESPN"
-    }
-  ],
   "tips": [
     {
       "headline": "Validate in Your Home Market First",
