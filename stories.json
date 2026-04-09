@@ -1,96 +1,25 @@
 {
-  "issue": 7,
+  "issue": 8,
   "date": "April 9, 2026",
   "cover_story": {
-    "tag": "Athlete Spotlight",
-    "headline": "Mbappé's €45M Content Empire Is Rewriting Football Media",
-    "dek": "France's most recognisable athlete has built a streaming-first production house that just signed its first major global distribution deal — and football clubs are already queuing to licence it.",
-    "author": "Camille Vernet",
+    "tag": "Investment Move",
+    "headline": "The World Cup Winner Who Became a VC",
+    "dek": "Mario Götze has 70+ startup bets, two unicorns, and a portfolio built entirely while still playing football.",
+    "author": "ByAthletes Editorial",
     "body": [
-      "Kylian Mbappé is 27 years old, plays for Real Madrid, and remains the most commercially powerful footballer on the planet. Since signing with Madrid in 2024, he has spent equal energy building Numéro 10 Studios, a Paris-registered sports media company that produces documentary series, short-form football content, and behind-the-scenes access formats for streaming platforms. Numéro 10 is not a vanity project — it has a full-time team of 34 and a library of 180 hours of exclusive content.",
-      "In March 2026, Numéro 10 Studios closed a €45M Series A led by Canal+ Ventures and Vivendi Sport, at a €160M post-money valuation. The round also included backing from DAZN and beIN Sports. The company generates revenue across three streams: a direct B2B licensing model sold to 22 football clubs (€8M ARR), a co-production arrangement with Amazon Prime Video France (three series commissioned), and a growing subscription tier on its own platform with 620,000 paying subscribers at €8.99 per month.",
-      "Numéro 10 is targeting €25M ARR by end of 2026, driven by two new Canal+ commissions and an expansion into LaLiga club partnerships. Mbappé has told investors he views the company as his post-playing career platform — a media infrastructure asset that operates independently of his playing contract and grows regardless of where he moves next."
+      "Mario Götze scored the goal that won Germany the 2014 World Cup. He also, quietly, built one of the most serious angel investing operations in professional football. Through Companion M — his personal investment vehicle — Götze has backed more than 70 startups at pre-seed and seed stage, writing €25,000–€50,000 tickets into B2B SaaS, software infrastructure, cybersecurity, and health tech. Two of those bets became unicorns in 2025: Danish fintech Flatpay and German AI startup Parloa.",
+      "Companion M is not a solo hobby. Götze runs a small team that handles deal flow, due diligence, and portfolio support. As a limited partner, he has backed more than 20 VC funds on both sides of the Atlantic — including 20VC, Cherry Ventures, EQT Ventures, and Planet A. He schedules investor calls before and after training, and aligns meetings to weeks without away fixtures. The infrastructure is built to survive a football calendar.",
+      "The thing that makes Götze's model worth studying is the timing. He did not wait for retirement to figure out where his money should go. He built the knowledge, the network, and the portfolio during his career — so when football ends, the investment operation is already running. That is the window most athletes miss entirely."
     ],
-    "quote": "Football creates the most compelling human stories in sport. The clubs have the players. We have the formats, the distribution, and the trust of the athletes. That's the edge.",
-    "quote_author": "Kylian Mbappé, Founder & Chairman, Numéro 10 Studios",
-    "big_stat": "€160M",
-    "stat_label": "Numéro 10 Studios post-money valuation — Series A, March 2026",
-    "image": "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=900&h=600&fit=crop&auto=format",
-    "source_url": "https://www.lequipe.fr/Football/Article/kylian-mbappe-numero-10-studios-series-a-canal-plus-vivendi/2026/03/28/1398742",
-    "source_name": "L'Équipe",
-    "chips": ["Football", "Sports Media", "€160M Valuation", "Canal+ Ventures", "620K Subscribers"]
+    "quote": "I only agree to invest if the startup and its founders check all the boxes.",
+    "quote_author": "Mario Götze, Founder, Companion M",
+    "big_stat": "70+",
+    "stat_label": "Startups in Götze's Companion M portfolio — 2 became unicorns in 2025",
+    "image": "",
+    "source_url": "https://techcrunch.com/2026/01/06/how-world-cup-champion-mario-gotze-built-a-parallel-career-as-an-angel-investor/",
+    "source_name": "TechCrunch",
+    "chips": ["Football", "Angel Investing", "B2B SaaS", "Companion M", "70+ Portfolio"]
   },
-  "tips": [
-    {
-      "headline": "Structure Your IP Before You Sign Anything",
-      "body": "Every piece of content you create — footage, formats, concepts — should sit inside a legal entity you own before you licence it to a third party. Mbappé's studio controls its own IP catalogue outright. That's why the valuation is €160M and not a single endorsement fee."
-    },
-    {
-      "headline": "B2B Revenue Protects You When B2C Stalls",
-      "body": "Club licensing deals gave Numéro 10 a predictable €8M ARR before they had a single paying subscriber. If you're building a consumer product, design a parallel enterprise channel — it funds the operation while the consumer side scales."
-    },
-    {
-      "headline": "Pick Co-investors Who Are Also Distribution Partners",
-      "body": "Canal+ and DAZN both invested in and distribute Numéro 10's content. That alignment removes a sales cycle — your investor already has a commercial reason to push your product. Look for this structure in every media or content deal you negotiate."
-    },
-    {
-      "headline": "Hire Operators Before You Hire Creatives",
-      "body": "The first ten hires at a sports media company should be a CEO, a head of production, a head of distribution, and a general counsel — not content creators. Creatives are abundant. Operators who can close distribution deals are rare."
-    },
-    {
-      "headline": "Your Playing Career Is a Marketing Budget",
-      "body": "Every press conference, tournament, and viral moment compounds your platform's organic reach at zero marginal cost. Build the business during the season so it captures that attention while it peaks — not three years after you retire."
-    },
-    {
-      "headline": "Set Valuation Anchors Early With Comparable Exits",
-      "body": "Before your first investor meeting, research three exits in your space — what they sold for, at what ARR multiple, and who bought them. Series A investors will anchor low if you don't come in with your own comps."
-    },
-    {
-      "headline": "Separate Your Brand From Your Business Entity",
-      "body": "Your name is not your company. Register the trademark separately, license it to the operating company at market rate, and keep renewal rights under your personal holding structure. This protects your brand equity if the operating company ever faces litigation or insolvency."
-    }
-  ],
-  "stats": {
-    "figures": [
-      {
-        "num": "€160M",
-        "label": "Post-money valuation of Numéro 10 Studios (Mbappé) after €45M Series A led by Canal+ Ventures — March 2026"
-      },
-      {
-        "num": "€38M",
-        "label": "Annual revenue of Pogačar Ventures cycling performance division — fastest-growing European athlete wellness brand in 2026"
-      },
-      {
-        "num": "2.4M",
-        "label": "Combined paying subscribers across European athlete-owned digital media platforms — up 60% year-on-year"
-      }
-    ],
-    "sectors": ["Sports Media & Content", "Health & Performance Tech", "Esports & Gaming", "Mobility & Climate Tech", "Athlete Wellness & Recovery"]
-  },
-  "investments": [
-    {
-      "investor": "Tadej Pogačar — Pogačar Ventures",
-      "headline": "Backs Belgian AI Cycling Coaching Platform VeloMind",
-      "amount": "€5M",
-      "body": "Two-time Tour de France champion Tadej Pogačar has led a €5M seed round in VeloMind, a Brussels-based platform using machine learning to generate personalised training programmes for amateur cyclists based on power output, recovery data, and race history. Pogačar's team UAE Team Emirates uses an internal version of the platform for load management. VeloMind has 85,000 registered athletes across Belgium, the Netherlands, and Slovenia.",
-      "sport": "Cycling",
-      "round": "Seed"
-    },
-    {
-      "investor": "Carlos Sainz",
-      "headline": "Invests in Madrid EV Performance Startup Voltia Race",
-      "amount": "€4M",
-      "body": "Formula 1 driver Carlos Sainz has invested €4M in Voltia Race, a Madrid-founded electric vehicle performance company developing lightweight battery systems for motorsport and urban mobility. Sainz joined as a technical advisor and brand ambassador alongside his financial stake. Voltia Race has partnerships with two FIA Formula E teams and plans a commercial road-car application by Q1 2027.",
-      "sport": "Formula 1",
-      "round": "Series A"
-    },
-    {
-      "investor": "Novak Djokovic — Novak Ventures",
-      "headline": "Leads Round in Serbian Longevity Supplement Brand Elementa",
-      "amount": "€6M",
-      "body": "Serbian tennis champion Novak Djokovic, through his Novak Ventures vehicle, has led a €6M Series A in Elementa, a Belgrade-founded longevity nutrition brand targeting professional athletes and high-performance individuals. Elementa's formulations — built around plant-based proteins, adaptogens, and microbiome-support compounds — are already used by Djokovic's own performance team and four other ATP players. The brand has €3.2M ARR after 18 months on the market.",
-      "sport": "Tennis",
-      "round": "Series A"
-    }
-  ]
+  "side_stories": [],
+  "roundup": []
 }
