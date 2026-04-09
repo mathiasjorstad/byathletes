@@ -1,96 +1,96 @@
 {
-  "issue": 6,
-  "date": "April 8, 2026",
+  "issue": 7,
+  "date": "April 9, 2026",
   "cover_story": {
     "tag": "Athlete Spotlight",
-    "headline": "Erling Haaland Is Building Norway's Boldest Athlete Tech Fund",
-    "dek": "The world's most lethal striker has quietly deployed €50M into Scandinavian health tech and climate infrastructure — and the fund is just getting started.",
-    "author": "Erik Lindström",
+    "headline": "Mbappé's €45M Content Empire Is Rewriting Football Media",
+    "dek": "France's most recognisable athlete has built a streaming-first production house that just signed its first major global distribution deal — and football clubs are already queuing to licence it.",
+    "author": "Camille Vernet",
     "body": [
-      "Erling Haaland is 25 years old, has scored 36 Premier League goals in a single season, and remains the most sought-after centre-forward in world football. He is also, quietly, building one of the most focused athlete investment vehicles in European sport. In January 2026, Haaland formalised what had been a series of personal cheques into a structured early-stage fund: Viking Capital, a Bergen-registered vehicle targeting Scandinavian health technology, climate infrastructure, and AI-enabled performance science.",
-      "Viking Capital has deployed €50M across seven investments since its Q4 2025 inception. Anchored positions include BioMark, an Oslo-based continuous glucose monitoring platform for elite athletes (€8M Series A); Vayu, a Stockholm climate fintech that converts athlete endorsement fees into renewable energy certificates (€6M seed); and PulseOS, a Copenhagen AI platform for team load management used by four Bundesliga academies. A two-person investment team manages the fund alongside Haaland's family office. Total portfolio AUM stands at €50M with a €100M hard cap target.",
-      "Viking Capital is targeting first close at €100M by Q3 2026, with active outreach to three Nordic sovereign wealth funds and two Premier League co-investors. Haaland has told LPs he intends to run the fund throughout his playing career — using his own training load, nutrition protocols, and recovery data as real-world test environments for every portfolio company before writing a cheque."
+      "Kylian Mbappé is 27 years old, plays for Real Madrid, and remains the most commercially powerful footballer on the planet. Since signing with Madrid in 2024, he has spent equal energy building Numéro 10 Studios, a Paris-registered sports media company that produces documentary series, short-form football content, and behind-the-scenes access formats for streaming platforms. Numéro 10 is not a vanity project — it has a full-time team of 34 and a library of 180 hours of exclusive content.",
+      "In March 2026, Numéro 10 Studios closed a €45M Series A led by Canal+ Ventures and Vivendi Sport, at a €160M post-money valuation. The round also included backing from DAZN and beIN Sports. The company generates revenue across three streams: a direct B2B licensing model sold to 22 football clubs (€8M ARR), a co-production arrangement with Amazon Prime Video France (three series commissioned), and a growing subscription tier on its own platform with 620,000 paying subscribers at €8.99 per month.",
+      "Numéro 10 is targeting €25M ARR by end of 2026, driven by two new Canal+ commissions and an expansion into LaLiga club partnerships. Mbappé has told investors he views the company as his post-playing career platform — a media infrastructure asset that operates independently of his playing contract and grows regardless of where he moves next."
     ],
-    "quote": "I test every product we invest in during the season. If it doesn't change something measurable in training within 30 days, we don't write the cheque. Full stop.",
-    "quote_author": "Erling Haaland, Founder, Viking Capital",
-    "big_stat": "€50M",
-    "stat_label": "Viking Capital AUM — launched January 2026",
-    "image": "Håland.jpg",
-    "source_url": "https://www.theguardian.com/sport/2026/apr/erling-haaland-viking-capital-fund-launch-norway-health-tech",
-    "source_name": "The Guardian",
-    "chips": ["Football", "Health Technology", "Climate Tech", "Viking Capital", "€50M AUM"]
+    "quote": "Football creates the most compelling human stories in sport. The clubs have the players. We have the formats, the distribution, and the trust of the athletes. That's the edge.",
+    "quote_author": "Kylian Mbappé, Founder & Chairman, Numéro 10 Studios",
+    "big_stat": "€160M",
+    "stat_label": "Numéro 10 Studios post-money valuation — Series A, March 2026",
+    "image": "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=900&h=600&fit=crop&auto=format",
+    "source_url": "https://www.lequipe.fr/Football/Article/kylian-mbappe-numero-10-studios-series-a-canal-plus-vivendi/2026/03/28/1398742",
+    "source_name": "L'Équipe",
+    "chips": ["Football", "Sports Media", "€160M Valuation", "Canal+ Ventures", "620K Subscribers"]
   },
   "tips": [
     {
-      "headline": "Validate in Your Home Market First",
-      "body": "Before you expand a product internationally, prove it in the one market where your name has the most pull. Your home country is your cheapest and highest-converting distribution channel."
+      "headline": "Structure Your IP Before You Sign Anything",
+      "body": "Every piece of content you create — footage, formats, concepts — should sit inside a legal entity you own before you licence it to a third party. Mbappé's studio controls its own IP catalogue outright. That's why the valuation is €160M and not a single endorsement fee."
     },
     {
-      "headline": "Test Products Before You Back Them",
-      "body": "If you can use the product yourself — in training, recovery, travel — do it before you write a cheque. Haaland deploys portfolio products in his own training load. That due diligence is irreplaceable."
+      "headline": "B2B Revenue Protects You When B2C Stalls",
+      "body": "Club licensing deals gave Numéro 10 a predictable €8M ARR before they had a single paying subscriber. If you're building a consumer product, design a parallel enterprise channel — it funds the operation while the consumer side scales."
     },
     {
-      "headline": "Set a Hard Floor for Your Equity Stake",
-      "body": "Model dilution before you sign. Three standard funding rounds can take your 40% founding stake to 18%. Know your floor — the minimum ownership that makes the exit worthwhile — before you start fundraising."
+      "headline": "Pick Co-investors Who Are Also Distribution Partners",
+      "body": "Canal+ and DAZN both invested in and distribute Numéro 10's content. That alignment removes a sales cycle — your investor already has a commercial reason to push your product. Look for this structure in every media or content deal you negotiate."
     },
     {
-      "headline": "Deploy Capital During Season Breaks",
-      "body": "Pre-season windows and international breaks are when you should be doing due diligence, not just resting. Build your investment pipeline when your competitive schedule is lightest."
+      "headline": "Hire Operators Before You Hire Creatives",
+      "body": "The first ten hires at a sports media company should be a CEO, a head of production, a head of distribution, and a general counsel — not content creators. Creatives are abundant. Operators who can close distribution deals are rare."
     },
     {
-      "headline": "Ask for Cohorts, CAC, and Churn First",
-      "body": "Founders pitch vision. You need data. Before any meeting, request a one-page with 6-month retention, customer acquisition cost, and churn rate. If they can't produce it, that's your answer."
+      "headline": "Your Playing Career Is a Marketing Budget",
+      "body": "Every press conference, tournament, and viral moment compounds your platform's organic reach at zero marginal cost. Build the business during the season so it captures that attention while it peaks — not three years after you retire."
     },
     {
-      "headline": "Build Your Board Before You Need to Defend One",
-      "body": "Every athlete founder needs at least one board member who has run a company at scale. Your Series B investor will ask who's in the room — and 'my agent' is not the right answer."
+      "headline": "Set Valuation Anchors Early With Comparable Exits",
+      "body": "Before your first investor meeting, research three exits in your space — what they sold for, at what ARR multiple, and who bought them. Series A investors will anchor low if you don't come in with your own comps."
     },
     {
-      "headline": "Your Media Footprint Is a Balance Sheet Item",
-      "body": "Every major interview, documentary, and branded post compounds your brand equity. Track your media value the way you track revenue — athletes who ignore it negotiate consistently worse commercial deals."
+      "headline": "Separate Your Brand From Your Business Entity",
+      "body": "Your name is not your company. Register the trademark separately, license it to the operating company at market rate, and keep renewal rights under your personal holding structure. This protects your brand equity if the operating company ever faces litigation or insolvency."
     }
   ],
   "stats": {
     "figures": [
       {
-        "num": "€90M",
-        "label": "Annualised ARR of Verstappen's Real F1 sim platform at 500K paying subscribers — most valuable single athlete-owned digital product in motorsport"
+        "num": "€160M",
+        "label": "Post-money valuation of Numéro 10 Studios (Mbappé) after €45M Series A led by Canal+ Ventures — March 2026"
       },
       {
-        "num": "€75M",
-        "label": "Post-money valuation of KDB Studios (Kevin De Bruyne) after €20M Series A led by Mediawan"
+        "num": "€38M",
+        "label": "Annual revenue of Pogačar Ventures cycling performance division — fastest-growing European athlete wellness brand in 2026"
       },
       {
-        "num": "€50M",
-        "label": "Viking Capital AUM — Erling Haaland's Scandinavian health and climate tech fund, launched January 2026"
+        "num": "2.4M",
+        "label": "Combined paying subscribers across European athlete-owned digital media platforms — up 60% year-on-year"
       }
     ],
-    "sectors": ["Health & Performance Tech", "Sports Media & Content", "Mobility & Climate", "Streetwear & Consumer", "Sim-Racing & Digital Sport"]
+    "sectors": ["Sports Media & Content", "Health & Performance Tech", "Esports & Gaming", "Mobility & Climate Tech", "Athlete Wellness & Recovery"]
   },
   "investments": [
     {
-      "investor": "Cristiano Ronaldo — CR7 Holdings",
-      "headline": "Backs Portuguese AI Football Education Platform EduKick",
-      "amount": "€8M",
-      "body": "Cristiano Ronaldo, through his CR7 Holdings vehicle, has co-invested €8M in EduKick, a Lisbon-founded platform delivering AI-powered coaching curricula to football academies across Portugal, Spain, and Brazil. EduKick uses video analysis and LLM-generated session plans to give amateur coaches access to professional training methodology. The platform has onboarded 2,200 academies since its 2024 launch.",
-      "sport": "Football",
+      "investor": "Tadej Pogačar — Pogačar Ventures",
+      "headline": "Backs Belgian AI Cycling Coaching Platform VeloMind",
+      "amount": "€5M",
+      "body": "Two-time Tour de France champion Tadej Pogačar has led a €5M seed round in VeloMind, a Brussels-based platform using machine learning to generate personalised training programmes for amateur cyclists based on power output, recovery data, and race history. Pogačar's team UAE Team Emirates uses an internal version of the platform for load management. VeloMind has 85,000 registered athletes across Belgium, the Netherlands, and Slovenia.",
+      "sport": "Cycling",
+      "round": "Seed"
+    },
+    {
+      "investor": "Carlos Sainz",
+      "headline": "Invests in Madrid EV Performance Startup Voltia Race",
+      "amount": "€4M",
+      "body": "Formula 1 driver Carlos Sainz has invested €4M in Voltia Race, a Madrid-founded electric vehicle performance company developing lightweight battery systems for motorsport and urban mobility. Sainz joined as a technical advisor and brand ambassador alongside his financial stake. Voltia Race has partnerships with two FIA Formula E teams and plans a commercial road-car application by Q1 2027.",
+      "sport": "Formula 1",
       "round": "Series A"
     },
     {
-      "investor": "Alistair Brownlee",
-      "headline": "Leads Seed Round in UK Endurance Recovery Platform Seren",
-      "amount": "£2.5M",
-      "body": "British triathlete and double Olympic champion Alistair Brownlee has led a £2.5M seed round in Seren, a Cardiff-based platform combining sleep tracking, HRV monitoring, and personalised recovery programming for endurance athletes. Brownlee, who has spoken openly about over-training during his competitive career, said Seren's protocol prevents the burnout cycle that ends amateur athletes' careers prematurely. Seren has 12,000 active users.",
-      "sport": "Triathlon",
-      "round": "Seed"
-    },
-    {
-      "investor": "Vivianne Miedema",
-      "headline": "Invests in Dutch Sports Mental Health Platform Mindset",
-      "amount": "€3M",
-      "body": "Dutch international and Arsenal striker Vivianne Miedema has backed Mindset, an Amsterdam-based platform delivering sports psychology and cognitive performance tools to professional football clubs. Miedema, among the first elite athletes to speak publicly about burnout, joined as a brand ambassador and strategic investor. Mindset has signed contracts with 14 clubs across the Eredivisie and the Women's Super League.",
-      "sport": "Football",
-      "round": "Seed"
+      "investor": "Novak Djokovic — Novak Ventures",
+      "headline": "Leads Round in Serbian Longevity Supplement Brand Elementa",
+      "amount": "€6M",
+      "body": "Serbian tennis champion Novak Djokovic, through his Novak Ventures vehicle, has led a €6M Series A in Elementa, a Belgrade-founded longevity nutrition brand targeting professional athletes and high-performance individuals. Elementa's formulations — built around plant-based proteins, adaptogens, and microbiome-support compounds — are already used by Djokovic's own performance team and four other ATP players. The brand has €3.2M ARR after 18 months on the market.",
+      "sport": "Tennis",
+      "round": "Series A"
     }
   ]
 }
