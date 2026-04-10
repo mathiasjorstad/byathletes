@@ -1,5 +1,23 @@
 [
   {
+    "issue": 9,
+    "date": "April 10, 2026",
+    "tag": "Athlete Spotlight",
+    "headline": "Mbappé Is Building a Business Empire at 27",
+    "dek": "Kylian Mbappé owns a football club, runs a film production company, and controls his own image rights — all while playing for Real Madrid.",
+    "image": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=900&h=600&fit=crop&auto=format",
+    "page": "issue-9-cover.html"
+  },
+  {
+    "issue": 8,
+    "date": "April 9, 2026",
+    "tag": "Investment Move",
+    "headline": "The World Cup Winner Who Became a VC",
+    "dek": "Mario Götze has 70+ startup bets, two unicorns, and a portfolio built entirely while still playing football.",
+    "image": "",
+    "page": "issue-8-cover.html"
+  },
+  {
     "issue": 5,
     "date": "April 7, 2026",
     "tag": "Football",

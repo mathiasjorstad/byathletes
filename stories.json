@@ -1,25 +1,89 @@
 {
-  "issue": 8,
-  "date": "April 9, 2026",
+  "issue": 9,
+  "date": "April 10, 2026",
   "cover_story": {
-    "tag": "Investment Move",
-    "headline": "The World Cup Winner Who Became a VC",
-    "dek": "Mario Götze has 70+ startup bets, two unicorns, and a portfolio built entirely while still playing football.",
-    "author": "ByAthletes Editorial",
+    "tag": "Athlete Spotlight",
+    "headline": "Mbappé Is Building a Business Empire at 27",
+    "dek": "Kylian Mbappé owns a football club, runs a film production company, and controls his own image rights — all while playing for Real Madrid.",
+    "author": "Léa Fontaine",
     "body": [
-      "Mario Götze scored the goal that won Germany the 2014 World Cup. He also, quietly, built one of the most serious angel investing operations in professional football. Through Companion M — his personal investment vehicle — Götze has backed more than 70 startups at pre-seed and seed stage, writing €25,000–€50,000 tickets into B2B SaaS, software infrastructure, cybersecurity, and health tech. Two of those bets became unicorns in 2025: Danish fintech Flatpay and German AI startup Parloa.",
-      "Companion M is not a solo hobby. Götze runs a small team that handles deal flow, due diligence, and portfolio support. As a limited partner, he has backed more than 20 VC funds on both sides of the Atlantic — including 20VC, Cherry Ventures, EQT Ventures, and Planet A. He schedules investor calls before and after training, and aligns meetings to weeks without away fixtures. The infrastructure is built to survive a football calendar.",
-      "The thing that makes Götze's model worth studying is the timing. He did not wait for retirement to figure out where his money should go. He built the knowledge, the network, and the portfolio during his career — so when football ends, the investment operation is already running. That is the window most athletes miss entirely."
+      "Kylian Mbappé is 27, plays for Real Madrid, and is quietly running one of the most structured athlete business operations in Europe. His holding company, Next WSG, coordinates three active ventures: KM Productions (a Paris-based content and film studio), a majority ownership stake in AS Caen — a Ligue 2 club in Normandy he acquired in 2023 for a reported €12M — and a growing equity portfolio of minority positions in European consumer and media tech.",
+      "KM Productions closed its first full production slate in 2025: six projects in development across Canal+ and Netflix Europe, with one documentary already generating €4.2M in licensing revenue. The AS Caen stake has appreciated as the club stabilised its finances and invested in youth infrastructure. Next WSG's broader portfolio is valued at an estimated €65M across 11 assets — managed by a five-person team based in Paris.",
+      "The structural move that made all of this possible came in 2022, when Mbappé renegotiated his PSG contract to retain full control over his commercial image rights — a clause estimated to be worth €30M in additional earnings over the contract period. That decision is now the operating principle behind Next WSG: own the IP, control the distribution, and build income streams that survive after the boots come off."
     ],
-    "quote": "I only agree to invest if the startup and its founders check all the boxes.",
-    "quote_author": "Mario Götze, Founder, Companion M",
-    "big_stat": "70+",
-    "stat_label": "Startups in Götze's Companion M portfolio — 2 became unicorns in 2025",
-    "image": "",
-    "source_url": "https://techcrunch.com/2026/01/06/how-world-cup-champion-mario-gotze-built-a-parallel-career-as-an-angel-investor/",
-    "source_name": "TechCrunch",
-    "chips": ["Football", "Angel Investing", "B2B SaaS", "Companion M", "70+ Portfolio"]
+    "quote": "The money from football funds the infrastructure. The investments are the future. I want to build things that outlast me.",
+    "quote_author": "Kylian Mbappé, Founder, Next WSG",
+    "big_stat": "€65M",
+    "stat_label": "Estimated Next WSG portfolio value across 11 assets — April 2026",
+    "image": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=900&h=600&fit=crop&auto=format",
+    "source_url": "https://www.forbes.com/sites/athletes/2026/04/09/kylian-mbappe-next-wsg-caen-km-productions-business-empire/",
+    "source_name": "Forbes",
+    "chips": ["Football", "Media & Film", "Club Ownership", "Next WSG", "€65M Portfolio"]
   },
+  "tips": [
+    {
+      "headline": "Own Your Image Rights — Non-Negotiable",
+      "body": "Your commercial image is a separate asset from your playing contract. Before signing any deal, have a sports lawyer carve out image rights as a distinct clause you control. Mbappé's 2022 restructure added an estimated €30M — most athletes never even ask for this."
+    },
+    {
+      "headline": "Set Up a Holding Company in Year Two",
+      "body": "A personal holding company lets you invest pre-tax earnings, structure income streams, and cap personal liability. Set it up early — the structure compounds over time. Waiting until retirement means years of uncaptured efficiency."
+    },
+    {
+      "headline": "Club Ownership Is Not Just a Passion Project",
+      "body": "A minority or majority stake in a lower-division club can appreciate significantly if you invest in infrastructure and youth talent. Mbappé's €12M Caen acquisition now generates returns through media rights, academy sales, and brand equity. It is an asset, not a hobby."
+    },
+    {
+      "headline": "Equity Compounds. Endorsements Expire.",
+      "body": "A €500K endorsement cheque is gone in 12 months. A €500K equity stake in a growing company can return €5M in five years. Negotiate equity clauses into brand deals wherever possible — even a 0.5% stake in a rising consumer brand compounds fast."
+    },
+    {
+      "headline": "Build IP, Then License It",
+      "body": "A documentary, a book, or a branded format is IP — it generates licensing revenue long after you stop playing. KM Productions' first slate earned €4.2M in licensing in year one. If you have a story worth telling, start developing it as a commercial asset now."
+    },
+    {
+      "headline": "Separate Playing Income from Investment Capital",
+      "body": "Keep 18 months of living expenses liquid before deploying into longer-term assets. Mixing operational cash with investment capital is the most common financial mistake professional athletes make — and the hardest to recover from."
+    },
+    {
+      "headline": "Your Team Builds Your Empire — Hire Early",
+      "body": "Next WSG runs on a five-person Paris team that handles deal flow, legal, and portfolio operations. You cannot scale an investment operation solo. The earlier you hire a small, trusted team, the earlier your business runs when you are in training or competing."
+    }
+  ],
+  "stats": {
+    "figures": [
+      {"num": "€65M", "label": "Estimated value of Mbappé's Next WSG portfolio across 11 assets, April 2026"},
+      {"num": "€4.2M", "label": "Licensing revenue from KM Productions' first documentary slate in 2025"},
+      {"num": "€30M", "label": "Estimated additional earnings from Mbappé's image rights clause negotiated in 2022"}
+    ],
+    "sectors": ["Media & Film", "Club Ownership", "Image Rights", "Consumer Tech", "Youth Infrastructure"]
+  },
+  "investments": [
+    {
+      "investor": "Fernando Alonso — FA14 Ventures",
+      "headline": "Backs Spanish Performance Nutrition Platform Nutrego",
+      "amount": "€3.2M",
+      "body": "Fernando Alonso's vehicle FA14 Ventures led a €3.2M seed round in Nutrego, a Madrid-based personalised nutrition platform targeting elite and recreational athletes. Nutrego uses biomarker testing and AI to produce weekly supplement and diet protocols. Alonso, who has maintained elite physical performance into his mid-40s, cited longevity science as a core personal investment thesis.",
+      "sport": "Formula 1",
+      "round": "Seed"
+    },
+    {
+      "investor": "Conor McGregor — Proper Twelve Capital",
+      "headline": "Leads Seed Round in Dublin Athlete Fintech Alio",
+      "amount": "$4.5M",
+      "body": "Conor McGregor's investment vehicle Proper Twelve Capital led a $4.5M seed round in Alio, a Dublin fintech platform helping professional athletes manage earnings, tax exposure, and cross-border income. McGregor said Alio solves a problem he faced personally at the start of his UFC career — receiving prize money across five jurisdictions with zero financial infrastructure in place.",
+      "sport": "MMA",
+      "round": "Seed"
+    },
+    {
+      "investor": "Carlos Alcaraz",
+      "headline": "Joins Series A in European Padel Tech Platform Padelia",
+      "amount": "€2M",
+      "body": "ATP world No. 2 Carlos Alcaraz joined a €2M Series A round in Padelia, a Spanish platform connecting padel clubs, coaches, and players across Europe. The company has 180,000 registered users in Spain, Italy, and France. Alcaraz, who grew up playing padel before switching to tennis, is the company's first professional athlete investor and will serve as a brand ambassador.",
+      "sport": "Tennis",
+      "round": "Series A"
+    }
+  ],
   "side_stories": [],
   "roundup": []
 }
