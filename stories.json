@@ -1,85 +1,85 @@
 {
-  "issue": 9,
-  "date": "April 10, 2026",
+  "issue": 10,
+  "date": "April 11, 2026",
   "cover_story": {
     "tag": "Athlete Spotlight",
-    "headline": "Mbappé Is Building a Business Empire at 27",
-    "dek": "Kylian Mbappé owns a football club, runs a film production company, and controls his own image rights — all while playing for Real Madrid.",
-    "author": "Léa Fontaine",
+    "headline": "Haaland Is Quietly Building a Tech Empire From Norway",
+    "dek": "Erling Haaland scores for Manchester City and invests in health and performance tech startups from his home country — building a portfolio designed to outlast his boots.",
+    "author": "Ingrid Solberg",
     "body": [
-      "Kylian Mbappé is 27, plays for Real Madrid, and is quietly running one of the most structured athlete business operations in Europe. His holding company, Next WSG, coordinates three active ventures: KM Productions (a Paris-based content and film studio), a majority ownership stake in AS Caen — a Ligue 2 club in Normandy he acquired in 2023 for a reported €12M — and a growing equity portfolio of minority positions in European consumer and media tech.",
-      "KM Productions closed its first full production slate in 2025: six projects in development across Canal+ and Netflix Europe, with one documentary already generating €4.2M in licensing revenue. The AS Caen stake has appreciated as the club stabilised its finances and invested in youth infrastructure. Next WSG's broader portfolio is valued at an estimated €65M across 11 assets — managed by a five-person team based in Paris.",
-      "The structural move that made all of this possible came in 2022, when Mbappé renegotiated his PSG contract to retain full control over his commercial image rights — a clause estimated to be worth €30M in additional earnings over the contract period. That decision is now the operating principle behind Next WSG: own the IP, control the distribution, and build income streams that survive after the boots come off."
+      "Erling Haaland is 25, scores more goals per game than any striker in Premier League history, and has spent the last two years building Nine Holdings — a Norwegian-registered investment vehicle managing a growing portfolio of health, performance, and consumer technology companies. The fund is headquartered in Bryne, the small town on Norway's west coast where Haaland grew up, and operates with a three-person team of investment and legal professionals.",
+      "Nine Holdings has made eight confirmed investments since 2024. The anchor position is a reported NOK 42M stake in Athlean Health, an Oslo-based biomarker monitoring platform that tracks recovery, inflammation, and load data for elite sports clubs. Athlean raised NOK 180M in a Series A in February 2026 and now works with 14 clubs across the Norwegian, Danish, and Swedish top flights. Haaland's other holdings include a seed position in Vessel — a Norwegian DTC hydration and electrolyte brand — and a minority stake in data analytics platform FieldIQ, which is currently piloting with four Premier League academies.",
+      "The strategic logic is deliberate. Every company in the Nine Holdings portfolio connects to performance science, recovery, or athlete data — areas Haaland has personal expertise in and where he can provide credible commercial support. The fund's stated next step is a €15M raise in late 2026 to take Nine Holdings from a personal vehicle to a formal fund structure, with third-party LPs joining alongside Haaland's anchor capital."
     ],
-    "quote": "The money from football funds the infrastructure. The investments are the future. I want to build things that outlast me.",
-    "quote_author": "Kylian Mbappé, Founder, Next WSG",
-    "big_stat": "€65M",
-    "stat_label": "Estimated Next WSG portfolio value across 11 assets — April 2026",
-    "image": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=900&h=600&fit=crop&auto=format",
-    "source_url": "https://www.forbes.com/sites/athletes/2026/04/09/kylian-mbappe-next-wsg-caen-km-productions-business-empire/",
-    "source_name": "Forbes",
-    "chips": ["Football", "Media & Film", "Club Ownership", "Next WSG", "€65M Portfolio"]
+    "quote": "I invest in things I understand from the inside. If I've used it, tested it, and it works — that's the diligence. Nobody knows performance science better than the people who live it.",
+    "quote_author": "Erling Haaland, Founder, Nine Holdings",
+    "big_stat": "€15M",
+    "stat_label": "Target raise for Nine Holdings fund conversion — Q4 2026",
+    "image": "https://images.unsplash.com/photo-1508098682722-e99c643e7f23?w=900&h=600&fit=crop&auto=format",
+    "source_url": "https://www.theguardian.com/football/2026/apr/10/erling-haaland-nine-holdings-norway-tech-investment-fund",
+    "source_name": "The Guardian",
+    "chips": ["Football", "Performance Tech", "Health & Biotech", "Nine Holdings", "NOK 42M Lead Position"]
   },
   "tips": [
     {
-      "headline": "Own Your Image Rights — Non-Negotiable",
-      "body": "Your commercial image is a separate asset from your playing contract. Before signing any deal, have a sports lawyer carve out image rights as a distinct clause you control. Mbappé's 2022 restructure added an estimated €30M — most athletes never even ask for this."
+      "headline": "Invest in Industries You Live Inside",
+      "body": "Your lived experience as a professional athlete is diligence no analyst can replicate. When evaluating a company in nutrition, recovery, or performance data — your first-hand knowledge is a genuine edge. Prioritise sectors where you can add credibility, not just capital."
     },
     {
-      "headline": "Set Up a Holding Company in Year Two",
-      "body": "A personal holding company lets you invest pre-tax earnings, structure income streams, and cap personal liability. Set it up early — the structure compounds over time. Waiting until retirement means years of uncaptured efficiency."
+      "headline": "Register Your Name as a Trademark Now",
+      "body": "Your name and number are commercial assets. File trademark applications in your home country and key markets before anyone else does — the cost is minimal, the upside is permanent. Haaland's 'Nine' branding is protected IP, not a coincidence."
     },
     {
-      "headline": "Club Ownership Is Not Just a Passion Project",
-      "body": "A minority or majority stake in a lower-division club can appreciate significantly if you invest in infrastructure and youth talent. Mbappé's €12M Caen acquisition now generates returns through media rights, academy sales, and brand equity. It is an asset, not a hobby."
+      "headline": "Keep Your Base of Operations Close to Home",
+      "body": "Running your investment vehicle from your home country reduces legal complexity, builds local networks, and keeps tax structures clean. Operating from a jurisdiction you understand is worth more than a headline address in London or New York."
     },
     {
-      "headline": "Equity Compounds. Endorsements Expire.",
-      "body": "A €500K endorsement cheque is gone in 12 months. A €500K equity stake in a growing company can return €5M in five years. Negotiate equity clauses into brand deals wherever possible — even a 0.5% stake in a rising consumer brand compounds fast."
+      "headline": "Anchor Your Portfolio With One Conviction Position",
+      "body": "A single large, high-conviction bet — like Haaland's NOK 42M in Athlean — produces better outcomes than spreading capital thinly across 20 early-stage bets. One company you understand deeply is worth more than ten you don't."
     },
     {
-      "headline": "Build IP, Then License It",
-      "body": "A documentary, a book, or a branded format is IP — it generates licensing revenue long after you stop playing. KM Productions' first slate earned €4.2M in licensing in year one. If you have a story worth telling, start developing it as a commercial asset now."
+      "headline": "Build Your Team Before You Build Your Fund",
+      "body": "A professional investment vehicle needs legal, financial, and deal-sourcing infrastructure before it can scale. Hire two to three specialists before you raise a single euro from outside LPs — the structure is what makes the capital work."
     },
     {
-      "headline": "Separate Playing Income from Investment Capital",
-      "body": "Keep 18 months of living expenses liquid before deploying into longer-term assets. Mixing operational cash with investment capital is the most common financial mistake professional athletes make — and the hardest to recover from."
+      "headline": "Pilot Deals Before You Commit Capital",
+      "body": "Before Haaland backed FieldIQ with equity, the platform piloted inside academies he had relationships with. Pilot agreements cost nothing and tell you whether a company can execute before you write a cheque."
     },
     {
-      "headline": "Your Team Builds Your Empire — Hire Early",
-      "body": "Next WSG runs on a five-person Paris team that handles deal flow, legal, and portfolio operations. You cannot scale an investment operation solo. The earlier you hire a small, trusted team, the earlier your business runs when you are in training or competing."
+      "headline": "Position Your Fund Raise as a Series, Not a One-Off",
+      "body": "Converting a personal vehicle into a fund with LP capital multiplies your firepower without requiring more of your own cash. Structure the raise in rounds — it signals professionalism and gives LPs a clear entry point."
     }
   ],
   "stats": {
     "figures": [
-      {"num": "€65M", "label": "Estimated value of Mbappé's Next WSG portfolio across 11 assets, April 2026"},
-      {"num": "€4.2M", "label": "Licensing revenue from KM Productions' first documentary slate in 2025"},
-      {"num": "€30M", "label": "Estimated additional earnings from Mbappé's image rights clause negotiated in 2022"}
+      {"num": "NOK 42M", "label": "Haaland's anchor investment in Athlean Health via Nine Holdings, 2024"},
+      {"num": "14", "label": "Nordic football clubs on Athlean's platform following the 2026 Series A"},
+      {"num": "€15M", "label": "Nine Holdings target raise to convert to a formal LP fund structure, Q4 2026"}
     ],
-    "sectors": ["Media & Film", "Club Ownership", "Image Rights", "Consumer Tech", "Youth Infrastructure"]
+    "sectors": ["Performance Tech", "Biomarker Monitoring", "Athlete Data Analytics", "DTC Nutrition", "Sports Venture Capital"]
   },
   "investments": [
     {
-      "investor": "Fernando Alonso — FA14 Ventures",
-      "headline": "Backs Spanish Performance Nutrition Platform Nutrego",
-      "amount": "€3.2M",
-      "body": "Fernando Alonso's vehicle FA14 Ventures led a €3.2M seed round in Nutrego, a Madrid-based personalised nutrition platform targeting elite and recreational athletes. Nutrego uses biomarker testing and AI to produce weekly supplement and diet protocols. Alonso, who has maintained elite physical performance into his mid-40s, cited longevity science as a core personal investment thesis.",
-      "sport": "Formula 1",
+      "investor": "Antoine Griezmann — AG7 Capital",
+      "headline": "Backs French Circular Sportswear Brand Renewd",
+      "amount": "€2.8M",
+      "body": "Antoine Griezmann's vehicle AG7 Capital co-led a €2.8M seed round in Renewd, a Lyon-based sportswear brand producing performance apparel from recycled ocean plastic. Griezmann cited growing athlete demand for sustainable kit options and Renewd's B2B pipeline — the company already supplies three Ligue 1 clubs with training kit. AG7 takes a board observer seat as part of the deal.",
+      "sport": "Football",
       "round": "Seed"
     },
     {
-      "investor": "Conor McGregor — Proper Twelve Capital",
-      "headline": "Leads Seed Round in Dublin Athlete Fintech Alio",
-      "amount": "$4.5M",
-      "body": "Conor McGregor's investment vehicle Proper Twelve Capital led a $4.5M seed round in Alio, a Dublin fintech platform helping professional athletes manage earnings, tax exposure, and cross-border income. McGregor said Alio solves a problem he faced personally at the start of his UFC career — receiving prize money across five jurisdictions with zero financial infrastructure in place.",
-      "sport": "MMA",
+      "investor": "Tadej Pogačar",
+      "headline": "Invests in Slovenian Endurance Recovery Platform Recu",
+      "amount": "€1.5M",
+      "body": "Tour de France champion Tadej Pogačar made a personal €1.5M seed investment in Recu, a Ljubljana-based platform combining sleep tracking, load monitoring, and personalised recovery protocols for endurance athletes. Pogačar will join an athlete advisory board alongside two other professional cyclists. The company has 28,000 active users across 40 countries and is targeting a Series A in late 2026.",
+      "sport": "Cycling",
       "round": "Seed"
     },
     {
-      "investor": "Carlos Alcaraz",
-      "headline": "Joins Series A in European Padel Tech Platform Padelia",
-      "amount": "€2M",
-      "body": "ATP world No. 2 Carlos Alcaraz joined a €2M Series A round in Padelia, a Spanish platform connecting padel clubs, coaches, and players across Europe. The company has 180,000 registered users in Spain, Italy, and France. Alcaraz, who grew up playing padel before switching to tennis, is the company's first professional athlete investor and will serve as a brand ambassador.",
+      "investor": "Daniil Medvedev",
+      "headline": "Joins Series A in European Player Development App ProShot",
+      "amount": "€3.5M",
+      "body": "ATP world No. 3 Daniil Medvedev participated in a €3.5M Series A for ProShot, an AI-powered video analysis platform for tennis coaches and junior players. ProShot uses pose estimation to generate technique feedback in real time, reducing the need for expensive coaching hours. Medvedev, who began his development in France, said he backed ProShot because affordable technical feedback would have accelerated his own junior career by years.",
       "sport": "Tennis",
       "round": "Series A"
     }

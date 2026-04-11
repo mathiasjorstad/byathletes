@@ -1,38 +1,43 @@
 [
   {
+    "issue": 10,
+    "date": "April 11, 2026",
+    "tag": "Athlete Spotlight",
+    "headline": "Haaland Is Quietly Building a Tech Empire From Norway",
+    "dek": "Erling Haaland scores for Manchester City and invests in health and performance tech startups from his home country — building a portfolio designed to outlast his boots.",
+    "image": "https://images.unsplash.com/photo-1508098682722-e99c643e7f23?w=900&h=600&fit=crop&auto=format",
+    "page": "issue-10-cover.html"
+  },
+  {
     "issue": 9,
     "date": "April 10, 2026",
-    "tag": "Athlete Spotlight",
     "headline": "Mbappé Is Building a Business Empire at 27",
-    "dek": "Kylian Mbappé owns a football club, runs a film production company, and controls his own image rights — all while playing for Real Madrid.",
-    "image": "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=900&h=600&fit=crop&auto=format",
-    "page": "issue-9-cover.html"
+    "athlete": "Kylian Mbappé",
+    "sport": "Football",
+    "dek": "Kylian Mbappé owns a football club, runs a film production company, and controls his own image rights — all while playing for Real Madrid."
   },
   {
     "issue": 8,
     "date": "April 9, 2026",
-    "tag": "Investment Move",
     "headline": "The World Cup Winner Who Became a VC",
-    "dek": "Mario Götze has 70+ startup bets, two unicorns, and a portfolio built entirely while still playing football.",
-    "image": "",
-    "page": "issue-8-cover.html"
+    "athlete": "Mario Götze",
+    "sport": "Football",
+    "dek": "Mario Götze has 70+ startup bets, two unicorns, and a portfolio built entirely while still playing football."
   },
   {
     "issue": 5,
     "date": "April 7, 2026",
-    "tag": "Football",
     "headline": "Gerard Piqué Is Rebuilding Football From the Ground Up",
-    "dek": "Kings League has gone from a viral experiment to a €200M media and sports property.",
-    "image": "images/pique.jpg",
-    "page": "issue-5-cover.html"
+    "athlete": "Gerard Piqué",
+    "sport": "Football",
+    "dek": "Kings League has gone from a viral experiment to a €200M media and sports property."
   },
   {
     "issue": 4,
     "date": "April 6, 2026",
-    "tag": "Formula 1",
     "headline": "Lewis Hamilton Is Betting on What Comes After the Podium",
-    "dek": "From Formula 1 to non-alcoholic spirits and film — Hamilton's off-track empire is accelerating faster than anything he's done behind the wheel.",
-    "image": "images/hamilton.jpg",
-    "page": "issue-4-cover.html"
+    "athlete": "Lewis Hamilton",
+    "sport": "Formula 1",
+    "dek": "From Formula 1 to non-alcoholic spirits and film — Hamilton's off-track empire is accelerating faster than anything he's done behind the wheel."
   }
 ]
